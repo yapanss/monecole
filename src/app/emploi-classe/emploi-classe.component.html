@@ -1,0 +1,119 @@
+<mat-card>
+<mat-card-header>
+	<div class="mt-4">
+		<h1 class="text-center" *ngIf="classe">Emploi du temps {{classe.nom}}</h1>
+	</div>
+</mat-card-header>
+<mat-card-content class="ml-4 mr-4">
+	<div class="d-flex flex-row-reverse mb-1 mr-2">
+		<button class="btn btn-primary" *ngIf="emploiclasse" (click)="onCreate()">Modifier</button>
+		<button class="btn btn-primary" *ngIf="!emploiclasse" (click)="onCreate()">Créer</button>
+	</div>
+	<table class="table table-bordered text-center">
+		<tr>
+			<th></th>
+			<th>Lundi</th>
+			<th>Mardi</th>
+			<th>Mercredi</th>
+			<th>Jeudi</th>
+			<th>Vendredi</th>
+		</tr>
+		<tr>
+			<td>M1</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.m1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.m1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.m1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.m1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.m1.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>M2</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.m2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.m2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.m2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.m2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.m2.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>M3</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.m3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.m3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.m3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.m3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.m3.matiere : null}}</td>
+		</tr>
+		<tr class="bg-success text-white">
+			<td></td>
+			<td>RE</td>
+			<td>CR</td>
+			<td>EA</td>
+			<td>TI</td>
+			<td>ON</td>
+		</tr>
+		<tr>
+			<td>M4</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.m4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.m4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.m4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.m4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.m4.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>M5</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.m5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.m5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.m5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.m5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.m5.matiere : null}}</td>
+		</tr>
+		<tr class="bg-success text-white">
+			<td></td>
+			<td>P</td>
+			<td>A</td>
+			<td>U</td>
+			<td>S</td>
+			<td>E</td>
+		</tr>
+		<tr>
+			<td>S1</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.s1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.s1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.s1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.s1.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.s1.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>S2</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.s2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.s2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.s2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.s2.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.s2.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>S3</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.s3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.s3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.s3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.s3.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.s3.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>S4</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.s4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.s4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.s4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.s4.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.s4.matiere : null}}</td>
+		</tr>
+		<tr>
+			<td>S5</td>
+			<td>{{emploiclasse ? emploiclasse.lundi.s5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mardi.s5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.mercredi.s5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.jeudi.s5.matiere : null}}</td>
+			<td>{{emploiclasse ? emploiclasse.vendredi.s5.matiere : null}}</td>
+		</tr>
+	</table>
+</mat-card-content>
+</mat-card>

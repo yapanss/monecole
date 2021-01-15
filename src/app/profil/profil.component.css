@@ -1,0 +1,25 @@
+.card-header{
+    height: 50px;
+    color: white;
+    background-color: #706441;
+    border-bottom: 2px solid white;
+}
+.card-body, .card-footer{
+    background-color: #CDC8B1;
+    color: darkblue;
+}
+.card-footer{
+    height: 50px;
+    border-top: 2px solid white;
+}
+.form-group{
+    padding: 5px;
+}
+.mat-button{
+    background-color: white;
+    outline: darkblue;
+}
+.mat-button:hover{
+    background-color: darkblue;
+    color: white;
+}

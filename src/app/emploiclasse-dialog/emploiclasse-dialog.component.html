@@ -1,0 +1,50 @@
+<section>
+	<div>
+		<h1 class="text-center">Répartition des matières</h1>
+		<h2 class="text-center text-warning" #unJour>{{leJour}}</h2>
+	</div>
+</section>
+<div mat-dialog>
+<div mat-dialog-content>
+ <form novalidate [formGroup]="emploiclasseForm" (ngSubmit)="onSubmit()">
+ 	<div *ngFor="let jour of jours">
+		<ng-container *ngIf="leJour==jour">
+ 		<div formGroupName="{{jour}}">
+ 			<div class="d-flex flex-row-reverse border border-top-0 border-left-0 border-right-0 pb-2">
+ 				<button *ngIf="jour != 'vendredi'" class="btn btn-primary ml-1 pt-2" (click)="onSuivant()"><mat-icon>arrow_forward_ios</mat-icon></button>
+ 				<button *ngIf="jour != 'lundi'" class="btn btn-primary pt-2" (click)="onPrecedent()"><mat-icon>arrow_back_ios</mat-icon></button>
+ 			</div>
+ 			<div *ngFor="let horaire of horaires">
+ 				<div formGroupName="{{horaire}}" class="form-group form-inline d-flex justify-content-around">
+ 					<div style="padding-top: 17px; color: yellow"><h3 #uneHeure>{{horaire}}</h3></div>
+ 					
+ 					<div class="form-group">
+ 						<label class="form-control-label mr-2" for="">Matière: </label>
+ 						<select class="form-control" formControlName="matiere" (change)="onChangeMatiere($event, unJour, uneHeure)">
+			  				<option *ngFor="let option of matieres" value="{{option}}">{{option}}</option>
+						</select>
+ 					</div>
+ 					<div class="form-group">
+ 						<label class="form-control-label mr-2">Salle: </label>
+						<select class="form-control" formControlName="salle">
+			  				<option *ngFor="let option of salles" value="{{option}}">{{option}}</option>
+						</select>
+ 					</div>
+ 				</div>
+ 			</div>
+ 		</div>
+		
+ 		<div class="d-flex flex-row-reverse border border-bottom-0 border-left-0 border-right-0 pt-2">
+ 			<button *ngIf="jour != 'vendredi'" class="btn btn-primary pt-2 ml-1" (click)="onSuivant()"><mat-icon>arrow_forward_ios</mat-icon></button>
+ 			<button *ngIf="jour != 'lundi'" class="btn btn-primary pt-2" (click)="onPrecedent()"><mat-icon>arrow_back_ios</mat-icon></button>
+ 		</div>
+ 		</ng-container>
+ 	</div>
+ 	<div class="action-container d-inline-block p-1">
+ 		<button class="btn btn-secondary" type="button" (click)="onCancel()">Cancel</button>
+ 		<button class="btn btn-success ml-1" type="Submit">Submit</button>
+ 	</div>
+ </form>
+</div>
+</div>
+

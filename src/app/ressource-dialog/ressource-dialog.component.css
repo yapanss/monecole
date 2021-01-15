@@ -1,0 +1,16 @@
+.card{
+    color: darkblue;
+}
+form{
+    padding: 2%;
+}
+.submitButton{
+    outline: darkblue;
+    color: darkblue;
+    background-color: #fff;
+}
+.submitButton:hover{
+    outline: darkblue;
+    color: white;
+    background-color: darkblue;
+}

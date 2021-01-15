@@ -1,0 +1,115 @@
+<div>
+	<button mat-icon-button color="primary" (click)="drawer.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+</div>
+<mat-drawer-container>
+	<mat-drawer #drawer mode="side" opened>
+		<div id="presentation" class="p-3">
+			<div id="cadrePhoto" align="center">
+				<img #imagePreview 
+				src="http://localhost:3000/{{personnel.photoUrl}}" alt="photo de profil" height="150" width="150">
+			</div>
+			<div id="nomEtEmploi" class="text-center">
+				<h2 id="nom">{{personnel.nom}} {{personnel.prenoms}}</h2>
+				<h3 id="emploi">Prof de {{personnel.fonction.specialite}}</h3>
+				<p><mat-icon>phone </mat-icon>: {{personnel.contact}}</p>
+				<p><mat-icon>email </mat-icon>: {{personnel.contact}}</p>
+			</div>
+			<div>
+				<div *ngIf="!showPhotoForm" class="text-center">
+					<button class="changeButton" mat-button (click)="togglePhotoForm()">Changer photo</button>
+				</div>
+				<div class="form-group" *ngIf="showPhotoForm">
+					<input type="file" #photo class="form-control" (change)="handleFile(photo.files, imagePreview)
+					" accept="image/*">
+   
+					<button mat-button (click)="cancelPhoto()">Annuler</button>
+					<button mat-button (click)="submitPhoto()">Changer</button>
+				</div>
+				<div class="text-center">
+					<button  mat-button class="changeButton" (click)="onUpdateDialog()">
+						Mettre à jour le profil
+					</button>
+				</div>
+			</div>
+		</div>
+	</mat-drawer>
+	<!-- <div id="container" class="mb-5 p-3 bg-info"> !-->
+ 	
+		<div id="infosPersonnel" class="ml-2 pl-3 pr-3 pt-1 pb-3 bg-white">
+				<mat-tab-group>
+					<mat-tab  label="Infos">
+						<div id="infoContainer" class="mt-3 d-flex justify-content-between">
+							<div id="etat-civil">
+								<div class="titreInfo">
+									<h2 class="text-center">Etat-Civil</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Date de naissance: {{personnel.dateNaissance | date: 'dd/MM/yyyy'}}</p>
+									</li>
+									<li>
+										<p>Lieu de naissance: {{personnel.lieuNaissance}}</p>
+									</li>
+									<li>
+										<p> Situation matrimoniale: {{personnel.situationMatrimoniale}}, {{personnel.nombreEnfants}} enfants</p>
+									</li>
+									<li>
+										<p>Nombre d'enfants: {{personnel.nombreEnfants}} enfants</p>
+									</li>
+								</ul>
+							</div>
+							<div id="adresse">
+								<div class="titreInfo">
+									<h2 class="text-center">Adresse</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Téléphone : {{personnel.contact}}</p>
+									</li>
+									<li>
+										<p>Domicile: {{personnel.domicile}}</p>
+									</li>
+								</ul>
+							</div>
+							<div id="carriere" class="col-4">
+								<div class="titreInfo">
+									<h2 class="text-center">Carrière</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Matricule: {{personnel.matricule}}</p>
+									</li>
+									<li>
+										<p>Fonction actuelle: {{personnel.fonction ? personnel.fonction.titre : null}}</p>
+									</li>
+									<li>
+										<p>Spécialité: {{personnel.fonction ? personnel.fonction.specialite : null}}</p>
+									</li>
+									<li>
+										<p>Code: {{personnel.code}}</p>
+									</li>
+									<li>
+										<p>Date d'entrée dans l'établissement: {{personnel.dateEntreeEtablissement | date: 'dd/MM/yyyy'}}</p>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+					</mat-tab>
+				   <mat-tab label="Emploi du Temps" *ngIf="personnel.fonction && personnel.fonction.titre=='Professeur'">
+					   <app-emploiprof [personnel]="personnel"></app-emploiprof>
+				   </mat-tab>
+				   <mat-tab label="Evaluer" 
+						   *ngIf="personnel.fonction && personnel.fonction.titre && personnel.fonction.titre=='Professeur' || personnel.fonction.titre=='Educateur(trice)'">
+					   <app-evaluation [personnel]="personnel"></app-evaluation>	
+				   </mat-tab>
+				   <mat-tab label="Page perso">
+					<app-pageperso [matricule]="personnel.matricule"></app-pageperso>
+				   </mat-tab>
+				</mat-tab-group>
+		</div>
+		<!-- </div> !-->
+   
+</mat-drawer-container>

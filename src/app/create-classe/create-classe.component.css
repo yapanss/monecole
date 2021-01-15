@@ -1,0 +1,16 @@
+section {
+	margin-left: 15%;
+	margin-right: 15%;
+	color: darkblue;
+}
+section.card{
+	background-color: #5e422f;
+	/* background-color: #555555; */
+}
+input {
+	margin: 2%;
+	width: 400px;
+}
+.sendButton{
+	background-color:  #3F51B5;
+}

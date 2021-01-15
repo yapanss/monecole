@@ -1,0 +1,60 @@
+.changeButton:hover{
+	background-color: #1397ab;
+	color: white;
+}
+img{
+	border-radius: 50%;
+}
+ul{
+	list-style-type: none;
+	margin-top: 20px;
+}
+td{
+	box-sizing: border-box;
+	height: 30px;
+}
+.mat-drawer-container {
+	background-color: #f5f0e1;
+	/* background-color: #fff; */
+	color: darkblue;
+}
+.mat-drawer {
+	background-color: #f5f0e1;
+	color: darkblue;
+	width: 250px;
+	border: 0px;
+}
+.mat-icon-button{
+	outline: none;
+}
+/*#infoContainer{
+	display: flex;
+	justify-content: space-between;
+}*/
+.titreInfo{
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color:  #706441;
+	color: white;
+	border-bottom: solid white 5px;
+	padding-top: 10px;
+}
+#etat-civil, #adresse, #carriere {
+	flex-grow: 1;
+	background-color: #F5F0E1;
+	padding: 0px;
+	margin-left: 5px;
+	/* margin-bottom: 20px;
+	margin-left: 5%;
+	margin-right: 5%; */
+}
+
+::ng-deep .mat-tab-label-content {
+	color: darkblue;
+	font-size: 1.2em;
+}
+
+::ng-deep mat-ink-bar.mat-ink-bar {
+    background-color: #FC7F45 !important;
+}

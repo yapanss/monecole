@@ -1,0 +1,41 @@
+#container{
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-bottom: 50px;
+	margin-top: 50px;
+	padding: 2%;
+}
+
+
+#titre{
+	color: darkblue;
+}
+#addButton{
+	background-color: white;
+	color: darkblue;
+}
+#addButton:hover{
+	background-color: darkblue;
+	color: white;
+}
+table {
+	width: 100%;
+	border-collapse:separate; 
+    border-spacing:0 15px;
+}
+th {
+	background-color: #706441;
+	font-weight: lighter;
+	color: white;
+}
+tr{
+	transition: box-shadow 1s;
+}
+tr:hover{
+	box-shadow: 6px 6px 6px black;
+}
+td {
+	background-color: white;
+	padding: 5px;
+}
+

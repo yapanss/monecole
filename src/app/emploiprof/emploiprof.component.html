@@ -1,0 +1,293 @@
+<mat-card class="p-0">
+<mat-card-header class="border border-top-0 border-left-0 border-right-0 pl-0 pr-0">
+	<div class="mt-2" id="titre">
+		<h1 align="right">Emploi du temps Prof </h1>
+	</div>
+</mat-card-header>
+<mat-card-content class="p-0" *ngIf="emploiprof">
+	<table class="table table-bordered text-center">
+		<tr>
+			<th></th>
+			<th>Lundi</th>
+			<th>Mardi</th>
+			<th>Mercredi</th>
+			<th>Jeudi</th>
+			<th>Vendredi</th>
+		</tr>
+		<tr>
+			<td>M1</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.lundi.m1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.lundi.m1.classe ? emploiprof.lundi.m1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.m1.salle }}
+			</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mardi.m1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.mardi.m1.classe ? emploiprof.mardi.m1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.m1.salle }}
+			</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mercredi.m1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.mercredi.m1.classe ? emploiprof.mercredi.m1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.m1.salle }}
+			</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.jeudi.m1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.jeudi.m1.classe ? emploiprof.jeudi.m1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.m1.salle }}
+			</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.vendredi.m1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.vendredi.m1.classe ? emploiprof.vendredi.m1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.m1.salle }} 
+			</td>
+		</tr>
+		<tr>
+			<td>M2</td>
+			<td #tooltip="matTooltip" 
+				matTooltip="{{emploiprof.lundi.m2.matiere}}"
+				[matTooltipPosition]="'above'"
+				  matTooltipHideDelay="0"
+				  >
+				    {{ emploiprof.lundi.m2.classe ? emploiprof.lundi.m2.classe + '/ Salle : ' : null}}
+					{{ emploiprof.lundi.m2.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mardi.m2.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mardi.m2.classe ? emploiprof.mardi.m2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.m2.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mercredi.m2.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mercredi.m2.classe ? emploiprof.mercredi.m2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.m2.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.jeudi.m2.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.jeudi.m2.classe ? emploiprof.jeudi.m2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.m2.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.vendredi.m2.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.vendredi.m2.classe ? emploiprof.vendredi.m2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.m2.salle }}</td>
+		</tr>
+		<tr>
+			<td>M3</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.lundi.m3.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.lundi.m3.classe ? emploiprof.lundi.m3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.m3.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mardi.m3.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mardi.m3.classe ? emploiprof.mardi.m3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.m3.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mercredi.m3.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mercredi.m3.classe ? emploiprof.mercredi.m3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.m3.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.jeudi.m3.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.jeudi.m3.classe ? emploiprof.jeudi.m3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.m3.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.vendredi.m3.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.vendredi.m3.classe ? emploiprof.vendredi.m3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.m3.salle }}</td>
+		</tr>
+		<tr class="pause">
+			<td></td>
+			<td>RE</td>
+			<td>CR</td>
+			<td>EA</td>
+			<td>TI</td>
+			<td>ON</td>
+		</tr>
+		<tr>
+			<td>M4</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.lundi.m4.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.lundi.m4.classe ? emploiprof.lundi.m4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.m4.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mardi.m4.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mardi.m4.classe ? emploiprof.mardi.m4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.m4.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mercredi.m4.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.mercredi.m4.classe ? emploiprof.mercredi.m4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.m4.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.jeudi.m4.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.jeudi.m4.classe ? emploiprof.jeudi.m4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.m4.salle }}</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.vendredi.m4.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">{{ emploiprof.vendredi.m4.classe ? emploiprof.vendredi.m4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.m4.salle }}</td>
+		</tr>
+		<tr>
+			<td>M5</td>
+			<td>{{ emploiprof.lundi.m5.classe ? emploiprof.lundi.m5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.m5.salle }}</td>
+			<td>{{ emploiprof.mardi.m5.classe ? emploiprof.mardi.m5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.m5.salle }}</td>
+			<td>{{ emploiprof.mercredi.m5.classe ? emploiprof.mercredi.m5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.m5.salle }}</td>
+			<td>{{ emploiprof.jeudi.m5.classe ? emploiprof.jeudi.m5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.m5.salle }}</td>
+			<td>{{ emploiprof.vendredi.m5.classe ? emploiprof.vendredi.m5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.m5.salle }}</td>
+		</tr>
+		<tr class="pause">
+			<td></td>
+			<td>P</td>
+			<td>A</td>
+			<td>U</td>
+			<td>S</td>
+			<td>E</td>
+		</tr>
+		<tr>
+			<td>S1</td>
+			<td #tooltip="matTooltip" 
+				matTooltip="{{emploiprof.lundi.s1.matiere}}"
+				[matTooltipPosition]="'above'"
+          		matTooltipHideDelay="0">
+				{{ emploiprof.lundi.s1.classe ? emploiprof.lundi.s1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.s1.salle }}
+			</td>
+			<td #tooltip="matTooltip" 
+			matTooltip="{{emploiprof.mardi.s1.matiere}}"
+			[matTooltipPosition]="'above'"
+			  matTooltipHideDelay="0">
+				{{ emploiprof.mardi.s1.classe ? emploiprof.mardi.s1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.s1.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mercredi.s1.classe ? emploiprof.mercredi.s1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.s1.salle }}
+			</td>
+			<td>
+				{{ emploiprof.jeudi.s1.classe ? emploiprof.jeudi.s1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.s1.salle }}
+			</td>
+			<td>
+				{{ emploiprof.vendredi.s1.classe ? emploiprof.vendredi.s1.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.s1.salle }} 
+			</td>
+		</tr>
+		<tr>
+			<td>S2</td>
+			<td>
+				{{ emploiprof.lundi.s2.classe ? emploiprof.lundi.s2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.s2.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mardi.s2.classe ? emploiprof.mardi.s2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.s2.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mercredi.s2.classe ? emploiprof.mercredi.s2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.s2.salle }}
+			</td>
+			<td>
+				{{ emploiprof.jeudi.s2.classe ? emploiprof.jeudi.s2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.s2.salle }}
+			</td>
+			<td>
+				{{ emploiprof.vendredi.s2.classe ? emploiprof.vendredi.s2.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.s2.salle }} 
+			</td>
+		</tr>
+		<tr>
+			<td>S3</td>
+			<td>
+				{{ emploiprof.lundi.s3.classe ? emploiprof.lundi.s3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.s3.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mardi.s3.classe ? emploiprof.mardi.s3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.s3.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mercredi.s3.classe ? emploiprof.mercredi.s3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.s3.salle }}
+			</td>
+			<td>
+				{{ emploiprof.jeudi.s3.classe ? emploiprof.jeudi.s3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.s3.salle }}
+			</td>
+			<td>
+				{{ emploiprof.vendredi.s3.classe ? emploiprof.vendredi.s3.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.s3.salle }} 
+			</td>
+		</tr>
+		<tr>
+			<td>S4</td>
+			<td>
+				{{ emploiprof.lundi.s4.classe ? emploiprof.lundi.s4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.s4.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mardi.s4.classe ? emploiprof.mardi.s4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.s4.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mercredi.s4.classe ? emploiprof.mercredi.s4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.s4.salle }}
+			</td>
+			<td>
+				{{ emploiprof.jeudi.s4.classe ? emploiprof.jeudi.s4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.s4.salle }}
+			</td>
+			<td>
+				{{ emploiprof.vendredi.s4.classe ? emploiprof.vendredi.s4.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.s4.salle }} 
+			</td>
+		</tr>
+		<tr>
+			<td>S5</td>
+			<td>
+				{{ emploiprof.lundi.s5.classe ? emploiprof.lundi.s5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.lundi.s5.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mardi.s5.classe ? emploiprof.mardi.s5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mardi.s5.salle }}
+			</td>
+			<td>
+				{{ emploiprof.mercredi.s5.classe ? emploiprof.mercredi.s5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.mercredi.s5.salle }}
+			</td>
+			<td>
+				{{ emploiprof.jeudi.s5.classe ? emploiprof.jeudi.s5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.jeudi.s5.salle }}
+			</td>
+			<td>
+				{{ emploiprof.vendredi.s5.classe ? emploiprof.vendredi.s5.classe + '/ Salle : ' : null}}
+				{{ emploiprof.vendredi.s5.salle }} 
+			</td>
+		</tr>
+	</table>
+</mat-card-content>
+</mat-card>

@@ -1,0 +1,120 @@
+<div mat-dialog id="dialog">
+	<div mat-dialog-content>
+		<div class="card">
+			<div class="card-header">
+				<h1 class="text-center" 
+					[textContent]="data.actionType=='create' ? 
+								  'Enregistrement d\'un personnel' :
+								  'Modification des infos de ' + data.personnel.nom + 
+								  ' '+ data.personnel.prenoms"></h1>
+			</div>
+			<div class="card-body">
+				<form #persoForm="ngForm" novalidate [formGroup] = "personnelForm">
+					<fieldset class="form-group">
+						<legend class="text-center">Etat Civil</legend>
+						<div class="form-group form-group-inline">
+							<label for="" class="form-control-label">Nom:</label>
+							<input type="text" class="form-control" formControlName="nom">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Prénoms:</label>
+							<input type="text" class="form-control" formControlName="prenoms">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Date de naissance:</label>
+							<input type="date" class="form-control" formControlName="dateNaissance">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Lieu de naissance</label>
+							<input type="text" class="form-control" formControlName="lieuNaissance">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Genre</label>
+							<select class="form-control" formControlName="genre">
+								  <option *ngFor="let option of genres" value="{{option}}">{{option}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Situation matrimoniale</label>
+							<select class="form-control" formControlName="situationMatrimoniale">
+								  <option *ngFor="let option of situationMatrimoniales" value="{{option}}">{{option}}</option>
+							</select>
+							
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Nombre d'enfants</label>
+							<input type="number" class="form-control" formControlName="nombreEnfants">
+						</div>
+					</fieldset>
+					<fieldset class="form-group">
+						<legend class="text-center">Adresse</legend>
+						<div class="form-group">
+							<label for="" class="form-control-label">Domicile</label>
+							<input type="text" class="form-control" formControlName="domicile">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Téléphone</label>
+							<input type="number" class="form-control" formControlName="contact">
+						</div>
+					</fieldset>
+					<fieldset class="form-group">
+						<legend class="text-center">Carrière</legend>
+						<div class="form-group">
+							<label for="" class="form-control-label">Matricule</label>
+							<input type="text" class="form-control" formControlName="matricule">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Date d'entrée dans l'établissement</label>
+							<input type="date" class="form-control" formControlName="dateEntreeEtablissement">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Emploi</label>
+							<select class="form-control" formControlName="emploi">
+								  <option *ngFor="let option of emplois" value="{{option}}">{{option}}</option>
+							</select>
+							
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Diplomes</label>
+							<input type="text" class="form-control" formControlName="diplomes">
+						</div>
+						<div class="form-group" formGroupName="fonction">
+						<h3 id="fonction">Fonction actuelle</h3>
+						<div class="form-group">
+							<label for="" class="form-control-label">titre</label>
+							<select class="form-control" formControlName="titre">
+								  <option *ngFor="let option of titres" value="{{option}}">{{option}}</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Spécialité</label>
+							<select class="form-control" formControlName="specialite">
+								  <option *ngFor="let option of specialites" value="{{option}}">{{option}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="form-control-label">Code</label>
+						<input type="text" class="form-control" formControlName="code">
+					</div>
+					</fieldset>
+				</form>
+            </div>
+            <div class="card-footer">
+                <div align="right">
+					<button id="cancelButton" mat-button (click)="onCancel()">
+						Cancel
+					</button>
+					<button mat-button  
+							class="submitButton" 
+                            *ngIf="data.actionType=='create'"
+                            (click)="onCreate()">Create</button>
+					<button mat-button 
+                            class="submitButton" 
+                            *ngIf="data.actionType=='update'"
+                            (click)="onUpdate()">Update</button>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>

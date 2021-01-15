@@ -1,0 +1,39 @@
+<section id="choix" class="form-group d-flex justify-content-around mt-3 bg-light pt-3">
+	<div id="matiere" class="form-group form-inline">
+		<label for="" class="mr-2">matiere: </label>
+		<select class="form-control" ngDefaultControl [(ngModel)]="matiere" (change)="onChange($event)">
+			<option *ngFor="let option of matieres" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div id="date1" class="form-group form-inline">
+		<label for="" class="mr-2">De : </label>
+		<input type="date" [(ngModel)]="dateDebut">
+	</div>
+	<div id="date2" class="form-group form-inline">
+		<label for="" class="mr-2">A : </label>
+		<input type="date" [(ngModel)]="dateFin">
+	</div>
+	<div id="generate">
+		<button mat-raised-button color="primary" (click)="onGenerate()">Voir</button>
+	</div>
+</section>
+
+<div id="container">
+    <div>
+        <button mat-icon-button>
+            <mat-icon (click)="onCreateDialog()"
+            #tooltip="matTooltip" 
+			matTooltip="Créer un cahier de texte"
+			[matTooltipPosition]="'above'"
+			matTooltipHideDelay="0">add</mat-icon>
+        </button>
+	</div>
+	<div *ngIf="!this.matiere">
+		
+	</div>
+	<angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+	</div>
+	
+</div>
+
+                

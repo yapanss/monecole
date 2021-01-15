@@ -1,0 +1,30 @@
+::ng-deep .mat-tab-label {
+	color: darkblue;
+}
+::ng-deep .mat-ink-bar {
+    background-color: #1397ab !important;
+}
+th{
+	background-color: #706441;
+	color: white;
+}
+td{
+	box-sizing: border-box;
+	height: 30px;
+	color: darkblue;
+}
+#choix{
+	background-color: #f5f0e1;
+}
+.actionButton{
+	border: solid 1px darkblue;
+	background-color: #fff;
+	color: darkblue;
+}
+.actionButton:hover{
+	background-color: darkblue;
+	color: white;
+}
+label, input, select{
+	color: darkblue;
+}

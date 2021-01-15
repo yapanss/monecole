@@ -1,0 +1,124 @@
+<section id="choix" class="form-group d-flex justify-content-around mt-3 bg-light pt-3">
+	<div id="periode" class="form-group form-inline">
+		<label for="" class="mr-2">periode: </label>
+		<select class="form-control" ngDefaultControl [(ngModel)]="periode">
+			<option *ngFor="let option of periodes" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div id="classe" class="form-group form-inline">
+		<label for="" class="mr-2">Classe ou Elève: </label>
+		<select class="form-control"  [(ngModel)]="classeOuEleve" ngDefaultControl>
+			<option *ngFor="let option of classeOuEleves" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div id="matricule" class="form-group form-inline" *ngIf="classeOuEleve=='Elève'">
+        <label for="" class="form-control-label">Matricule Elève: </label>
+		<input type="text" [(ngModel)]="matriculeEleve">
+    </div>
+	<div id="generate">
+		<button mat-raised-button color="primary" (click)="onGenerate()">Générer</button>
+	</div>
+</section>
+
+
+<div id="container" *ngFor="let bulletin of listeBulletin" class="p-2">
+    <section id="header">
+        <div id="infoEcole" class="d-flex justify-content-between">
+            <div id="logo" class="bg-info p-2">
+                <img src="https://via.placeholder.com/70" alt="">
+            </div>
+            <div id="institutionnel" class="bg-success p-2 ml-0">
+                <p>REPUBLIQUE DE COTE D'IVOIRE</p>
+                <p class="">MINISTERE DE L'EDUCATION NATIONALE ET DE L'ENSEIGNEMENT TECHNIQUE</p>
+                <p class="text-center">{{configuration.nomEcole}}</p>
+            </div>
+            <div id="adresse" class="bg-primary p-2 flex-grow-1">
+                <p>Adresse: 11 BP 648 Abidjan 11   code: 000402</p>
+                <p>Téléphone: 21360757   Statut: Public</p>
+                <p>Email: lmodkoum@gmail.ci</p>
+            </div>
+        </div>
+        <div id="titre">
+            <h1>BULLETIN DE NOTES: {{periode}} - Année Scolaire: {{configuration.anneeScolaire}}</h1>
+        </div>
+        <div id="infoEleve">
+            <div class="d-flex justify-content-between">
+                <h2 class="p-2">{{bulletin.nom}} {{bulletin.prenoms}}</h2>
+                    <h2 class="p-2">Matricule: {{bulletin.matricule}}</h2>
+            </div>
+                       
+            <div>
+                <p>Classe : {{bulletin.classe}}</p>
+                <p>Genre: {{bulletin.genre}}</p>
+                <p>Né le: {{bulletin.dateNaissance | date: 'dd/MM/yyyy'}} à {{bulletin.lieuNaissance}}: </p>
+            </div>
+        </div>
+    </section>
+    <section id="body">
+        <div id="moyennes">
+            <table class="table table-borderd">
+                <tr>
+                    <th>Matière</th>
+                    <th>Moy</th>
+                    <th>Coef</th>
+                    <th>Min-Max</th>
+                    <th>Rang</th>
+                    <th>Appréciation</th>
+                    <th>Prof/Emargement</th>
+                </tr>
+                <tr *ngFor="let prof of lesProfs">
+                    <td>{{prof.matiere}}</td>
+                    <td>
+                        {{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                         bulletin.resultats[periode][prof.matiere]['note'] :
+                         null}}
+                    </td>
+                    <td>{{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                        bulletin.resultats[periode][prof.matiere]['coefficient'] :
+                        null}}</td>
+                    <td>{{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                        bulletin.resultats[periode][prof.matiere]['min'].toString() + '--' + bulletin.resultats[periode][prof.matiere]['max'].toString() :
+                        null}}</td>
+                    <td>{{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                        bulletin.resultats[periode][prof.matiere]['rang'] :
+                        null}}</td>
+                    <td>{{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                        bulletin.resultats[periode][prof.matiere]['appreciation'] :
+                        null}}</td>
+                    <td>{{bulletin.resultats[periode] && bulletin.resultats[periode][prof.matiere] ?
+                        bulletin.resultats[periode][prof.matiere]['nomEvaluateur'] :
+                        null}}</td>
+                </tr>
+            </table>
+        </div>
+        <div id="absence">
+
+        </div>
+        <div id="resultat">
+
+        </div>
+    </section>
+    <section id="footer">
+        <table class="table">
+            <tr>
+                <th>
+                    Appréciation du Conseil de classe
+                </th>
+                <th>
+                    Visa du Chef d'établissement
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    Résultat
+                </td>
+                <td>
+                    Abidjan, le...........
+                </td>
+            </tr>
+        </table>
+    </section>
+</div>
+<div align='right' id="imprime">
+    <button mat-button color="primary" (click)="printBulletin()">Imprimer</button>
+</div>

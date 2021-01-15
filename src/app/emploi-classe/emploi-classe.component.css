@@ -1,0 +1,11 @@
+.mat-card {
+	margin: 3%;
+	background-color: gray;
+}
+td {
+	color: white;
+}
+th {
+	background-color: #09827c;
+	color: white;
+}

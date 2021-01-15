@@ -1,0 +1,33 @@
+
+.card-body{
+	background-color: #CDC8B1;
+	color: white;
+}
+.card-header{
+	background-color: #706441;
+	color: white;
+	border-bottom: 2px solid white;
+}
+.card-footer{
+	border-top: 2px solid white;
+	background-color: #CDC8B1;
+}
+#cancelButton{
+	background-color: lightgray;
+	color: darkblue;
+}
+.submitButton{
+	margin-left: 5px;
+	background-color: white;
+	color: darkblue;
+}
+.submitButton:hover{
+	background-color: darkblue;
+	color: white;
+}
+legend, #fonction{
+	color: yellow;
+}
+label{
+	color: white;
+}

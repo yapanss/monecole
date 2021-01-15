@@ -1,0 +1,52 @@
+<div id="titre" class="mb-4 mt-5 p-2 d-flex justify-content-between">
+    <div class="flex-grow-1 d-flex justify-content-between" id="search-input">
+        <input class="form-control flex-grow-1" type="text" placeholder="Rechercher">
+        <button mat-icon-button class="search-button">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+    
+    <div align="right">
+        <button mat-icon-button id="add-icon" (click)="onCreateDialog()"
+                                    #tooltip="matTooltip"
+                                    matTooltip="Ajouter ressouce"
+			                        [matTooltipPosition]="'above'"
+			                        matTooltipHideDelay="0">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
+<div id="container">
+    <div id="main" class="p-3">
+        <div class="d-flex">
+            <div class="card mr-2 mb-2 flex-fill" *ngFor="let ressource of ressources; let i=index">
+                <div class="card-header">
+                    <h2>{{ressource.type}} : {{ressource.titre}}</h2> 
+                </div>
+                <div class="card-body">
+                    <iframe width="200" height="100" 
+                            [src]="ressource.liens.video | safe" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                </div>
+                <div class="card-footer">
+                    <a href={{ressource.liens.pdf}} target="_blank" *ngIf="ressource.liens.pdf">pdf</a>
+                    <a href="{{ressource.liens.ppt}}" target="_blank" class="ml-1" *ngIf="ressource.liens.ppt">ppt</a>
+                    <a href="{{ressource.liens.doc}}" 
+                        target="_blank" class="ml-1"
+                        *ngIf="ressource.liens.doc">docx</a>
+                    <div class="overlay d-flex justify-content-end"> 
+                        <button mat-icon-button id="edit-icon" (click)="onUpdateDialog(i)">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button id="delete-icon" (click)="onDelete(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+</div>
+
+

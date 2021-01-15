@@ -1,0 +1,57 @@
+<div id="container" class="mt-5">
+    <div class="mb-2" *ngFor="let donnee of donnees">
+        <div class="mb-3">
+            <h1 class="text-center mb-2">{{donnee.annee}} Classe : {{donnee.classe}}</h1>
+
+        </div>
+        <div>
+            <table class="table text-center table-bordered">
+                <tr>
+                    <th rowspan="2">Matieres</th>
+                    <th [attr.colspan]= "donnee.periodes.length * 2">Résultats</th>
+                    <th rowspan="2">Appréciations</th>
+                    <th rowspan="2">Professeurs</th>
+                </tr>
+                <tr>
+                    <ng-container *ngFor="let periode of donnee.periodes" style="display: inline;"> 
+                        <th>{{periode}}</th>
+                        <th>Rang</th>
+                    </ng-container>
+                </tr>
+                <tr *ngFor="let matiere of matieres">
+                    <td>{{matiere}}</td>
+                    <ng-container *ngFor="let periode of donnee.periodes">
+                        <td>
+                            {{donnee['resultats'] && 
+                            donnee['resultats'][periode] && 
+                            donnee['resultats'][periode][matiere] && 
+                            donnee['resultats'][periode][matiere]['note'] ? 
+                            donnee['resultats'][periode][matiere]['note'].toFixed(2) : null}}
+                        </td>
+                        <td>
+                            {{donnee['resultats'] && 
+                            donnee['resultats'][periode] && 
+                            donnee['resultats'][periode][matiere] && 
+                            donnee['resultats'][periode][matiere]['rang'] ? 
+                            donnee['resultats'][periode][matiere]['rang'] : null}}
+                        </td>
+                    </ng-container>
+                    <td>
+                        {{donnee['resultats'] && 
+                        donnee['resultats']['Annuel'] && 
+                        donnee['resultats']['Annuel'][matiere] && 
+                        donnee['resultats']['Annuel'][matiere]['note'] ? 
+                        donneAppreciation(donnee['resultats']['Annuel'][matiere]['note']) : null}}
+                    </td>
+                    <td>
+                        {{donnee['resultats'] && 
+                        donnee['resultats']['Annuel'] && 
+                        donnee['resultats']['Annuel'][matiere] && 
+                        donnee['resultats']['Annuel'][matiere]['nomEvaluateur'] ? 
+                        donnee['resultats']['Annuel'][matiere]['nomEvaluateur'] : null}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

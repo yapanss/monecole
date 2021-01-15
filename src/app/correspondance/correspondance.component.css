@@ -1,0 +1,9 @@
+#addButton{
+	background-color: white;
+	color: #2A34B3;
+	outline: none;
+}
+#addButton:hover{
+	background-color: #2A34B3;
+	color: white;
+}

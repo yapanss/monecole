@@ -1,0 +1,52 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+	  <div id="logo" class="text-center" style="border-radius: 15%;">
+		<img [src]=logoUrl alt="logo">
+		<h3 id="brand" >S'instruire pour mieux servir</h3>
+	  </div>
+	  <h1>{{auth.getUser() ? auth.getUser().nom : null}}</h1>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div id="menu">
+	<div id="button">
+		<button mat-button routerLink="/" style="font-size:24px;">
+			<fa-icon [icon]="faHome"></fa-icon><span style="font-size: medium;"> Accueil</span>
+		</button>
+		<button mat-button routerLink="/personnels" style="font-size:24px;">
+			<fa-icon [icon]="faUserTie"></fa-icon><span style="font-size: medium;"> Personnel</span>
+		</button>
+		<button mat-button routerLink="/eleves" style="font-size:24px;">
+			 <fa-icon [icon]="faBookReader"></fa-icon><span style="font-size: medium;"> Elève</span> 
+		</button>
+		<button mat-button routerLink="/classes" style="font-size:24px;">
+			<fa-icon [icon]="faChalkboard"></fa-icon><span style="font-size: medium;"> Classe</span>
+		</button>
+		<button mat-button routerLink="" style="font-size:24px;">
+			<fa-icon [icon]="faChartLine"></fa-icon><span style="font-size: medium;"> Stats</span>
+		</button>
+	</div>
+	<div id="config">
+		<button mat-button routerLink="/config" style="font-size:24px;">
+			<fa-icon [icon]="faUserCog"></fa-icon>
+		</button>
+		<button mat-button  class="mr-2"
+				[matMenuTriggerFor]="userMenu" *ngIf="auth.isLoggedIn()">
+			<img src="{{auth.getUser() ? baseUrl + auth.getUser().photoUrl : null}}"  alt="avatar" width="40" height="40" 
+			 style="border-radius: 50%;" 
+			> 
+			<fa-icon [icon]="faAngleDown"></fa-icon>
+		</button>
+		<mat-menu #userMenu="matMenu" yPosition="below">
+			<button mat-menu-item (click)="onLogout()">Logout</button>
+			<button mat-menu-item>Item 2</button>
+		  </mat-menu>
+		<button mat-button  style="font-size:24px;" (click)="onLogin()" *ngIf="auth.isLoggedOut()">
+			<fa-icon [icon]="faSignInAlt"></fa-icon>
+		</button>
+	</div>
+</div>
+
+
+
+
+

@@ -1,0 +1,113 @@
+<mat-card *ngIf="eleve">
+<mat-card-title>
+		<h1 class="text-center">Modification des données de {{eleve.nom}} {{eleve.prenoms}}</h1>
+	</mat-card-title>
+<mat-card-content>
+	<form novalidate [formGroup] = "eleveForm" (ngSubmit) = "onSubmit()">
+	<fieldset class="form-group">
+		<legend>Etat Civil</legend>
+		<div class="form-group">
+			<label for="" class="form-control-label">Nom:</label>
+			<input class="form-control" type="text" formControlName="nom" placeholder="Entrer le nom">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Prénoms:</label>
+			<input class="form-control" type="text" formControlName="prenoms" placeholder="Entrer les prenoms">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Date de naissance:</label>
+			<input class="form-control" type="date" formControlName="dateNaissance" placeholder="Entrer la date de naissance">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Lieu de naissance:</label>
+			<input class="form-control" type="text" formControlName="lieuNaissance" placeholder="Entrer le lieu de naissance">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Genre:</label>
+			<input class="form-control" type="text" formControlName="genre" placeholder="Entrer le genre">
+		</div>
+	</fieldset>
+	<fieldset class="form-group">
+		<legend>Adresse</legend>
+		<div class="form-group">
+			<label for="" class="form-control-label">Téléphone</label>
+			<input class="form-control" type="text" formControlName="contact" placeholder="Entrer le contact">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Domicile</label>
+			<input class="form-control" type="text" formControlName="domicile" placeholder="Entrer le domicile">
+		</div>
+	</fieldset>
+	<fieldset class="form-group">
+		<legend>Infos Parents</legend>
+		<!-- Infos du pere -->
+		<div formGroupName="pere" class="form-group">
+			<div class="form-group">
+				<label for="" class="form-control-label">Nom du père:</label>
+				<input class="form-control" type="text" formControlName="nomEtPrenoms" placeholder="Entrer le nom du père">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Téléphone du père:</label>
+				<input class="form-control" type="text" formControlName="contact" placeholder="Entrer le contact du père">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Profession du père:</label>
+				<input class="form-control" type="text" formControlName="profession" placeholder="Entrer la profession du père">
+			</div>
+		</div>
+		<!-- Infos de la mere -->
+		<div formGroupName="mere" class="form-group">
+			<div class="form-group">
+				<label for="" class="form-control-label">Nom de la mère:</label>
+				<input class="form-control" type="text" formControlName="nomEtPrenoms" placeholder="Entrer le nom de la mère">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Téléphone de la mère:</label>
+				<input class="form-control" type="text" formControlName="contact" placeholder="Entrer le contact de la mère">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Profession de la mère:</label>
+				<input class="form-control" type="text" formControlName="profession" placeholder="Entrer la profession de la mère">
+			</div>
+		</div>
+		<!-- Infos du tuteur -->
+		<div formGroupName="tuteur" class="form-group">
+			<div class="form-group">
+				<label for="" class="form-control-label">Nom du tuteur:</label>
+				<input class="form-control" type="text" formControlName="nomEtPrenoms" placeholder="Entrer le nom du tuteur">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Téléphone du tuteur:</label>
+				<input class="form-control" type="text" formControlName="contact" placeholder="Entrer le contact du tuteur">
+			</div>
+			<div class="form-group">
+				<label for="" class="form-control-label">Profession du tuteur:</label>
+				<input class="form-control" type="text" formControlName="profession" placeholder="Entrer la profession du tuteur">
+			</div>
+		</div>
+	</fieldset>
+	<fieldset class="form-group">
+		<legend>Infos Scolaires</legend>
+		<div class="form-group">
+			<label for="" class="form-control-label">Matricule:</label>
+			<input class="form-control" type="text" formControlName="matricule" placeholder="Entrer le matricule">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Mot de passe:</label>
+			<input class="form-control" type="password" formControlName="motDePasse">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Niveau:</label>
+			<input class="form-control" type="text" formControlName="niveau">
+		</div>
+		<div class="form-group">
+			<label for="" class="form-control-label">Redoublant:</label>
+			<input class="form-control" type="text" formControlName="redoublant" placeholder="Entrer oui ou non">
+		</div>
+	</fieldset>
+		<div class="d-flex flex-row-reverse">
+			<button mat-raised-button color="accent" type="submit">Submit</button>
+		</div>
+</form>
+</mat-card-content>
+</mat-card>

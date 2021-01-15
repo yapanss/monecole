@@ -1,0 +1,56 @@
+#container{
+	/* display: flex;
+	justify-content: space-around; */
+	margin: 5%;
+	padding: 2%; 
+	background-color: #fff;
+}
+
+#menu{
+	width: 20%;
+	background-color: #c4a756;
+	background-color: lightgray;
+}
+#contenu {
+	background-color: lightgray;
+	width: 100%;
+	margin-left: 2%;
+}
+#submit {
+	padding: 10px;
+	margin-top: 20px;
+}
+th {
+	background-color: lightgray;
+}
+td {
+	background-color: white;
+}
+th, td {
+	padding: 5px;
+	margin: 5px;
+}
+#config {
+	margin-left: 10%;
+	margin-right: 10%;
+	background-color: gray;
+}
+.mat-card {
+	margin-top: 5%;
+}
+::ng-deep .mat-tab-label {
+	color: darkblue;
+	/* margin-bottom: 25px; */
+}
+::ng-deep .mat-ink-bar {
+    background-color: #1397ab !important;
+}
+.mat-radio-button ~ .mat-radio-button {
+	margin-left: 16px;
+}
+/* .mat-accordion{
+} */
+.mat-expansion-panel{
+	margin-bottom: 1%;
+	margin-top: 1%;
+}

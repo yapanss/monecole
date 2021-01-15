@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; 
+	font-family: Roboto, "Helvetica Neue", sans-serif;
+	/* background-color: #C1C1C1; */
+	background-color: #f5f0e1;
+}
+/*#a3c4c3*/
+.mat-drawer-container {
+	background-color: #f5f0e1;
+	color: darkblue;
+}
+.mat-drawer {
+	background-color: #f5f0e1;
+	color: darkblue;
+	width: 250px;
+	border: 0px;
+}

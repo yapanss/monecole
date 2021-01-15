@@ -1,0 +1,104 @@
+<div id="container" class="mt-5">
+    <div>
+        <button id="addButton" mat-icon-button 
+                    routerLink=""
+                    #tooltip="matTooltip" 
+                    matTooltip="Ajouter une correspondance"
+                    [matTooltipPosition]="'above'"
+                      matTooltipHideDelay="0">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Absences et Retards
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+              <table class="table">
+                  <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Durée</th>
+                        <th>Motif</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>mars 2021</td>
+                          <td>Absence</td>
+                          <td>3 heures</td>
+                          <td>Néant</td>
+                      </tr>
+                  </tbody>
+                  <tfoot>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>Total = </td>
+                      </tr>
+                  </tfoot>
+              </table>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Autorisations d'absence
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th>Date</th>
+                      <th>Durée</th>
+                      <th>Motif</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>mars 2021</td>
+                        <td>3 jours</td>
+                        <td>Visite médicale au CHU Cocody</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Visites médicales
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+              <table class="table">
+                  <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Durée</th>
+                        <th>Motif</th>
+                        <th>Prescription</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>mars 2021</td>
+                          <td>de 08h à 09h </td>
+                          <td>Maux de tête</td>
+                          <td>Paracétamol</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          </mat-expansion-panel>
+      </mat-accordion>
+      
+</div>

@@ -1,0 +1,99 @@
+.changeButton:hover{
+	background-color: #1397ab;
+	color: white;
+}
+#classe{
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 10%
+}
+th{
+	background-color: #706441;
+	color: white;
+}
+th, td{
+	font-size: 0.9em;
+}
+.moyenne-matiere{
+	background-color: #CDB79E;
+	color: white;
+}
+.rang-matiere{
+	background-color: #F5F0E1;
+	color: darkblue;
+}
+.resultat-general{
+	background-color: #FC7F45;
+	color: white;
+}
+/*#selectPeriode{
+	width: 100%;
+}*/
+img {
+	border-radius: 50%
+}
+#periode-resultat{
+	background-color: #F5F0E1;
+}
+ul{
+	list-style-type: none;
+	margin-top: 20px;
+}
+#perso, #pere, #mere, #tuteur {
+	flex-grow: 1;
+	background-color: #F5F0E1;
+	padding: 0px;
+	margin-left: 5px;
+	/* margin-bottom: 20px;
+	margin-left: 5%;
+	margin-right: 5%; */
+}
+.titreInfo{
+	margin-top: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color:  #706441;
+	color: white;
+	border-bottom: solid white 5px;
+	padding-top: 10px;
+}
+.card-header{
+	height: 35px;
+	background-color: #706441;
+}
+.mat-drawer-container {
+	background-color: #f5f0e1;
+	/* background-color: #fff; */
+	color: darkblue;
+}
+.mat-drawer {
+	background-color: #f5f0e1;
+	color: darkblue;
+	width: 250px;
+	border: 0px;
+}
+.mat-icon-button{
+	outline: none;
+}
+/* .mat-drawer-container {
+	background-color: #fff;
+	color: darkblue;
+} */
+/* .mat-drawer {
+	background-color: #fff;
+	color: darkblue;
+	width: 250px;
+	border: 0px;
+} */
+::ng-deep .mat-tab-list .mat-tab-labels  {
+  /*background-color: lightgray;*/
+  /*margin-bottom: 0.3%;*/
+}
+::ng-deep .mat-tab-label-content {
+	color: darkblue;
+	font-size: 1.2em;
+}
+
+::ng-deep mat-ink-bar.mat-ink-bar {
+	background-color: #FC7F45 !important;
+}

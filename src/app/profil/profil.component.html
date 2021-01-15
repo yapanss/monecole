@@ -1,0 +1,30 @@
+<div class="card">
+	<div class="card-header">
+		<h1 class="text-center">Données de connexion</h1>
+	</div>
+	<div class="card-body">
+		<form novalidate>
+			<div class="form-group mt-2">
+				<label class="form-control-label" for="statut">Quel est votre statut</label>
+				<select [(ngModel)]="statut" class="form-control" name="statut">
+					<option *ngFor="let option of statuts" value="{{option}}">{{option}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="matricule">Identifiant</label>
+				<input class="form-control" type="text" [(ngModel)]="matricule" name="matricule">
+			</div>
+			<div class="form-group">
+				<label class="form-control-label" for="motDePasse">Mot de passe</label>
+				<input class="form-control" type="password" [(ngModel)]="motDePasse" name="motDePasse">
+			</div>
+		</form>
+	</div>
+	<div class="card-footer">
+		<div align="right">
+			<button mat-button (click)="onLogin()">
+				Se connecter
+			</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,40 @@
+<div id="container">
+	<div id="titre" class="text-center">
+		<h1>Liste des classes</h1>
+	</div>
+	<div>
+		<button id="addButton" mat-icon-button routerLink="/classe/new">
+			<mat-icon>add</mat-icon>
+		</button>
+	</div>
+	<div id="liste">
+		<table>
+			<thead>
+				<tr class="text-center">
+					<th>N°</th>
+					<th>Nom</th>
+					<th>Salle</th>
+					<th>Effectif</th>
+					<th>Prof principal</th>
+					<th>Délégué</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor = "let classe of classes; let i=index" class="text-center">
+					<td>{{i+1}}</td>
+					<td>{{classe.nom}}</td>
+					<td>{{classe.salle}}</td>
+					<td>{{classe.effectif}}</td>
+					<td>{{classe.pp}}</td>
+					<td>{{classe.chefDeClasse}}</td>
+					<td>
+						<button mat-button color="accent" routerLink="/classe/detail/{{classe.nom}}">détail</button>
+						<button mat-button color="primary" routerLink="/classe/edit/{{classe.nom}}">modifier</button>
+						<button mat-button color="warn" (click)="onDelete(i)">supprimer</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

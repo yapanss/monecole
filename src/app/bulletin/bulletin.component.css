@@ -1,0 +1,27 @@
+#container{
+    border: solid black 1px;
+    /* margin-bottom: 50px;
+    height: 380mm;
+    width:  250mm */
+}
+ 
+label, #header {
+    color: darkmagenta;
+}
+@media print {
+	#periode, #classe, #matricule, #generate, #imprime {
+		display: none;
+    }
+    @page {
+        size: 21cm 29.7cm;
+        background-color: black;
+        /* size: 8.5in 12in; */
+    }
+    #container{
+        /* height: 100%; */
+       page-break-after: always;
+        /* margin-bottom: 50px;
+        height: 380mm;
+        width:  250mm */
+    }
+}

@@ -1,0 +1,68 @@
+<section id="choix" class="form-group d-flex justify-content-around mt-3 pt-3">
+	<div id="periode" class="form-group form-inline">
+		<label for="" class="mr-2">periode: </label>
+		<select class="form-control" ngDefaultControl [(ngModel)]="periode">
+			<option *ngFor="let option of periodes" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div id="classe" class="form-group form-inline">
+		<label for="" class="mr-2">classe: </label>
+		<select class="form-control" (change)="onSelectClasse()" [(ngModel)]="nomClasse" ngDefaultControl>
+			<option *ngFor="let option of nomsDesClasses" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div id="matiere" class="form-group form-inline">
+		<label for="" class="mr-2">matiere: </label>
+		<select class="form-control" [(ngModel)]="matiere" ngDefaultControl>
+			<option *ngFor="let option of matieres" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div>
+		<button class="actionButton" *ngIf="periode && nomClasse && matiere" mat-button color="primary" (click)="onGenerate()">Générer</button>
+	</div>
+</section>
+<section id="liste">
+	<form #moyForm="ngForm">
+	<table class="table table-bordered mt-5">
+		<tr class="text-center">
+			<th>N°</th>
+			<th>Photo</th>
+			<th #matric>Matricule</th>
+			<th>Nom et prénoms</th>
+			<th>Sexe</th>
+			<th>Red.</th>
+			<th>Moyenne</th>
+			<th>Rang</th>
+			<th *ngIf="personnel && personnel.fonction && personnel.fonction.titre == 'Educateur(trice)'">Heures d'Absence</th>
+		</tr>
+		<tr *ngFor = "let eleve of eleves; let i=index">
+			<td>{{i+1}}</td>
+			<td></td>
+			<td>{{eleve.matricule}}</td>
+			<td>{{eleve.nom}} {{eleve.prenoms}}</td>
+			<td>{{eleve.genre}}</td>
+			<td>{{eleve.redoublant}}</td>
+			<td style="padding: 0;">
+				<input class="text-center" type="number" style="width: 100%; height: 100%;" 
+						name="moy_{{i}}"
+						[(ngModel)]="moyennes[i]" 
+						disabled="{{(periode=='Annuel') || 
+							(periodesEvaluation[periode].debut != null && aujourdhui < periodesEvaluation[periode].debut) || 
+							(periodesEvaluation[periode].fin != null && aujourdhui > periodesEvaluation[periode].fin)}}">
+			</td>
+			<td class="text-center">
+				{{rangs[i] ? rangs[i] + 'e' : null}}
+			</td>
+			<td style="padding: 0;" *ngIf="personnel && personnel.fonction.titre == 'Educateur(trice)'">
+				<input type="number" style="width: 100%; height: 100%;" 
+						[(ngModel)]="absences[i]"
+						disabled="{{(periode=='Annuel') || aujourdhui < periodesEvaluation[periode].debut || 
+															aujourdhui > periodesEvaluation[periode].fin}}">
+			</td>
+		</tr>
+	</table>
+	<div align="right" *ngIf="moyForm.dirty && moyForm.valid">
+		<button class="actionButton" mat-button (click)="onSubmit()">Valider</button>
+	</div>
+</form>
+</section>

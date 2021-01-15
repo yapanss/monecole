@@ -1,0 +1,104 @@
+
+#container{
+    min-height: 500px;
+}
+#main, #menu, #titre{
+    background-color: #F5F0E1;
+}
+#menu{
+    width: 250px;
+}
+input{
+    height: 100%;
+    /* display: inline; */
+    /* margin-left: 20%; */
+}
+button{
+    outline: none;
+}
+#search-input{
+    border: solid lightgray 2px;
+    margin-left: 15%;
+    margin-right: 15%;
+    padding: 0;
+}
+.search-button{
+    background-color:  #F5F0E1;
+    /* border-radius: 0; */
+}
+input{
+    border: none;
+}
+.menuButton{
+    color: darkblue;
+    width: 100%;
+    border-bottom: solid white 2px;
+}
+.menuButton:hover{
+    background-color: darkblue;
+    color: white;
+}
+#delete-icon, #edit-icon{
+    color: white;
+    /* margin-top: 5px; */
+    margin-bottom: 5px;
+}
+#delete-icon:hover{
+    /* border-radius: 50%; */
+    background-color: lightgray;
+    color: red;
+    /* border: solid red 1px; */
+}
+#edit-icon:hover{
+    background-color: lightgray;
+    color: green;
+    /* border: solid green 1px; */
+}
+#add-icon{
+    background-color: white;
+    color: darkblue;
+}
+#add-icon:hover{
+    background-color: darkblue;
+    color: white;
+}
+.card{
+    /* width: 250px; */
+}
+.card-header{
+    background-color:  #706441;
+    color: white;
+    font-size: 0.95em;
+    height: 40px;
+    padding: 5px;
+}
+.card-header > h2{
+    font-size: 14px;
+}
+.card-footer{
+    position: relative;
+    height: 45px;
+    background-color: gray;
+}
+a{
+    color: white;
+    font-size: 14px;
+}
+.overlay{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    right: 0;
+    width: 40%;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-top: 1x;
+    opacity: 0;
+    background: lightgray;
+    background: rgba(128, 128, 128, 0.5); /* Black see-through */
+    color: #f1f1f1; 
+    transition: .5s ease;
+}
+.card:hover .overlay{
+    opacity: 1;
+}

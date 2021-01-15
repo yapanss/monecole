@@ -1,0 +1,181 @@
+<div>
+	<button mat-icon-button color="primary" (click)="drawer.toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+</div>
+<mat-drawer-container>
+	 <mat-drawer #drawer mode="side" opened>
+		<div id="presentation" class="p-3">
+			<div id="cadrePhoto" align="center">
+				<h1 class="text-center bg-dark text-white mb-0">{{classe.nom}}</h1>
+				<!-- <img
+				[src]=imgSrc alt="photo de profil" height="150" width="150"> -->
+			</div>
+			<div id="salleEffectifPersonnel" class="text-center">
+				<h3>Salle: {{classe.salle}}</h3>
+				<h3>Effectif: {{eleves? eleves.length: null}}</h3>
+				<h3>Educateur</h3>
+				<p>Mr {{classe.educateur}}</p>
+				<p>Contact: </p>
+				<h3>Prof principal</h3>
+				<p>Mr {{classe.pp}}</p>
+				<p>Contact: </p>
+				<h3>Délégué</h3>
+				<p>Mr {{classe.chefDeClasse}}</p>
+				<p>Contact: </p>
+			</div>
+			<div class="text-center">
+				<button mat-button (click)="onAjoutEleve()">Ajouter Elèves</button>
+			</div>
+		   <div class="text-center">
+			   <button mat-button (click)="onAjoutProf()">Ajouter Profs</button>
+		   </div>
+			<div class="text-center">
+			   <button mat-button routerLink="/classe/edit/{{classe.nom}}">Modifier infos</button>
+			</div>
+		</div>
+	 </mat-drawer>
+	 <div id="container" *ngIf="classe" class="mb-5 p-3 d-flex">
+		<div id="infosClasse" class="ml-2 pl-3 pr-3 pt-1 pb-3 bg-white flex-grow-1">
+			<mat-tab-group>
+				<mat-tab label="Profs">
+					<div id="liste_profs">
+						<table class="table mt-5">
+							<tr>
+								<th>Matière</th>
+								<th>Nom et Prénoms</th>
+								<th>Email</th>
+								<th>Page personnelle</th>
+							</tr>
+							<tr *ngFor="let prof of lesProfs">
+								<td>{{prof.matiere}}</td>
+								<td>{{prof.prof.nom}} {{prof.prof.prenoms}}</td>
+								<td>{{prof.prof.email}}</td>
+								<td><button mat-stroked-button 
+											routerLink="/personnels/detail/{{prof.prof.matricule}}"
+											class="text-white">Consuler</button></td>
+							</tr>
+						</table>
+					</div>
+				</mat-tab>
+				<mat-tab label="Liste">
+					<table class="table table-bordered mt-5">
+						<tr>
+						   <th>N°</th>
+						   <th>Photo</th>
+						   <th>Matricule</th>
+						   <th>Nom</th>
+						   <th>Prénoms</th>
+						   <th>Genre</th>
+						   <th>Redoublant(e)</th>
+						   <th>Actions</th>
+					   </tr>
+					   <tr *ngFor = "let eleve of eleves; let i=index">
+						   <td>{{i+1}}</td>
+						   <td><img src="" height="30" width="30" alt=""></td>
+						   <td>{{eleve.matricule}}</td>
+						   <td>{{eleve.nom}}</td>
+						   <td>{{eleve.prenoms}}</td>
+						   <td>{{eleve.genre}}</td>
+						   <td>{{eleve.redoublant}}</td>
+						   <td>
+							   <button mat-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}"><mat-icon>info</mat-icon>détail</button>
+							   
+							   <button mat-button color="warn" (click)="onDelete(i)">
+								   <mat-icon>delete</mat-icon>
+							   Retirer
+						   </button>
+						   </td>
+					   </tr>
+					</table>
+				</mat-tab>
+				<mat-tab label="Emploi du temps">
+					<app-emploi-classe></app-emploi-classe>
+				</mat-tab>
+				<mat-tab label="Cahiers">
+					<app-cahiertexte [classe]="classe.nom"></app-cahiertexte>
+				</mat-tab>
+				<mat-tab label="Bilan">
+					<div class="form-group form-inline p-2 bg-light">
+					   <label for="" class="form-control-label col-2 offset-1">Periode</label>
+					   <select class="form-control ml-3 col-6" [(ngModel)]="periode">
+						   <option *ngFor="let option of periodes" value="{{option}}">{{option}}</option>
+					   </select>
+				   </div>
+					<div class="d-flex justify-content between">
+					   <h1 *ngIf="periode" class="text-center text-dark">Résultats {{periode != 'Annuel' ? 'du': null}} {{periode}}</h1>
+					</div>
+					<div align="right" class="mb-1">
+					   <button *ngIf="periode == 'Annuel'" 
+							   mat-raised-button color="primary"
+							   (click)="onSubmitDecision()">valider</button>
+					</div>
+					<div>
+						<table>
+							<tr>
+								<th>N°</th>
+								<th>Nom et Prénoms</th>
+								<th *ngFor="let prof of lesProfs">{{prof.matiere}}</th>
+								<th>Moyenne</th>
+								<th>Rang</th>
+								<th *ngIf="periode!='Annuel'">Distinctions</th>
+							   <th *ngIf="periode=='Annuel'">DFA</th>
+								<th *ngIf="periode=='Annuel'">Niveau</th>
+							</tr>
+							<tr *ngFor="let eleve of eleves; let i = index">
+								<td class="bg-dark">{{i+1}}</td>
+								<td>{{eleve.nom}} {{eleve.prenoms}}</td>
+								<td *ngFor="let prof of lesProfs">
+									{{(infoEleves[i].resultats && 
+									   infoEleves[i].resultats[periode] && 
+									   infoEleves[i].resultats[periode][prof.matiere] &&
+									   infoEleves[i].resultats[periode][prof.matiere]['note'] != null) ? 
+									   infoEleves[i].resultats[periode][prof.matiere]['note'].toFixed(2) : 
+									   null}}
+								   </td>
+								<td>
+									{{infoEleves[i].resultats && infoEleves[i].resultats[periode]  && (infoEleves[i].resultats[periode].moyenne != null) ? 
+									   infoEleves[i].resultats[periode].moyenne.toFixed(2) : 
+									   null}}
+								</td>
+								<td>{{infoEleves[i].resultats && infoEleves[i].resultats[periode]  && (infoEleves[i].resultats[periode].moyenne != null) ? 
+									infoEleves[i].resultats[periode].rang : 
+									null}}
+								</td>
+								<td *ngIf="periode!='Annuel'">
+									{{infoEleves[i].resultats && infoEleves[i].resultats[periode]  && (infoEleves[i].resultats[periode].moyenne != null) ? 
+										infoEleves[i].resultats[periode].distinction : 
+										null}}
+								</td>
+								<td *ngIf="periode=='Annuel'">
+									{{infoEleves[i].decisionFinAnnee}}
+							   </td>
+								<td>
+									<select name="" id="" [(ngModel)]="niveauProchain[i]" 
+											*ngIf="periode=='Annuel' && infoEleves[i].decisionFinAnnee=='Admis (e)'">
+									   <option *ngFor="let option of niveaux" value="{{option}}">{{option}}</option>
+									</select>
+							   </td>
+							</tr>
+						</table>
+						<div align="right" class="mt-2">
+						   <button mat-stroked-button color="primary">Imprimer</button>
+						</div>
+					</div>
+				</mat-tab>
+				<mat-tab label="Bulletins">
+				   <app-bulletin [eleves]="eleves" 
+							   [periodes]="periodeSansAnnuel"
+							   [lesProfs]="lesProfs"
+							   [configuration]="configuration"></app-bulletin>				
+			   </mat-tab>
+			   <mat-tab label="Calendrier">Calendrier</mat-tab>
+			</mat-tab-group>
+		</div>
+	</div>
+ </mat-drawer-container>
+ 
+
+  
+
+ 

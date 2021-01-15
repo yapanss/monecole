@@ -1,0 +1,57 @@
+<section class="card text-white mt-3 mb-3">
+<div class="card-header border border-top-0 border-left-0 border-right-0">
+	<div class="card-title">
+		<h1 class="text-center">Enregistrement d'une classe</h1>
+	</div>
+</div>
+<form novalidate [formGroup] = "classeForm" (ngSubmit) = "onSubmit()">
+<div class="card-body">
+	<div class="form-group">
+		<label for="niv" class="form-control-label">Niveau:</label>
+		<select class="form-control" formControlName="niveau" (change)="onSelectNiveau()">
+		  <option *ngFor="let option of niveaux" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="nivSuiv" class="form-control-label">Niveau Suivant Par Défaut:</label>
+		<select class="form-control" formControlName="niveauSuivant">
+		  <option *ngFor="let option of niveaux" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="clas" class="form-control-label">Classe:</label>
+		<select formControlName="nom" class="form-control">
+		  <option *ngFor="let option of classes" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div>
+		<label for="Salle" class="form-control-label">Salle:</label>
+		<select formControlName="salle" class="form-control">
+		  <option *ngFor="let option of salles" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="lv2" class="form-control-label">LV2:</label>
+		<select class="form-control" formControlName="lv2">
+		  <option *ngFor="let option of LV2" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="art" class="form-control-label">Art:</label>
+		<select class="form-control" formControlName="art">
+		  <option *ngFor="let option of Arts" value="{{option}}">{{option}}</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="" class="form-control-label">Educateur</label>
+		<input class="form-control" type="text" formControlName="educateur" placeholder="Entrer le matricule de l'éducateur">
+	</div>
+	
+</div>
+<div class="card-footer border border-bottom-0 border-left-0 border-right-0">
+	<div class="d-flex flex-row-reverse">
+		<button mat-raised-button class="sendButton" type="submit">Submit</button>
+	</div>
+</div>
+</form>
+</section>

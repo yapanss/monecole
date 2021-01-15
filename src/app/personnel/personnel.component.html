@@ -1,0 +1,71 @@
+<div id="overlay" [style.display]="personnels ? 'none' : 'block'">
+	<mat-progress-bar id="text" mode="indeterminate" color="primary"></mat-progress-bar>
+</div>
+<div id="listePersonnels" *ngIf="personnels">
+	
+<div class="mb-1">
+	<button id="addButton" mat-icon-button (click)="onCreateDialog()"
+			#tooltip="matTooltip" 
+			matTooltip="Ajouter un personnel"
+			[matTooltipPosition]="'above'"
+			matTooltipHideDelay="0"><mat-icon>add</mat-icon>
+	</button>
+</div>
+<div class="card p-0">
+	<div class="card-header">
+		<h1 class="text-center" id="listeTitle">Liste des personnels</h1>
+	</div>
+	<div class="card-body pt-0">
+		<table>
+			<tr class="text-center">
+				<th>N°</th>
+				<th>Matricule</th>
+				<th>Nom et Prénoms</th>
+				<th>Emploi</th>
+				<th>Fonction actuelle</th>
+				<th>Code</th>
+				<th>Domicile</th>
+				<th>Contact</th>
+				<th>Actions</th>
+			</tr>
+			<tr *ngFor = "let personnel of personnels; let i=index" class="text-center infos">
+				<td>{{i+1}}</td>
+				<td>{{personnel.matricule}}</td>
+				<td>{{personnel.nom}} {{personnel.prenoms}}</td>
+				<td>{{personnel.emploi}}</td>
+				<td>{{personnel.fonction.titre}} {{personnel.fonction.specialite}}</td>
+				<td>{{personnel.code}}</td>
+				<td>{{personnel.domicile}}</td>
+				<td>{{personnel.contact}}</td>
+				<td>
+					<button mat-icon-button
+							class="text-success" 
+							routerLink="/personnels/detail/{{personnel.matricule}}"
+							#tooltip="matTooltip"
+							matTooltip="Détails"
+							[matTooltipPosition]="'above'"
+							  matTooltipHideDelay="0">
+						<fa-icon [icon]="faInfoCircle"></fa-icon>
+					</button>
+					<button mat-icon-button  
+							(click)="onUpdateDialog(i)"
+							#tooltip="matTooltip"
+							matTooltip="Modifier"
+							[matTooltipPosition]="'above'"
+							  matTooltipHideDelay="0">
+						<fa-icon [icon]="faEdit"></fa-icon>
+					</button>
+					<button mat-icon-button color="warn" 
+							(click)="onDelete(i)"
+							#tooltip="matTooltip"
+							matTooltip="Supprimer"
+							[matTooltipPosition]="'above'"
+							  matTooltipHideDelay="0">
+						<fa-icon [icon]="faTrashAlt"></fa-icon>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>	
+</div>

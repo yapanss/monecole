@@ -1,0 +1,185 @@
+<div>
+	<button mat-icon-button color="primary" (click)="drawer.toggle()">
+		<mat-icon>
+			menu
+		</mat-icon>
+	</button>
+</div>
+<mat-drawer-container>
+	<mat-drawer #drawer mode="side" opened>
+		<div id="presentation" class="p-3">
+			<div id="cadrePhoto" align="center">
+				<img #imagePreview 
+				[src]=imgSrc alt="photo de profil" height="150" width="150">
+			</div>
+			<div id="nomEtEmploi" class="text-center">
+				<h2 id="nom">{{eleve.nom}} {{eleve.prenoms}}</h2>
+				<h3 id="matricule">Mle: {{eleve.matricule}} {{eleve.classe}}</h3>
+				<h3 id="classe" class="p-2 changeButton" routerLink="/classe/detail/{{eleve.classe}}">{{eleve.classe}}</h3>
+				<p><mat-icon>phone </mat-icon>: {{eleve.contact}}</p>
+				<p><mat-icon>email </mat-icon>: {{eleve.contact}}</p>
+			</div>
+			<div>
+				<div *ngIf="!showPhotoForm" class="text-center">
+					<button id="photoChangeButton" class="changeButton" mat-button (click)="togglePhotoForm()">Changer photo</button>
+				</div>
+				<div class="form-group" *ngIf="showPhotoForm">
+					<input type="file" #photo class="form-control" (change)="handleFile(photo.files, imagePreview)
+					" accept="image/*">
+					<button mat-button (click)="cancelPhoto()">Annuler</button>
+					<button mat-button (click)="submitPhoto()">Envoyer</button>
+				</div>
+				<div class="text-center">
+				   <button class="changeButton" mat-button routerLink="/eleve/edit/{{eleve.matricule}}">Mettre à jour</button>
+			   </div>
+			</div>
+			
+		</div>
+	</mat-drawer>
+	<!--<div id="container" *ngIf="eleve" class="mb-5 p-3 bg-info">!-->
+ 	
+		<div id="infoseleve" class="ml-2 pl-3 pr-3 pt-1 pb-3 bg-white mb-5">
+				<mat-tab-group>
+					<mat-tab  label="Infos">
+						<section id="infosperso" class="d-flex mt-3 mb-1">
+							<div id="perso">
+								<div class="titreInfo">
+									<h2 class="text-center">Infos personnelles</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Genre : {{eleve.genre}}</p>
+										<p>Date de naissance : {{eleve.dateNaissance | date: 'dd/MM/yyyy'}}</p>
+										<p>Lieu de naissance :	{{eleve.lieuNaissance}}</p>
+										<p>Domicile : {{eleve.domicile}}</p>
+										<p>Handicap : </p>
+										<p>Aptitude EPS : </p>
+										<p>Etablissement d'origine : </p>
+										<p>Date d'entrée dans l'établissement : </p>
+										<p>Redoublant : </p>
+									</li>
+								</ul>
+							</div>
+							<div id="pere">
+								<div class="titreInfo">
+									<h2 class="text-center">Infos père</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Nom et Prénoms: {{eleve.pere ? eleve.pere.nomEtPrenoms : null}}</p>
+										<p>Téléphone:  {{eleve.pere ? eleve.pere.contact : null}}</p>
+										<p>Email:  {{eleve.pere ? eleve.pere.email : null}}</p>
+										<p>Domicile:  {{eleve.pere ? eleve.pere.domicile : null}}</p>
+										<p>Profession: {{eleve.pere ? eleve.pere.profession : null}}</p>
+									</li>
+								</ul>
+							</div>
+							<div id="mere">
+								<div class="titreInfo">
+									<h2 class="text-center">Infos mère</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Nom et Prénoms: {{eleve.mere ? eleve.mere.nomEtPrenoms : null}}</p>
+										<p>Téléphone:  {{eleve.mere? eleve.mere.contact : null}}</p>
+										<p>Email:  {{eleve.mere? eleve.mere.email : null}}</p>
+										<p>Domicile:  {{eleve.mere ? eleve.mere.domicile : null}}</p>
+										<p>Profession: {{eleve.mere ? eleve.mere.profession : null}}</p>
+									</li>
+								</ul>
+							</div>
+							<div id="tuteur">
+								<div class="titreInfo">
+									<h2 class="text-center">Infos tuteur légal</h2>
+								</div>
+								<ul>
+									<li>
+										<p>Nom et Prénoms: {{eleve.tuteur ? eleve.tuteur.nomEtPrenoms : null}}</p>
+										<p>Téléphone:  {{eleve.tuteur? eleve.tuteur.contact : null}}</p>
+										<p>Email:  {{eleve.tuteur? eleve.tuteur.email : null}}</p>
+										<p>Domicile:  {{eleve.tuteur ? eleve.tuteur.domicile : null}}</p>
+										<p>Profession: {{eleve.tuteur? eleve.tuteur.profession : null}}</p>
+									</li>
+								</ul>
+							</div>
+						</section>
+					</mat-tab>
+				   <mat-tab label="Correspondance">
+					<app-correspondance></app-correspondance>
+				   </mat-tab>
+				   <mat-tab label="Résultats">
+					   <section class="mt-3 mb-5">
+						   <div class="form-group form-inline p-2" id="periode-resultat">
+							   <label for="" class="form-control-label col-2 offset-1">Periode</label>
+							   <select id="selectPeriode" class="form-control col-6" [(ngModel)]="periode" (change)="onGenerate()">
+								   <option *ngFor="let option of periodes" value="{{option}}">{{option}}</option>
+							   </select>
+						   </div>
+					   </section>
+					   <section class="mb-3">
+						   <h1>Résultats du {{periode}}</h1>
+					   </section>
+					   <section>
+						   <table class="table table-bordered">
+							   <tr>
+								   <th *ngFor="let matiere of matieres" colspan="2">{{matiere}}</th>
+								   <th>Moyenne</th>
+								   <th>Rang</th>
+								   <th *ngIf="periode != 'Annuel'">Distinct°/Sanct°</th>
+								   <th *ngIf="periode == 'Annuel'">DFA</th>
+							   </tr>
+							   <tr>
+								   <ng-container *ngFor="let matiere of matieres">
+									<td class="moyenne-matiere">
+										{{eleve.resultats && 
+											eleve.resultats[periode] && 
+											eleve.resultats[periode][matiere] &&
+											eleve.resultats[periode][matiere]['note'] != null? 
+											eleve.resultats[periode][matiere]['note'].toFixed(2) : null}}
+									</td>
+									<td class="rang-matiere">
+										{{eleve.resultats && 
+											eleve.resultats[periode] && 
+											eleve.resultats[periode][matiere] ?
+											eleve.resultats[periode][matiere]['rang'] + 'e' :
+											null }}
+									</td>
+								   </ng-container>
+									
+								   <td class="resultat-general">
+									   {{eleve.resultats && 
+									   eleve.resultats[periode] && 
+									   eleve.resultats[periode]['moyenne'] && 
+									   eleve.resultats[periode]['moyenne'] != null? 
+									   (eleve.resultats[periode]['moyenne']).toFixed(2) : 
+									   null}}
+								   </td>
+								   <td class="resultat-general">
+									   {{eleve.resultats && 
+										eleve.resultats[periode] ? 
+										eleve.resultats[periode]['rang'] :
+										null}}
+								   </td>
+								   <td *ngIf='periode !="Annuel"' class="resultat-general">
+										{{eleve.resultats && 
+										eleve.resultats[periode] ? 
+										eleve.resultats[periode]['distinction'] :
+										null}}
+								</td>
+								<td *ngIf='periode =="Annuel"'>{{eleve['decisionFinAnnee']}}</td>
+							   </tr>
+						   </table>
+					   </section>
+				   </mat-tab>
+				   <mat-tab label="Livret scolaire">
+					   <app-livretscolaire [eleve]="eleve"></app-livretscolaire>
+				   </mat-tab>
+				   <mat-tab label="Inscription"> Content 3 </mat-tab>
+				</mat-tab-group>
+		</div>
+		<!--</div>!-->
+</mat-drawer-container>
+
+
+
+
