@@ -13,8 +13,11 @@
 		<label for="" class="mr-2">A : </label>
 		<input type="date" [(ngModel)]="dateFin">
 	</div>
-	<div id="generate">
-		<button mat-raised-button color="primary" (click)="onGenerate()">Voir</button>
+	<div id="consultation">
+		<button mat-raised-button color="primary" (click)="setViewMode()">Consulter</button>
+	</div>
+	<div id="modification">
+		<button mat-raised-button color="primary" (click)="setEditMode()">Modifier</button>
 	</div>
 </section>
 
@@ -28,10 +31,14 @@
 			matTooltipHideDelay="0">add</mat-icon>
         </button>
 	</div>
-	<div *ngIf="!this.matiere">
-		
-	</div>
-	<angular-editor [placeholder]="'Enter text here...'" [(ngModel)]="htmlContent"></angular-editor>
+	<ng-container *ngIf="editMode">
+		<div *ngFor="let item of cahiertexte['partage'][matiere]; let i = index">
+			<h3>{{item.date | date : 'dd/MM/yyyy'}}</h3>
+			<button mat-icon-button><mat-icon>edit</mat-icon></button>
+			<button mat-icon-button><mat-icon>delete</mat-icon></button>
+		</div>
+	</ng-container>
+	<angular-editor [(ngModel)]="htmlContent" *ngIf="viewMode"></angular-editor>
 	
 </div>
 

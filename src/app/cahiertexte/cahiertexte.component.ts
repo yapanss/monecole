@@ -4,6 +4,7 @@ import {
   Input,
   Inject,
   ViewChild,
+  TemplateRef,
   ElementRef,
 } from "@angular/core";
 import { CahiertexteDialogComponent } from "../cahiertexte-dialog/cahiertexte-dialog.component";
@@ -19,6 +20,7 @@ import { DatePipe } from "@angular/common";
 })
 export class CahiertexteComponent implements OnInit {
   cahiertexte;
+  lessons = "";
   matieres: string[] = [
     "Anglais",
     "Allemand",
@@ -46,7 +48,9 @@ export class CahiertexteComponent implements OnInit {
                             <h1 style="color: red;">Cahier de Texte de la classe</h1>
 
                           </div>`;
-  //@ViewChild('textcontenair') public textcont: ElementRef;
+  editMode: boolean = false;
+  viewMode: boolean = false;
+  //@ViewChild('myEditor') public myEditor: TemplateRef<any>;
 
   constructor(
     private dialog: MatDialog,
@@ -62,7 +66,8 @@ export class CahiertexteComponent implements OnInit {
       this.cahiertexte = response["cahiertexte"];
     });
   }
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+  }
 
   onCreateDialog() {
     let dialogRef = this.dialog.open(CahiertexteDialogComponent, {
@@ -89,7 +94,9 @@ export class CahiertexteComponent implements OnInit {
     });
   }
   onDelete(index) {}
-  onGenerate() {
+  setViewMode() {
+    this.editMode = false;
+    this.viewMode = true;
     let contenu: string = "<div id='accordion'>";
     let dateString;
     let href;
@@ -113,7 +120,14 @@ export class CahiertexteComponent implements OnInit {
     });
     this.htmlContent = contenu + "</div>";
   }
-
+  setEditMode(){
+    this.viewMode = false;
+    this.editMode = true;
+  }
   onChange(e) {}
   onDataChange() {}
+  onDeleteEntree() {
+    
+  }
+
 }
