@@ -2,6 +2,7 @@ const personnelController = require('../controllers/personnel');
 const multer = require('../middlewares/multer');
 const fs = require('fs');
 // const imageToBase64 = require('image-to-base64');
+const bcrypt = require('bcryptjs');
 
 module.exports = (app) => {
 	app.route('/api/personnel')
@@ -79,6 +80,9 @@ module.exports = (app) => {
 	.put(multer, async (req, res) => {
 		try{
 			const personnel = await personnelController.getById(req.params.id);
+			if(req.body.motDePasse){
+				personnel.motDePasse = await bcrypt.hash(req.body.motDePasse, 10)
+			}
 			if(req.body.nom){
 				personnel.nom = req.body.nom
 			}

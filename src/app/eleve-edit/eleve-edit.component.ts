@@ -51,7 +51,7 @@ export class EleveEditComponent implements OnInit {
   		this.eleveForm = this.formBuilder.group({
       anneeScolaire: this.formBuilder.control(this.anneeScolaire),
   		// Infos personnelles
-      motDePasse: this.formBuilder.control(this.eleve.motDePasse),
+      motDePasse: this.formBuilder.control(null),
       matricule: this.formBuilder.control(this.eleve.matricule),
       nom: this.formBuilder.control(this.eleve.nom),
       prenoms: this.formBuilder.control(this.eleve.prenoms),

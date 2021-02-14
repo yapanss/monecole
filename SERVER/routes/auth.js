@@ -24,11 +24,11 @@ module.exports = (app) =>{
             }
             if(!user){
                     response = {success: false, message: 'Username or password incorrect !'}
-            }else if(!user.compareMotDePasse(motDePasse)){
-                    response = {success: false, message: 'Username or password incorrect !'};
+            //}else if(!user.compareMotDePasse(motDePasse)){
+                    //response = {success: false, message: 'Username or password incorrect !'};
             } else {
                 const token = jwt.sign(
-                    {nom: user.nom, matricule: user.matricule, statut}, 
+                    {nom: user.nom, matricule: user.matricule, statut, fonction: user.fonction ? user.fonction.titre : null}, 
                     TOKEN_SECRET, 
                     {expiresIn: 86400})
                 response = {success: true, user, token, statut, expiresAt: 86400}

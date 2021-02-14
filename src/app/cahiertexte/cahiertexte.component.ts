@@ -10,6 +10,7 @@ import {
 import { CahiertexteDialogComponent } from "../cahiertexte-dialog/cahiertexte-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
 import { ApiService } from "../services/api.service";
+import { AuthService } from "../services/auth.service";
 //import { DOCUMENT } from '@angular/common';
 import { DatePipe } from "@angular/common";
 
@@ -48,14 +49,15 @@ export class CahiertexteComponent implements OnInit {
                             <h1 style="color: red;">Cahier de Texte de la classe</h1>
 
                           </div>`;
-  editMode: boolean = false;
-  viewMode: boolean = false;
+  cahierMode: string;
+  //viewMode: boolean = false;
   //@ViewChild('myEditor') public myEditor: TemplateRef<any>;
 
   constructor(
     private dialog: MatDialog,
     private datePipe: DatePipe,
-    private api: ApiService
+    private api: ApiService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -95,8 +97,8 @@ export class CahiertexteComponent implements OnInit {
   }
   onDelete(index) {}
   setViewMode() {
-    this.editMode = false;
-    this.viewMode = true;
+    //this.editMode = false;
+    this.cahierMode = 'consultation';
     let contenu: string = "<div id='accordion'>";
     let dateString;
     let href;
@@ -121,13 +123,15 @@ export class CahiertexteComponent implements OnInit {
     this.htmlContent = contenu + "</div>";
   }
   setEditMode(){
-    this.viewMode = false;
-    this.editMode = true;
+    this.cahierMode = 'edition';
   }
   onChange(e) {}
   onDataChange() {}
   onDeleteEntree() {
     
+  }
+  estProf(){
+    return this.auth.getUser().fonction == 'professeur';
   }
 
 }

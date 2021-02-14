@@ -49,6 +49,7 @@ export class ProfilComponent implements OnInit {
           redirectUrl = `/eleve/detail/${authResult['user'].matricule}`;
         }else {
           redirectUrl = `/personnel/detail/${authResult['user'].matricule}`;
+			alert(redirectUrl);
         }
         this.router.navigateByUrl(redirectUrl)
         // this.sendUserInfo.emit(response['user'])

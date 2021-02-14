@@ -2,6 +2,7 @@ const eleveController = require('../controllers/eleve');
 const { check, validationResult } = require('express-validator');
 const multer = require('../middlewares/multer');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
 module.exports = (app) => {
 	app.route('/api/eleve')

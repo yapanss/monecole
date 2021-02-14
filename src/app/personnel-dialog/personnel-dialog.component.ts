@@ -40,6 +40,7 @@ export class PersonnelDialogComponent implements OnInit {
   buildForm(){
   		this.personnelForm = this.formBuilder.group({
   			// Infos personnelles
+		  motDePasse: this.formBuilder.control(null),
 	      matricule: this.formBuilder.control(this.data.personnel && this.data.personnel.matricule ? this.data.personnel.matricule : null),
 	      nom: this.formBuilder.control(this.data.personnel && this.data.personnel.nom ? this.data.personnel.nom : null),
 	      prenoms: this.formBuilder.control(this.data.personnel && this.data.personnel.prenoms ? this.data.personnel.prenoms : null),

@@ -22,7 +22,7 @@
 </section>
 
 <div id="container">
-    <div>
+    <div *ngIf="estProf()">
         <button mat-icon-button>
             <mat-icon (click)="onCreateDialog()"
             #tooltip="matTooltip" 
@@ -31,14 +31,14 @@
 			matTooltipHideDelay="0">add</mat-icon>
         </button>
 	</div>
-	<ng-container *ngIf="editMode">
+	<ng-container *ngIf="cahierMode == 'edition'">
 		<div *ngFor="let item of cahiertexte['partage'][matiere]; let i = index">
 			<h3>{{item.date | date : 'dd/MM/yyyy'}}</h3>
 			<button mat-icon-button><mat-icon>edit</mat-icon></button>
 			<button mat-icon-button><mat-icon>delete</mat-icon></button>
 		</div>
 	</ng-container>
-	<angular-editor [(ngModel)]="htmlContent" *ngIf="viewMode"></angular-editor>
+	<angular-editor [(ngModel)]="htmlContent" *ngIf="cahierMode == 'consultation'"></angular-editor>
 	
 </div>
 

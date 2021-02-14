@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 
 const personnelSchema = new mongoose.Schema({
 	// Infos personnelles
@@ -6,7 +7,9 @@ const personnelSchema = new mongoose.Schema({
 		type: String,
 		unique: true
 	},
-	motDePasse: String,
+	motDePasse: {
+		type: String,
+	},
 	nom: String,
 	prenoms: String,
 	dateNaissance: Date,
@@ -32,5 +35,23 @@ const personnelSchema = new mongoose.Schema({
 	},
 	photoUrl: String
 });
+
+personnelSchema.pre('save', async function(next){
+	try{
+		let personnel = this;
+		if(!personnel.isModified('motDePasse')){
+			return next();
+		}
+		personnel.motDePasse = await bcrypt.hash(personnel.motDePasse, 10);
+		next();
+	}catch(err){
+		console.log(err);
+	}
+})
+
+personnelSchema.methods.compareMotDePasse = function(motDePasse) {
+	const personnel = this;
+	return bcrypt.compareSync(motDePasse, personnel.motDePasse);
+}
 
 module.exports = mongoose.model('Personnel', personnelSchema);

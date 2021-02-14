@@ -23,10 +23,10 @@ export class AuthService {
   setSession(authResult){ 
     const expiresAt = moment().add(authResult.expiresAt,'second');
     const photoUrl = authResult['user'].photoUrl;
-    const { statut } = authResult;
+    const { statut, fonction } = authResult;
     localStorage.setItem('token', authResult.token);
     localStorage.setItem("expiresAt", JSON.stringify(expiresAt.valueOf()) );
-    localStorage.setItem('user', JSON.stringify({photoUrl, statut}));
+    localStorage.setItem('user', JSON.stringify({photoUrl, statut, fonction}));
   }
   
   getUser(){
@@ -56,4 +56,15 @@ export class AuthService {
   isLoggedOut(){
     return !this.isLoggedIn();
   }
+ 
 }
+
+
+
+
+
+
+
+
+
+
