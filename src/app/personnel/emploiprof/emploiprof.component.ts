@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray,Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
@@ -46,7 +46,6 @@ export class EmploiprofComponent implements OnInit, OnChanges {
     this.api.getSome('classe', 'prof', this.codeProf, this.anneeScolaire)
     .pipe(
       mergeMap(classes =>{
-        console.log(classes);
         let nomsClasse = classes.map(classe => classe.nom)
         return this.api.getSome('emploiclasse', 'classe', nomsClasse)
     }),
@@ -54,7 +53,6 @@ export class EmploiprofComponent implements OnInit, OnChanges {
   )
   .subscribe(emploiclasses => {
     this.emploiclasses = emploiclasses;
-    console.log('Emploi Classe = ', this.emploiclasses)
     this.buildEmploiProf()
 })
   }
@@ -76,7 +74,6 @@ export class EmploiprofComponent implements OnInit, OnChanges {
       }
     })
     }
-    console.log('emploi du temps prof : ', this.emploiprof)
   }
   initialiseEmploiProf(){
     this.jours.forEach(jour =>{

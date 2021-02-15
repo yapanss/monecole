@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from "@angular/forms";
 import { RessourceDialogComponent } from '../ressource-dialog/ressource-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-pageperso',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';

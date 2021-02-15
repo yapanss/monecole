@@ -40,7 +40,7 @@
 				<td>
 					<button mat-icon-button
 							class="text-success" 
-							routerLink="/personnels/detail/{{personnel.matricule}}"
+							[routerLink]="['/detail', personnel.matricule]"
 							#tooltip="matTooltip"
 							matTooltip="Détails"
 							[matTooltipPosition]="'above'"

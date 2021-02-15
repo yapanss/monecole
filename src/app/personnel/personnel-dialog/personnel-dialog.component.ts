@@ -1,8 +1,8 @@
 import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, catchError } from 'rxjs/operators';
 
