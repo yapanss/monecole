@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, catchError, map, flatMap } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';

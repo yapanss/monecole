@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, catchError } from 'rxjs/operators';
-import { ConfigService } from '../services/config.service';
+import { ConfigService } from '../../services/config.service';
 
 @Component({
   selector: 'app-eleve-edit',

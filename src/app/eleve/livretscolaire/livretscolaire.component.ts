@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import  { MATIERES, donneAppreciation } from '../share/share';
+import  { MATIERES, donneAppreciation } from '../../share/share';
 
 
 @Component({

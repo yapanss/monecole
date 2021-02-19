@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 
 import { PersonnelModule } from './personnel/personnel.module';
+import { EleveModule } from './eleve/eleve.module';
 
 //Angular Material modules
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -39,19 +40,17 @@ import { HeaderComponent } from './header/header.component';
 import { CreateClasseComponent } from './create-classe/create-classe.component';
 import { ClasseComponent } from './classe/classe.component';
 import { ClasseDetailComponent } from './classe-detail/classe-detail.component';
-import { CreateEleveComponent } from './create-eleve/create-eleve.component';
-import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
+//import { CreateEleveComponent } from './create-eleve/create-eleve.component';
+//import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
 import { ClasseDialogComponent } from './classe-dialog/classe-dialog.component';
-import { EleveComponent } from './eleve/eleve.component';
-import { EleveEditComponent } from './eleve-edit/eleve-edit.component';
+//import { EleveComponent } from './eleve/eleve.component';
+//import { EleveEditComponent } from './eleve-edit/eleve-edit.component';
 import { ConfigComponent } from './config/config.component';
 import { EmploiClasseComponent } from './emploi-classe/emploi-classe.component';
 import { EmploiclasseDialogComponent } from './emploiclasse-dialog/emploiclasse-dialog.component';
 import { ClasseEditComponent } from './classe-edit/classe-edit.component';
 import { ProfilComponent } from './profil/profil.component';
 import { BulletinComponent } from './bulletin/bulletin.component';
-import { CorrespondanceComponent } from './correspondance/correspondance.component';
-import { LivretscolaireComponent } from './livretscolaire/livretscolaire.component';
 import { CahiertexteComponent } from './cahiertexte/cahiertexte.component';
 import { CahiertexteDialogComponent } from './cahiertexte-dialog/cahiertexte-dialog.component';
 
@@ -59,23 +58,23 @@ import { CahiertexteDialogComponent } from './cahiertexte-dialog/cahiertexte-dia
 @NgModule({
   declarations: [
     AppComponent,
-    EleveComponent,
-    CreateEleveComponent,
+    //EleveComponent,
+    //CreateEleveComponent,
     HeaderComponent,
     CreateClasseComponent,
     ClasseComponent,
     ClasseDetailComponent,
-    EleveDetailComponent,
+    //EleveDetailComponent,
     ClasseDialogComponent,
-    EleveEditComponent,
+    //EleveEditComponent,
     ConfigComponent,
     EmploiClasseComponent,
     EmploiclasseDialogComponent,
     ClasseEditComponent,
     ProfilComponent,
     BulletinComponent,
-    CorrespondanceComponent,
-    LivretscolaireComponent,
+    //CorrespondanceComponent,
+    //LivretscolaireComponent,
     CahiertexteComponent,
     CahiertexteDialogComponent,
   ],
@@ -106,7 +105,8 @@ import { CahiertexteDialogComponent } from './cahiertexte-dialog/cahiertexte-dia
     MatMenuModule,
     FontAwesomeModule,
     AngularEditorModule,
-    PersonnelModule
+    PersonnelModule,
+    EleveModule
   ],
   providers: [
     DatePipe,

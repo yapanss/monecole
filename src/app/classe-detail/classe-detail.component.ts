@@ -50,6 +50,7 @@ export class ClasseDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('activatedroute', this.route)
   	this.route.params
       .pipe(
         mergeMap(params => {
