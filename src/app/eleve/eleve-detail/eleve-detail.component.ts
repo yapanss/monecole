@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { ConfigService } from '../../services/config.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EleveDialogComponent } from '../eleve-dialog/eleve-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 import { mergeMap, catchError, map, flatMap } from 'rxjs/operators';
 import { fromEvent } from 'rxjs';
 import * as _ from 'lodash';
@@ -28,7 +30,8 @@ export class EleveDetailComponent implements OnInit {
   constructor(private api: ApiService,
               private configService: ConfigService,
       			  private router: Router,
-      			  private route: ActivatedRoute) { }
+      			  private route: ActivatedRoute,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
   	this.route.params
@@ -85,7 +88,18 @@ export class EleveDetailComponent implements OnInit {
       })
     } else alert('Pas de photo à soumettre !')
   }
-  
+   onUpdateDialog(){
+    let dialogRef = this.dialog.open(EleveDialogComponent, {
+      width: '80%',
+      data: {
+        actionType: 'update',
+        eleve: this.eleve
+      }
+    });
+    dialogRef.componentInstance.updateEleve.subscribe(newEleve =>{
+      this.eleve = newEleve;
+    })
+  }
   onGenerate(){
     this.matieres = []
     let matieres = (this.eleve.resultats && this.eleve.resultats[this.periode]) ?

@@ -30,7 +30,7 @@
 					<button mat-button (click)="submitPhoto()">Envoyer</button>
 				</div>
 				<div class="text-center">
-				   <button class="changeButton" mat-button routerLink="/eleve/edit/{{eleve.matricule}}">Mettre à jour</button>
+				   <button class="changeButton" mat-button (click)="onUpdateDialog()">Mettre à jour</button>
 			   </div>
 			</div>
 			

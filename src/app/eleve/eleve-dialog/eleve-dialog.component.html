@@ -1,12 +1,18 @@
-<mat-card *ngIf="eleve">
-<mat-card-title>
-		<h1 class="text-center">Modification des données de {{eleve.nom}} {{eleve.prenoms}}</h1>
-	</mat-card-title>
-<mat-card-content>
-	<form novalidate [formGroup] = "eleveForm" (ngSubmit) = "onSubmit()">
-	<fieldset class="form-group">
-		<legend>Etat Civil</legend>
-		<div class="form-group">
+<div mat-dialog id="dialog">
+	<div mat-dialog-content>
+		<div class="card">
+			<div class="card-header">
+				<h1 class="text-center" 
+					[textContent]="data.actionType=='create' ? 
+								  'Enregistrement d\'un nouvel élève' :
+								  'Modification des infos de ' + data.eleve.nom + 
+								  ' '+ data.eleve.prenoms"></h1>
+			</div>
+			<div class="card-body">
+				<form #elvForm="ngForm" novalidate [formGroup] = "eleveForm">
+					<fieldset class="form-group">
+						<legend class="text-center">Etat Civil</legend>
+						<div class="form-group">
 			<label for="" class="form-control-label">Nom:</label>
 			<input class="form-control" type="text" formControlName="nom" placeholder="Entrer le nom">
 		</div>
@@ -26,10 +32,10 @@
 			<label for="" class="form-control-label">Genre:</label>
 			<input class="form-control" type="text" formControlName="genre" placeholder="Entrer le genre">
 		</div>
-	</fieldset>
-	<fieldset class="form-group">
-		<legend>Adresse</legend>
-		<div class="form-group">
+		</fieldset>
+					<fieldset class="form-group">
+						<legend class="text-center">Adresse</legend>
+						<div class="form-group">
 			<label for="" class="form-control-label">Téléphone</label>
 			<input class="form-control" type="text" formControlName="contact" placeholder="Entrer le contact">
 		</div>
@@ -37,8 +43,8 @@
 			<label for="" class="form-control-label">Domicile</label>
 			<input class="form-control" type="text" formControlName="domicile" placeholder="Entrer le domicile">
 		</div>
-	</fieldset>
-	<fieldset class="form-group">
+					</fieldset>
+					<fieldset class="form-group">
 		<legend>Infos Parents</legend>
 		<!-- Infos du pere -->
 		<div formGroupName="pere" class="form-group">
@@ -105,9 +111,23 @@
 			<input class="form-control" type="text" formControlName="redoublant" placeholder="Entrer oui ou non">
 		</div>
 	</fieldset>
-		<div class="d-flex flex-row-reverse">
-			<button mat-raised-button color="accent" type="submit">Submit</button>
+				</form>
+            </div>
+            <div class="card-footer">
+                <div align="right">
+					<button id="cancelButton" mat-button (click)="onCancel()">
+						Cancel
+					</button>
+					<button mat-button  
+							class="submitButton" 
+                            *ngIf="data.actionType=='create'"
+                            (click)="onCreate()">Create</button>
+					<button mat-button 
+                            class="submitButton" 
+                            *ngIf="data.actionType=='update'"
+                            (click)="onUpdate()">Update</button>
+                </div>
+            </div>
 		</div>
-</form>
-</mat-card-content>
-</mat-card>
+	</div>
+</div>

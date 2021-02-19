@@ -8,7 +8,7 @@
 	</div>
 	<div>
 		<button id="addButton" mat-icon-button 
-				routerLink="/eleves/new"
+				(click)="onCreateDialog()"
 				#tooltip="matTooltip" 
 				matTooltip="Ajouter un élève"
 				[matTooltipPosition]="'above'"
@@ -33,7 +33,7 @@
 		<td [routerLink]= "eleve.classe ? ['/classe/detail', eleve.classe] : null" id="classe">{{eleve.classe}}</td>
 		<td>
 			<button mat-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}">détail</button>
-			<button mat-button color="primary" routerLink="/eleve/edit/{{eleve.matricule}}">modifier</button>
+			<button mat-button color="primary" (click)="onUpdateDialog(i)">modifier</button>
 			<button mat-button color="warn" (click)="onDelete(i)">supprimer</button>
 		</td>
 	</tr>

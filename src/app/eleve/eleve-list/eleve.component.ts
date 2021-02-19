@@ -3,6 +3,8 @@ import { ApiService } from '../../services/api.service';
 import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { EleveDialogComponent } from '../eleve-dialog/eleve-dialog.component';
 
 @Component({
   selector: 'app-eleve',
@@ -16,7 +18,8 @@ export class EleveComponent implements OnInit {
 
   constructor(private api: ApiService,
               private configService: ConfigService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
   	this.api.getAllItems('eleve')
@@ -34,6 +37,29 @@ export class EleveComponent implements OnInit {
         })
       }
   		this.eleves = _.sortBy(eleves, 'nom');
+    })
+  }
+  onCreateDialog(){
+    let dialogRef = this.dialog.open(EleveDialogComponent, {
+      width: '80%',
+      data: {
+        actionType: 'create',
+      }
+    });
+    dialogRef.componentInstance.addEleve.subscribe(eleve =>{
+      this.eleves.push(eleve)
+    })
+  }
+  onUpdateDialog(index){
+    let dialogRef = this.dialog.open(EleveDialogComponent, {
+      width: '80%',
+      data: {
+        actionType: 'update',
+        eleve: this.eleves[index]
+      }
+    });
+    dialogRef.componentInstance.updateEleve.subscribe(newEleve =>{
+      this.eleves[index] = newEleve;
     })
   }
   onDelete(index){
