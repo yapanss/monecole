@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray,Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';

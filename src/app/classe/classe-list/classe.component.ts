@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { ApiService } from '../../services/api.service';
 import { forkJoin } from 'rxjs';
 import { Router } from '@angular/router';
-import { ConfigService } from '../services/config.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfigService } from '../../services/config.service';
+import { ClasseDialogComponent } from '../classe-dialog/classe-dialog.component';
 
 @Component({
   selector: 'app-classe',
@@ -15,6 +17,7 @@ export class ClasseComponent implements OnInit {
 	anneeScolaire: string;
   constructor(private api: ApiService,
               private configService: ConfigService,
+              private dialog: MatDialog,
               private route: Router) { }
 
   ngOnInit(): void {
@@ -26,7 +29,29 @@ export class ClasseComponent implements OnInit {
       console.log(classes);
   	});
   }
-
+  onCreateDialog(){
+    let dialogRef = this.dialog.open(ClasseDialogComponent, {
+      width: '80%',
+      data: {
+        actionType: 'create',
+      }
+    });
+    dialogRef.componentInstance.addClasse.subscribe(classe =>{
+      this.classes.push(classe)
+    })
+  }
+  onUpdateDialog(index){
+    let dialogRef = this.dialog.open(ClasseDialogComponent, {
+      width: '80%',
+      data: {
+        actionType: 'update',
+        classe: this.classes[index]
+      }
+    });
+    dialogRef.componentInstance.updateClasse.subscribe(newClasse =>{
+      this.classes[index] = newClasse;
+    })
+  }
   onDelete(index){
    if (confirm('Voulez-vous suprimer cette classe')){
     let reqBody = {query: this.classes[index].nom, value: null, anneeScolaire: this.anneeScolaire}

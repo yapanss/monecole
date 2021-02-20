@@ -9,8 +9,8 @@ import {
 } from "@angular/core";
 import { CahiertexteDialogComponent } from "../cahiertexte-dialog/cahiertexte-dialog.component";
 import { MatDialog } from "@angular/material/dialog";
-import { ApiService } from "../services/api.service";
-import { AuthService } from "../services/auth.service";
+import { ApiService } from "../../services/api.service";
+import { AuthService } from "../../services/auth.service";
 //import { DOCUMENT } from '@angular/common';
 import { DatePipe } from "@angular/common";
 

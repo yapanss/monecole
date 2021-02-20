@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import { mergeMap, catchError, flatMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { ClasseDialogComponent } from '../classe-dialog/classe-dialog.component';
+import { AjoutEleveProfComponent } from '../ajout-eleve-prof/ajout-eleve-prof.component';
 import { FormBuilder, Validators, FormGroup, FormControl } from "@angular/forms";
 import * as _ from 'lodash';
 
@@ -125,7 +125,7 @@ export class ClasseDetailComponent implements OnInit {
           
   this.eleveForm = this.formBuilder.group(group)
           
-    this.dialog.open(ClasseDialogComponent, {
+    this.dialog.open(AjoutEleveProfComponent, {
       disableClose: true,
       width: '80%',
       data: {
@@ -148,7 +148,7 @@ export class ClasseDetailComponent implements OnInit {
     })
   })
   this.profForm = this.formBuilder.group(group);
-  this.dialog.open(ClasseDialogComponent, {
+  this.dialog.open(AjoutEleveProfComponent, {
       disableClose: true,
       width: '80%',
       data: {

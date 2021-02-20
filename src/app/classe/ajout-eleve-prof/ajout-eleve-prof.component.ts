@@ -1,17 +1,18 @@
 import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import {FormBuilder, Validators, FormGroup, FormControl} from "@angular/forms";
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-classe-dialog',
-  templateUrl: './classe-dialog.component.html',
-  styleUrls: ['./classe-dialog.component.css']
+  selector: 'app-ajout-eleve-prof',
+  templateUrl: './ajout-eleve-prof.component.html',
+  styleUrls: ['./ajout-eleve-prof.component.css']
 })
-export class ClasseDialogComponent implements OnInit {
+export class AjoutEleveProfComponent implements OnInit {
+
   anneeScolaire: string = this.configService.config.anneeScolaire;
   profForm: FormGroup;
   eleveForm: FormGroup;
@@ -26,15 +27,15 @@ export class ClasseDialogComponent implements OnInit {
   horaires = ["m1", "m2", "m3", "m4", "m5", "s1", "s2", "s3", "s4", "s5"]
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
-  			  private formBuilder: FormBuilder,
-          private dialogRef: MatDialogRef<ClasseDialogComponent>,
-          private api: ApiService,
-          private configService: ConfigService,
-          private route: Router) {
+  			      private formBuilder: FormBuilder,
+          	  private dialogRef: MatDialogRef<AjoutEleveProfComponent>,
+          	  private api: ApiService,
+          	  private configService: ConfigService,
+          	  private route: Router) { 
   	this.buildForm()
   }
 
-  ngOnInit(): void {
+   ngOnInit(): void {
     this.api.getOneItem('emploiclasse', this.data.classe.nom)
     .subscribe(emploiclasse =>{
       this.emploiclasse = emploiclasse
@@ -117,4 +118,7 @@ export class ClasseDialogComponent implements OnInit {
       return this.api.updateOneItem('classe', this.data.classe._id, body)
     }
   }
+
 }
+
+

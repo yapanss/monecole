@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatTooltipModule,
     MatSidenavModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FontAwesomeModule
   ]
 })
 export class EleveModule { }
