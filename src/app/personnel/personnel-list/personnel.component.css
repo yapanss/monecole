@@ -35,15 +35,9 @@
 	margin-bottom: 50px;
 	margin-top: 50px;
 }
-.card-header{
-	background-color: #696969;
-	/* background-color: #706441; */
-	color: white;
-	height: 50px;
-	/* padding-top: 10px; */
-}
-.card-body{
-	margin: 0;
+#listeTitle{
+	color: darkblue;
+	padding-top: 10px;
 }
 #addButton{
 	background-color: white;
@@ -55,14 +49,12 @@
 	color: white;
 }
 table {
-	margin-top: 0;
 	width: 100%;
 	border-collapse:separate; 
-    border-spacing:0 5px;
+    border-spacing:0 15px;
 }
-th{
-	background-color: #696969;
-	/* background-color:  #706441; */
+th {
+	background-color: #706441;
 	font-weight: lighter;
 	color: white;
 }
@@ -71,6 +63,10 @@ tr{
 }
 tr:hover{
 	box-shadow: 6px 6px 6px black;
+}
+td {
+	background-color: white;
+	padding: 5px;
 }
 .infos  {
 	background-color: #F5F0E1;

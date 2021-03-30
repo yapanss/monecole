@@ -58,14 +58,15 @@ export class ClasseDialogComponent implements OnInit {
                                          this.data.classe.lv2 : null),
         art: this.formBuilder.control(this.data.classe && this.data.classe.art ?
                                          this.data.classe.art : null),
-        educateur: this.formBuilder.control(this.data.classe && this.data.classe.educateur ?
-                                         this.data.classe.educateur : null)
+        //educateur: this.formBuilder.control(this.data.classe && this.data.classe.educateur ?
+                                         //this.data.classe.educateur : null)
       })
     }
   onCancel(){
     this.dialogRef.close();
   }
   onCreate(){
+      this.classeForm.value.anneeScolaire = this.anneeScolaire
       this.api.postForm('classe', this.classeForm.value)
       .subscribe(response => {
         this.addClasse.emit(response)

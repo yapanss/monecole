@@ -38,6 +38,9 @@ th, td {
 .mat-card {
 	margin-top: 5%;
 }
+.errorMessage{
+	color:red;
+}
 ::ng-deep .mat-tab-label {
 	color: darkblue;
 	/* margin-bottom: 25px; */

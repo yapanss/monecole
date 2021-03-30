@@ -43,7 +43,7 @@ export class EmploiprofComponent implements OnInit, OnChanges {
       this.anneeScolaire = this.configService.config.anneeScolaire;
     }
     this.codeProf = this.personnel["code"]
-    this.api.getSome('classe', 'prof', this.codeProf, this.anneeScolaire)
+    this.api.getSome('classe', 'prof', this.personnel.matricule, this.anneeScolaire)
     .pipe(
       mergeMap(classes =>{
         let nomsClasse = classes.map(classe => classe.nom)

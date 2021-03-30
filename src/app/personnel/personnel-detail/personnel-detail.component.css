@@ -1,5 +1,5 @@
 .changeButton:hover{
-	background-color: #1397ab;
+	background-color: #FC7F45;
 	color: white;
 }
 img{
@@ -49,7 +49,10 @@ td{
 	margin-left: 5%;
 	margin-right: 5%; */
 }
-
+.infos{
+	font-weight: bolder;
+	color: indianred;
+}
 ::ng-deep .mat-tab-label-content {
 	color: darkblue;
 	font-size: 1.2em;

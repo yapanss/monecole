@@ -12,6 +12,8 @@ import { faEdit, faTrashAlt, faInfoCircle } from '@fortawesome/free-solid-svg-ic
 })
 export class PersonnelComponent implements OnInit {
   personnels;
+  personnelsAffiche;
+  filtre: string;
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faInfoCircle = faInfoCircle;
@@ -24,7 +26,8 @@ export class PersonnelComponent implements OnInit {
   	this.api.getAllItems('personnel')
   	.subscribe(response => {
       if(response['success']){
-  		  this.personnels = response['personnels'];
+  		  this.personnelsAffiche = response['personnels'];
+        this.personnels = this.personnelsAffiche;
       }else{
         const {message} = response;
         alert(message);
@@ -54,6 +57,12 @@ export class PersonnelComponent implements OnInit {
     dialogRef.componentInstance.updatePersonnel.subscribe(newPersonnel =>{
       this.personnels[index] = newPersonnel;
     })
+  }
+  filtrerPersonnel(){
+    this.personnels = this.personnelsAffiche.filter(personnel => {
+        return (personnel.emploi && personnel.emploi.startsWith(this.filtre)) || 
+               (personnel.fonction && personnel.fonction.specialite && personnel.fonction.specialite.startsWith(this.filtre)) 
+    });
   }
   onDelete(index){
     let personnel = this.personnels[index]

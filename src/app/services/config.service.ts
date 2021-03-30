@@ -28,7 +28,7 @@ export class ConfigService {
   	return this.config.salles
   }
   getCodes() {
-  	return this.config.codesPersonnel
+  	return this.config.codesProfesseur
   }
   getCodeProf(classe, matiere) {
     return classe.enseignements.filter(enseignement => enseignement.matiere == matiere)

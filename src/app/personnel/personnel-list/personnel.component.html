@@ -1,9 +1,11 @@
 <div id="overlay" [style.display]="personnels ? 'none' : 'block'">
 	<mat-progress-bar id="text" mode="indeterminate" color="primary"></mat-progress-bar>
 </div>
-<div id="listePersonnels" *ngIf="personnels">
-	
-<div class="mb-1">
+<div id="listePersonnels" *ngIf="personnels" class="mt-3">
+	<div>
+		<h1 class="text-center" id="listeTitle">Liste des personnels</h1>
+	</div>
+<div class="mb-2">
 	<button id="addButton" mat-icon-button (click)="onCreateDialog()"
 			#tooltip="matTooltip" 
 			matTooltip="Ajouter un personnel"
@@ -11,14 +13,13 @@
 			matTooltipHideDelay="0"><mat-icon>add</mat-icon>
 	</button>
 </div>
-<div class="card p-0">
-	<div class="card-header">
-		<h1 class="text-center" id="listeTitle">Liste des personnels</h1>
-	</div>
-	<div class="card-body pt-0">
+<div class="mb-2">
+	<input class="form-control" type="text" [(ngModel)]="filtre" placeholder="Filter par emploi, par fonction ou par spécialité" (ngModelChange)="filtrerPersonnel()">
+</div>
 		<table>
 			<tr class="text-center">
 				<th>N°</th>
+				<th>Photo</th>
 				<th>Matricule</th>
 				<th>Nom et Prénoms</th>
 				<th>Emploi</th>
@@ -30,6 +31,8 @@
 			</tr>
 			<tr *ngFor = "let personnel of personnels; let i=index" class="text-center infos">
 				<td>{{i+1}}</td>
+				<td><img src='{{personnel.photoUrl ? "http://localhost:3000/"+ personnel.photoUrl : 
+								"http://localhost:3000/"+ "avatar.png"}}' height="30" width="30" alt=""></td>
 				<td>{{personnel.matricule}}</td>
 				<td>{{personnel.nom}} {{personnel.prenoms}}</td>
 				<td>{{personnel.emploi}}</td>
@@ -65,7 +68,5 @@
 					</button>
 				</td>
 			</tr>
-		</table>
-	</div>
-</div>	
+		</table>	
 </div>

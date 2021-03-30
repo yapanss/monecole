@@ -1,15 +1,33 @@
-#submitProf {
+
+.card-body{
+	background-color: #8B7E66;
+	color: white;
+}
+.card-header{
+	background-color: #706441;
+	color: white;
+	border-bottom: 2px solid white;
+}
+.card-footer{
+	border-top: 2px solid white;
+	background-color: #CDC8B1;
+}
+#cancelButton{
+	background-color: lightgray;
+	color: darkblue;
+}
+.submitButton{
 	margin-left: 5px;
+	background-color: white;
+	color: darkblue;
 }
-#profButtons {
-	margin-top: 10px;
+.submitButton:hover{
+	background-color: darkblue;
+	color: white;
 }
-legend{
+legend, #fonction{
 	color: yellow;
 }
-#coefficient {
-	margin-left: 20%;
-}
-table{
-	background-color: lightgray;
+label{
+	color: white;
 }

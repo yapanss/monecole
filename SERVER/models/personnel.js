@@ -3,20 +3,33 @@ const bcrypt = require('bcryptjs');
 
 const personnelSchema = new mongoose.Schema({
 	// Infos personnelles
+	nomUtilisateur: {
+		type: String,
+		unique: true
+	},
 	matricule: {
 		type: String,
 		unique: true
 	},
 	motDePasse: {
 		type: String,
+		required: true
 	},
-	nom: String,
-	prenoms: String,
+	nom: {
+		type: String,
+	},
+	prenoms: {
+		type: String,
+	},
 	dateNaissance: Date,
 	lieuNaissance: String,
   	genre: String,
 	domicile: String,
 	contact: String,
+	email: {
+		type: String,
+		unique: true
+	},
 	situationMatrimoniale: String,
 	nombreEnfants: Number,
 	// Carriere

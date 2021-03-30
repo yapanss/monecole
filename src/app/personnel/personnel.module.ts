@@ -25,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MatCardModule } from '@angular/material/card';
     MatTabsModule,
     MatTooltipModule,
     MatCardModule,
+    MatSnackBarModule,
     FontAwesomeModule,
     PersonnelRoutingModule
   ]

@@ -19,6 +19,7 @@
 <table>
 	<tr class="text-center">
 		<th>N°</th>
+		<th>Photo</th>
 		<th>Matricule</th>
 		<th>Nom et Prénoms</th>
 		<th>Genre</th>
@@ -27,6 +28,8 @@
 	</tr>
 	<tr *ngFor="let eleve of eleves; let i=index" class="text-center">
 		<td>{{i+1}}</td>
+		<td><img src='{{eleve.photoUrl ? "http://localhost:3000/"+ eleve.photoUrl : 
+			"http://localhost:3000/"+ "avatar.png"}}' height="30" width="30" alt=""></td>
 		<td>{{eleve.matricule}}</td>
 		<td>{{eleve.nom}} {{eleve.prenoms}}</td>
 		<td>{{eleve.genre}}</td>

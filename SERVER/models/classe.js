@@ -9,14 +9,23 @@ const classeSchema = new mongoose.Schema({
   effectif: Number,
   lv2: String,
   art: String,
-  educateur: String,
   enseignements: [{
     matiere: String,
     codeProf: String,
+    matriculeProf: String,
+    nomProf: String,
     coefficient: Number
   }],
-  chefDeClasse: String,
-  pp: String,
+  encadrements: [{
+    titreEncadreur: String,
+    matriculeEncadreur: String,
+    nomEncadreur: String
+  }],
+  delegues: [{
+    titreDelegue: String,
+    matriculeDelegue: String,
+    nomDelegue: String
+  }]
 });
 
 module.exports = mongoose.model('Classe', classeSchema)

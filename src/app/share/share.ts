@@ -1,3 +1,12 @@
+export const TITRES_ENCADREMENT: string[] = [
+  "Censeur", "Inspecteur d'Orientation", "Inspecteur d'Education", 
+  "Educateur", "Professeur Principal"
+] 
+
+export const TITRES_DELEGUES: string[] = [
+  "Chef De Classe", "Sous-Chef De Classe", "Responsable Salubrité"
+]
+
 export const MATIERES: string[] = [
     "Anglais", "Allemand", "Arts Plastiques", "Conduite", "Couture", 
     "Edhc", "Espagnol", "EPS", "Français", "Histoire-Géographie", 

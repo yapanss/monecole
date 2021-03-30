@@ -7,6 +7,7 @@ import { forkJoin } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { EmploiclasseDialogComponent } from '../emploiclasse-dialog/emploiclasse-dialog.component';
+import { MATIERES } from '../../share/share';
 
 @Component({
   selector: 'app-emploi-classe',
@@ -30,8 +31,8 @@ export class EmploiClasseComponent implements OnInit {
       .pipe(
         mergeMap(params => {
           this.anneeScolaire = this.configService.config.anneeScolaire;
-          return forkJoin(this.api.getOneItem('emploiclasse', params.nom),
-                          this.api.getOneItem('classe', params.nom, this.anneeScolaire))
+          return forkJoin([this.api.getOneItem('emploiclasse', params.nom),
+                          this.api.getOneItem('classe', params.nom, this.anneeScolaire)])
          
        }),
         catchError(err => {throw(err)})
@@ -40,7 +41,7 @@ export class EmploiClasseComponent implements OnInit {
         if(response){
           this.emploiclasse = response[0];
           this.classe = response[1];
-          this.matieres = this.configService.getMatieres(this.classe.niveau)
+          //this.matieres = this.configService.getMatieres(this.classe.niveau)
         }
       })
   }
@@ -50,7 +51,7 @@ export class EmploiClasseComponent implements OnInit {
       width: '80%',
       data: {
         emploiclasse: this.emploiclasse,
-        matieres: this.matieres,
+        matieres: MATIERES,
         classe: this.classe
       }
     })

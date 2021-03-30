@@ -11,7 +11,7 @@ module.exports = {
 			case 'prof':
 				return Classe.find({
 					anneeScolaire,
-					"enseignements.codeProf": value
+					"enseignements.matriculeProf": value
 				})
 		}
 	},

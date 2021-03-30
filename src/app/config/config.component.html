@@ -132,7 +132,9 @@
 											<td>{{matiere.matiere}}</td>
 											<td>{{matiere.coefficient}}</td>
 											<td>
-												<button (click)="onDeleteMatiere(matiere, i)"><mat-icon color="warn">delete</mat-icon></button>
+												<button (click)="onDeleteMatiere(matiere, i)">
+													<mat-icon color="warn">delete</mat-icon>
+												</button>
 											</td>
 										</tr>
 									</table>
@@ -153,15 +155,69 @@
 				<button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
 			</div>
 		</mat-tab>
-		<mat-tab label="Autres">
-			<div class="mt-3">
-				<div class="form-group">
-					<label class="form-control-label" for="">Classe: </label>
-					<input class="form-control" type="text" #classe>
-					<button mat-button color="primary">Mettre à jour</button>
+		<mat-tab label="Codes Professeurs">
+			<section *ngIf="codeProfErrorMessage">
+				<h2 class="errorMessage">{{codePersoErrorMessage}}</h2>
+			</section>
+			<section id="choix" class="form-group d-flex justify-content-around mt-3 pt-3">
+				<div id="matiere" class="form-group form-inline">
+					<label for="" class="mr-2">Matière: </label>
+					<select class="form-control" [(ngModel)]="matiere" ngDefaultControl>
+						<option *ngFor="let option of listeMatieres" value="{{option}}">{{option}}</option>
+					</select>
 				</div>
-			</div>
-			
+				<div id="periode" class="form-group form-inline">
+					<label for="" class="mr-2">Code: </label>
+					<input type="text" [(ngModel)]="codeProf" ngDefaultControl>
+				</div>
+				<div id="prof" class="form-group form-inline">
+					<label for="" class="mr-2">Matricule: </label>
+					<input type="text" placeholder="Entrez le matricule du prof" class="form-control" [(ngModel)]="matriculeProf" ngDefaultControl>
+						
+				</div>
+				<div *ngIf="addMode">
+					<button mat-button color="primary" (click)="addCode()">Ajouter</button>
+				</div>
+				<div *ngIf="updateMode">
+					<button mat-button color="primary" (click)="cancelUpdate()">Annuler</button>
+					<button class="ml-1" mat-button color="primary" (click)="updateCode()">Modifier</button>
+				</div>
+			</section>
+			<section>
+				<table class="table">
+					<tr>
+						<th>Code</th>
+						<th>Matière</th>
+						<th>Matricule Prof</th>
+						<th>Nom et Prénoms Prof</th>
+						<th>Actions</th>
+					</tr>
+					<tr *ngFor="let item of configuration.codesProfesseur; let i = index">
+						<td>{{item.codeProf}}</td>
+						<td>{{item.matiere}}</td>
+						<td>{{item.matriculeProf}}</td>
+						<td>{{item.nomProf}}</td>
+						<td>
+					<button mat-icon-button  
+							(click)="selectCodeToModify(i)"
+							#tooltip="matTooltip"
+							matTooltip="Modifier"
+							[matTooltipPosition]="'above'"
+							  matTooltipHideDelay="0">
+						<fa-icon [icon]="faEdit"></fa-icon>
+					</button>
+					<button mat-icon-button color="warn" 
+							(click)="deleteCode(i)"
+							#tooltip="matTooltip"
+							matTooltip="Supprimer"
+							[matTooltipPosition]="'above'"
+							  matTooltipHideDelay="0">
+						<fa-icon [icon]="faTrashAlt"></fa-icon>
+					</button>
+						</td>
+					</tr>
+				</table>
+			</section>
 		</mat-tab>
 	</mat-tab-group>
 </section>

@@ -5,16 +5,20 @@
 </div>
 <mat-drawer-container>
 	<mat-drawer #drawer mode="side" opened>
-		<div id="presentation" class="p-3">
-			<div id="cadrePhoto" align="center">
+		<div class="p-3">
+			<div align="center">
 				<img #imagePreview 
 				src="http://localhost:3000/{{personnel.photoUrl}}" alt="photo de profil" height="150" width="150">
 			</div>
-			<div id="nomEtEmploi" class="text-center">
-				<h2 id="nom">{{personnel.nom}} {{personnel.prenoms}}</h2>
-				<h3 id="emploi">Prof de {{personnel.fonction.specialite}}</h3>
+			<div class="text-center">
+				<h2 class="mb-0">{{personnel.nom}} {{personnel.prenoms}}</h2>
+				<h3 class="infos" 
+					*ngIf="personnel.fonction && 
+						   personnel.fonction.titre == 'Professeur'">Prof de {{personnel.fonction.specialite}}</h3>
+				<h3 *ngIf="personnel.fonction && 
+						   personnel.fonction.titre != 'Professeur'" class="infos">{{personnel.fonction && personnel.fonction.titre ? personnel.fonction.titre : null}}</h3>
 				<p><mat-icon>phone </mat-icon>: {{personnel.contact}}</p>
-				<p><mat-icon>email </mat-icon>: {{personnel.contact}}</p>
+				<p><mat-icon>email </mat-icon>: {{personnel.email}}</p>
 			</div>
 			<div>
 				<div *ngIf="!showPhotoForm" class="text-center">
@@ -47,16 +51,16 @@
 								</div>
 								<ul>
 									<li>
-										<p>Date de naissance: {{personnel.dateNaissance | date: 'dd/MM/yyyy'}}</p>
+										<p>Date de naissance: <span class="infos">{{personnel.dateNaissance | date: 'dd/MM/yyyy'}}</span></p>
 									</li>
 									<li>
-										<p>Lieu de naissance: {{personnel.lieuNaissance}}</p>
+										<p>Lieu de naissance: <span class="infos">{{personnel.lieuNaissance}}</span></p>
 									</li>
 									<li>
-										<p> Situation matrimoniale: {{personnel.situationMatrimoniale}}, {{personnel.nombreEnfants}} enfants</p>
+										<p> Situation matrimoniale: <span class="infos">{{personnel.situationMatrimoniale}}</span></p>
 									</li>
 									<li>
-										<p>Nombre d'enfants: {{personnel.nombreEnfants}} enfants</p>
+										<p>Nombre d'enfants: <span class="infos">{{personnel.nombreEnfants}}</span></p>
 									</li>
 								</ul>
 							</div>
@@ -66,10 +70,13 @@
 								</div>
 								<ul>
 									<li>
-										<p>Téléphone : {{personnel.contact}}</p>
+										<p>Téléphone : <span class="infos">{{personnel.contact}}</span></p>
 									</li>
 									<li>
-										<p>Domicile: {{personnel.domicile}}</p>
+										<p>Domicile: <span class="infos">{{personnel.domicile}}</span></p>
+									</li>
+									<li>
+										<p>Email: <span class="infos">{{personnel.email}}</span></p>
 									</li>
 								</ul>
 							</div>
@@ -79,19 +86,19 @@
 								</div>
 								<ul>
 									<li>
-										<p>Matricule: {{personnel.matricule}}</p>
+										<p>Matricule: <span class="infos">{{personnel.matricule}}</span></p>
 									</li>
 									<li>
-										<p>Fonction actuelle: {{personnel.fonction ? personnel.fonction.titre : null}}</p>
+										<p>Fonction actuelle: <span class="infos">{{personnel.fonction ? personnel.fonction.titre : null}}</span></p>
 									</li>
 									<li>
-										<p>Spécialité: {{personnel.fonction ? personnel.fonction.specialite : null}}</p>
+										<p>Spécialité: <span class="infos">{{personnel.fonction ? personnel.fonction.specialite : null}}</span></p>
 									</li>
 									<li>
-										<p>Code: {{personnel.code}}</p>
+										<p>Code: <span class="infos">{{personnel.code}}</span></p>
 									</li>
 									<li>
-										<p>Date d'entrée dans l'établissement: {{personnel.dateEntreeEtablissement | date: 'dd/MM/yyyy'}}</p>
+										<p>Date d'entrée dans l'établissement: <span class="infos">{{personnel.dateEntreeEtablissement | date: 'dd/MM/yyyy'}}</span></p>
 									</li>
 								</ul>
 							</div>

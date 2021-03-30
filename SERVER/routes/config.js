@@ -63,7 +63,6 @@ module.exports = {
 				}
 				if(req.body.periodesEvaluation){
 					config.periodesEvaluation = req.body.periodesEvaluation
-					console.log(req.body.periodesEvaluation)
 				}
 				if(req.body.salles){
 					config.salles = req.body.salles
@@ -71,8 +70,8 @@ module.exports = {
 				if(req.body.niveaux){
 					config.niveaux = req.body.niveaux
 				}
-				if(req.body.codesPersonnel){
-					config.codesPersonnel = req.body.codesPersonnel
+				if(req.body.codesProfesseur){
+					config.codesProfesseur = req.body.codesProfesseur
 				}
 				const newConfig = await configController.updateOne(config)
 				res.send(newConfig);

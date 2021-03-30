@@ -47,7 +47,9 @@ export class AjoutEleveProfComponent implements OnInit {
     this.profForm = this.data.profForm;
   }
   filterEleve(){
-    this.data.eleves = this.eleves.filter(eleve => eleve.nom.startsWith(this.nom));
+    this.data.eleves = this.eleves.filter(eleve => {
+      return eleve.nom.startsWith(this.nom) || eleve.matricule.startsWith(this.nom)
+    });
   }
   onCancel(){
     this.dialogRef.close();
@@ -96,12 +98,11 @@ export class AjoutEleveProfComponent implements OnInit {
       classe: this.data.classe.nom,
       updateQuery: 'classe'
     }
-    // const reqBodyClasse = {
-    //   effectif: this.data.classe.effectif + selectedEleves.length
-    // }
-    forkJoin(
-      this.api.updateItems('eleve', reqBodyEleves)
-      // this.api.updateOneItem('classe', this.data.classe.nom, reqBodyClasse)
+    const reqBodyClasse = {
+      effectif: this.data.classe.effectif + selectedMatriculeEleves.length
+    }
+    forkJoin([this.api.updateItems('eleve', reqBodyEleves),
+              this.api.updateOneItem('classe', this.data.classe._id, reqBodyClasse)]
     )    
     .subscribe(response  => {
       this.route.routeReuseStrategy.shouldReuseRoute = () => false;

@@ -72,6 +72,7 @@ export class ApiService {
     return this.http.get(url)
   }
   updateOneItem(collection, id, data){
+    console.log('collection : ', collection, ' id : ', id, 'data : ', data)
      let url = 'http://localhost:3000/api/'+collection+'/'+id
     let body = JSON.stringify(data)
     return this.http.put(url, body, {

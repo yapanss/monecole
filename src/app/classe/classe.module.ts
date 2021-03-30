@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { EncadrementComponent } from './encadrement/encadrement.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     CahiertexteComponent,
     CahiertexteDialogComponent,
     EmploiClasseComponent,
-    EmploiclasseDialogComponent
+    EmploiclasseDialogComponent,
+    EncadrementComponent
   ],
   imports: [
     CommonModule,

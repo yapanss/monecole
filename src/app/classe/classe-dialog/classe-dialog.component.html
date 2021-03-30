@@ -5,7 +5,7 @@
 				<h1 class="text-center" 
 					[textContent]="data.actionType=='create' ? 
 								  'Enregistrement d\'une nouvelle classe' :
-								  'Modification des infos de la' + data.classe.nom"></h1>
+								  'Modification des infos de la ' + data.classe.nom"></h1>
 			</div>
 			<div class="card-body">
 				<form #claForm="ngForm" novalidate [formGroup] = "classeForm">
@@ -46,10 +46,10 @@
 			  <option *ngFor="let option of Arts" value="{{option}}">{{option}}</option>
 			</select>
 		</div>
-		<div class="form-group">
+		<!--<div class="form-group">
 			<label for="" class="form-control-label">Educateur</label>
 			<input class="form-control" type="text" formControlName="educateur" placeholder="Entrer le matricule de l'éducateur">
-		</div>
+		</div> !-->
 		</form>
     </div>
             <div class="card-footer">

@@ -23,7 +23,15 @@ const configSchema = new mongoose.Schema({
 			]
 		}
 	],
-	codesPersonnel: [String]
+	codesProfesseur: [{
+		codeProf: {
+			type: String,
+			unique: true
+		},
+		matiere: String,
+		matriculeProf: String,
+		nomProf: String
+	}]
 })
 
 module.exports = mongoose.model('Config', configSchema);

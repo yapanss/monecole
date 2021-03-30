@@ -10,15 +10,42 @@
 			</div>
 			<div class="card-body">
 				<form #persoForm="ngForm" novalidate [formGroup] = "personnelForm">
+					<div *ngIf = "messageErreur">
+						<h2 class="errors">{{messageErreur}}</h2>
+					</div>
+					<fieldset class="form-group">
+						<legend class="text-center">Identifiants</legend>
+						<div class="form-group">
+							<label for="" class="form-control-label">Nom d'Utilisateur:
+							</label>
+							<input class="form-control" type="text" formControlName="nomUtilisateur">
+							<span *ngIf="personnelNomUtilisateurControl.errors && 
+										personnelNomUtilisateurControl.errors.required"
+										class="errors">Ce champ est obligatoire !</span>
+						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Mot de passe:</label>
+							<input class="form-control" type="password" formControlName="motDePasse">
+							<span *ngIf="personnelMotDePasseControl.errors && 
+										personnelMotDePasseControl.errors.required"
+										class="errors">Ce champ est obligatoire !</span>
+						</div>
+					</fieldset>
 					<fieldset class="form-group">
 						<legend class="text-center">Etat Civil</legend>
 						<div class="form-group form-group-inline">
 							<label for="" class="form-control-label">Nom:</label>
 							<input type="text" class="form-control" formControlName="nom">
+							<span *ngIf="personnelNomControl.errors && 
+										personnelNomControl.errors.required"
+										class="errors">Ce champ est obligatoire !</span>
 						</div>
 						<div class="form-group">
 							<label for="" class="form-control-label">Prénoms:</label>
 							<input type="text" class="form-control" formControlName="prenoms">
+							<span *ngIf="personnelPrenomControl.errors && 
+										personnelPrenomControl.errors.required"
+										class="errors">Ce champ est obligatoire !</span>
 						</div>
 						<div class="form-group">
 							<label for="" class="form-control-label">Date de naissance:</label>
@@ -56,12 +83,23 @@
 							<label for="" class="form-control-label">Téléphone</label>
 							<input type="number" class="form-control" formControlName="contact">
 						</div>
+						<div class="form-group">
+							<label for="" class="form-control-label">Email</label>
+							<input type="email" class="form-control " formControlName="email">
+							<span *ngIf="personnelEmailControl.errors && 
+										personnelEmailControl.errors.pattern && 
+										personnelEmailControl.dirty"
+										class="errors">Le format de l'email n'est pas valide  !</span>
+						</div>
 					</fieldset>
 					<fieldset class="form-group">
 						<legend class="text-center">Carrière</legend>
 						<div class="form-group">
 							<label for="" class="form-control-label">Matricule</label>
 							<input type="text" class="form-control" formControlName="matricule">
+							<span *ngIf="personnelMatriculeControl.errors && 
+										personnelMatriculeControl.errors.required"
+										class="errors">Ce champ est obligatoire !</span>
 						</div>
 						<div class="form-group">
 							<label for="" class="form-control-label">Date d'entrée dans l'établissement</label>
@@ -97,14 +135,13 @@
 						<label for="" class="form-control-label">Code</label>
 						<input type="text" class="form-control" formControlName="code">
 					</div>
-						<div class="form-group">
-							<label for="" class="form-control-label">Mot de passe:</label>
-							<input class="form-control" type="password" formControlName="motDePasse">
-						</div>
 					</fieldset>
 				</form>
             </div>
             <div class="card-footer">
+				<div *ngIf = "messageErreur" class="errors">
+					<h2>{{messageErreur}}</h2>
+				</div>
                 <div align="right">
 					<button id="cancelButton" mat-button (click)="onCancel()">
 						Cancel

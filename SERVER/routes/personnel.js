@@ -21,6 +21,9 @@ module.exports = (app) => {
 	.post(async (req, res) => {
 		try{
 			const body = {
+				//   Identifiants
+				nomUtilisateur: req.body.nomUtilisateur,
+				motDePasse: req.body.motDePasse,
 				//   Etat Civil
 				nom: req.body.nom,
 				  prenoms: req.body.prenoms,
@@ -32,6 +35,7 @@ module.exports = (app) => {
 				//   Adresse
 				  domicile: req.body.domicile,
 				  contact: req.body.contact,
+				  email: req.body.email,
 				  
 				  // Carriere
 				  matricule: req.body.matricule,
@@ -53,7 +57,12 @@ module.exports = (app) => {
 			const personnel = await personnelController.postOne(body);
 			res.send(personnel);
 		} catch(err){
-			console.log(err);
+			let champ = Object.entries(err.keyValue)[0][0]
+			let valeur = Object.entries(err.keyValue)[0][1]
+			res.json({
+				statut: 'erreur',
+				message: `Le ${champ} ${valeur} est déjà utilisé`
+			})
 		}
 	})
 	.put(async (req, res)  =>{
@@ -68,6 +77,7 @@ module.exports = (app) => {
 	app.route('/api/personnel/:id')
 	.get(async (req, res) => {
 		try{
+			console.log('REQUETE :')
 			const personnel = await personnelController.getById(req.params.id);
 			res.status(200).json({
 				success: true,
@@ -80,6 +90,9 @@ module.exports = (app) => {
 	.put(multer, async (req, res) => {
 		try{
 			const personnel = await personnelController.getById(req.params.id);
+			if(req.body.nomUtilisateur){
+				personnel.nomUtilisateur = req.body.nomUtilisateur
+			}
 			if(req.body.motDePasse){
 				personnel.motDePasse = await bcrypt.hash(req.body.motDePasse, 10)
 			}
@@ -103,6 +116,9 @@ module.exports = (app) => {
 			}
 			if(req.body.contact){
 				personnel.contact = req.body.contact
+			}
+			if(req.body.email){
+				personnel.email = req.body.email
 			}
 			if(req.body.situationMatrimoniale){
 				personnel.situationMatrimoniale = req.body.situationMatrimoniale
@@ -141,6 +157,12 @@ module.exports = (app) => {
 			res.send(newPersonnel);
 		} catch(err){
 			console.log(err);
+			let champ = Object.entries(err.keyValue)[0][0]
+			let valeur = Object.entries(err.keyValue)[0][1]
+			res.json({
+				statut: 'erreur',
+				message: `Le ${champ} ${valeur} est déjà utilisé`
+			})
 		}
 	})
 	.post( async (req, res) =>{

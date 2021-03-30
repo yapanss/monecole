@@ -26,7 +26,7 @@ export class ClasseComponent implements OnInit {
   	this.api.getAllItems('classe', this.anneeScolaire)
   	.subscribe(classes => {
   		this.classes = classes;
-      console.log(classes);
+      console.log('classes : ', classes);
   	});
   }
   onCreateDialog(){

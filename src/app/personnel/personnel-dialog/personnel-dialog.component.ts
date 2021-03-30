@@ -14,6 +14,7 @@ import { mergeMap, catchError } from 'rxjs/operators';
 export class PersonnelDialogComponent implements OnInit {
 	personnel;
 	personnelForm: FormGroup;
+	personnelNameControl;
 	emplois = ["Professeur de lycée", "Professeur de collège", "Educateur",
 	             "Inspecteur d\'orientation", "Inspecteur d\'éducation"]
 	genres = ["M", "F"];
@@ -26,6 +27,14 @@ export class PersonnelDialogComponent implements OnInit {
 
 	@Output() addPersonnel = new EventEmitter()
 	@Output() updatePersonnel = new EventEmitter()
+	messageErreur: any;
+	personnelNomUtilisateurControl: any;
+	personnelMotDePasseControl: any;
+	personnelNomControl: any;
+	personnelPrenomControl: any;
+	personnelContactControl: any;
+	personnelEmailControl: any;
+	personnelMatriculeControl: any;
 					 
   constructor(private api: ApiService,
               private formBuilder: FormBuilder,
@@ -40,10 +49,11 @@ export class PersonnelDialogComponent implements OnInit {
   buildForm(){
   		this.personnelForm = this.formBuilder.group({
   			// Infos personnelles
-		  motDePasse: this.formBuilder.control(null),
-	      matricule: this.formBuilder.control(this.data.personnel && this.data.personnel.matricule ? this.data.personnel.matricule : null),
-	      nom: this.formBuilder.control(this.data.personnel && this.data.personnel.nom ? this.data.personnel.nom : null),
-	      prenoms: this.formBuilder.control(this.data.personnel && this.data.personnel.prenoms ? this.data.personnel.prenoms : null),
+		  nomUtilisateur: this.formBuilder.control(this.data.personnel && this.data.personnel.nomUtilisateur ? this.data.personnel.nomUtilisateur : null, Validators.required),
+		  motDePasse: this.formBuilder.control(this.data.personnel && this.data.personnel.motDePasse ? this.data.personnel.motDePasse : null, Validators.required),
+	      matricule: this.formBuilder.control(this.data.personnel && this.data.personnel.matricule ? this.data.personnel.matricule : null, Validators.required),
+	      nom: this.formBuilder.control(this.data.personnel && this.data.personnel.nom ? this.data.personnel.nom : null, Validators.required),
+	      prenoms: this.formBuilder.control(this.data.personnel && this.data.personnel.prenoms ? this.data.personnel.prenoms : null, Validators.required),
 		  dateNaissance: this.formBuilder.control(this.data.personnel && this.data.personnel.dateNaissance ? 
 												  this.data.personnel.dateNaissance : null),
 		  lieuNaissance: this.formBuilder.control(this.data.personnel && this.data.personnel.lieuNaissance ?
@@ -54,6 +64,8 @@ export class PersonnelDialogComponent implements OnInit {
 		  nombreEnfants: this.formBuilder.control(this.data.personnel && this.data.personnel.nombreEnfants ? 
 												  this.data.personnel.nombreEnfants : null),
 	      contact: this.formBuilder.control(this.data.personnel && this.data.personnel.contact ? this.data.personnel.contact : null),
+	      email: this.formBuilder.control(this.data.personnel && this.data.personnel.email ? this.data.personnel.email : null, 
+										  Validators.pattern(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}/)),
 	      domicile: this.formBuilder.control(this.data.personnel && this.data.personnel.domicile ? this.data.personnel.domicile : null),
 	      // Carriere
 		  dateEntreeEtablissement: this.formBuilder.control(this.data.personnel && this.data.personnel.dateEntreeEtablissement ?
@@ -77,25 +89,51 @@ export class PersonnelDialogComponent implements OnInit {
 					 						this.data.personnel.radiation.motif : null)
 	  	})
 	  })
+	  this.personnelNomUtilisateurControl = this.personnelForm.get('nomUtilisateur')
+	  this.personnelMotDePasseControl = this.personnelForm.get('motDePasse')
+	  this.personnelNomControl = this.personnelForm.get('nom')
+	  this.personnelPrenomControl = this.personnelForm.get('prenoms')
+	  this.personnelEmailControl = this.personnelForm.get('email')
+	  this.personnelMatriculeControl = this.personnelForm.get('matricule')
+	  
   }
+  
   onCancel(){
 	  this.dialogRef.close();
   }
   onCreate(){
-    if(this.data.actionType == 'create'){
+    if(this.personnelForm.valid){
       this.api.postForm('personnel', this.personnelForm.value)
   		.subscribe(response => {
-        this.addPersonnel.emit(response)
-        this.dialogRef.close()
+			  if(response['statut'] == 'erreur'){
+				  console.log(response);
+				  this.messageErreur = response['message']
+			  } else {
+				this.addPersonnel.emit(response)
+        		this.dialogRef.close()
+			  }
+        
       }, err  => console.error(err));
-    } 
+    }else{ 
+		this.messageErreur = "Le formulaire est invalide ! Vérifiez que tous les champs sont correctement remplis."
+	}
   }
   onUpdate(){
+    if(this.personnelForm.valid){
 	const matricule = this.data.personnel.matricule;
     this.api.updateOneItem('personnel', matricule, this.personnelForm.value)
   		.subscribe(response => {
-        this.updatePersonnel.emit(response)
-        this.dialogRef.close()
+			if(response['statut'] == 'erreur'){
+				console.log(response);
+				this.messageErreur = response['message']
+			} else { 
+				this.updatePersonnel.emit(response)
+        		this.dialogRef.close()
+			}
+        
       }, err  => console.error(err));
-  }
+  	} else{ 
+		this.messageErreur = "Le formulaire est invalide ! Vérifiez que tous les champs sont correctement remplis."
+	}
+	}
 }

@@ -1,6 +1,11 @@
-
+.errors{
+	font-weight: bolder;
+	color: red;
+	background-color: #fff;
+	opacity: 0.9;
+}
 .card-body{
-	background-color: #CDC8B1;
+	background-color: #8B7E66;
 	color: white;
 }
 .card-header{

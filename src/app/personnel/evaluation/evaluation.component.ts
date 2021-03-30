@@ -54,7 +54,7 @@ export class EvaluationComponent implements OnInit, OnChanges {
     this.moyenneRedoublement = this.configService.config.moyenneRedoublement;
     if(this.personnel && this.personnel.fonction){
       if(this.personnel.fonction.titre == 'Professeur' || this.personnel.fonction.titre == 'Educateur(trice)'){
-        this.api.getSome('classe', 'prof', this.personnel.code, this.anneeScolaire)
+        this.api.getSome('classe', 'prof', this.personnel.matricule, this.anneeScolaire)
         .subscribe(classes => {
           this.classes = classes;
           this.nomsDesClasses = this.determineNomsDesClasse(this.classes)
@@ -64,7 +64,7 @@ export class EvaluationComponent implements OnInit, OnChanges {
   }
   onSelectClasse(): void {
     this.classe = this.determineClasseParNom(this.nomClasse);
-    this.matieres = this.determineMatieres(this.personnel.code, this.classe)
+    this.matieres = this.determineMatieres(this.personnel.matricule, this.classe)
   }
   generateEleves(){
     if(this.eleves){
@@ -185,15 +185,14 @@ export class EvaluationComponent implements OnInit, OnChanges {
     }
     this.api.updateItems('eleve', body)
     .subscribe(response =>{
-        console.log('response = ', response)
         this.openSaveSnackBar()
         this.collectionneRangsPeriode(response) 
     })
   }
 
 
-  determineMatieres(codeProf: string, classe: any){
-    return classe.enseignements.filter(enseignement => enseignement.codeProf == codeProf)
+  determineMatieres(matriculeProf: string, classe: any){
+    return classe.enseignements.filter(enseignement => enseignement.matriculeProf == matriculeProf)
                                .map(enseignement => enseignement.matiere);
   }
   determineNomsDesClasse(classes: any){
@@ -361,8 +360,9 @@ export class EvaluationComponent implements OnInit, OnChanges {
     return sommeCoef != 0 ? total/sommeCoef: null;
   }
   trieMoyennes(moyennes): number[]{
-    return moyennes.map(moyenne => moyenne)
+    let moyTr = moyennes.map(moyenne => moyenne)
                   .sort((a: number, b: number) => b-a)
+    return moyTr;
   }
   rangeNotes(moyennesTries: number[]): any{
     let listeRang = {};

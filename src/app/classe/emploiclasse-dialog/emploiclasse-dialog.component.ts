@@ -93,6 +93,8 @@ export class EmploiclasseDialogComponent implements OnInit {
     const jour = unJour.textContent
     const heure = uneHeure.textContent
     this.listeCodeProf.push([jour, heure, this.codeProf])
+
+    console.log('codes profs ', this.listeCodeProf)
   }
   onSubmit(){
     this.ajouteCodeProf()

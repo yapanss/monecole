@@ -4,7 +4,7 @@
 	</button>
 </div>
 <mat-drawer-container>
-	 <mat-drawer #drawer mode="side" opened>
+	 <mat-drawer #drawer mode="side" closed>
 		<div id="presentation" class="p-3">
 			<div id="cadrePhoto" align="center">
 				<h1 class="text-center bg-dark text-white mb-0">{{classe.nom}}</h1>
@@ -13,16 +13,7 @@
 			</div>
 			<div id="salleEffectifPersonnel" class="text-center">
 				<h3>Salle: {{classe.salle}}</h3>
-				<h3>Effectif: {{eleves? eleves.length: null}}</h3>
-				<h3>Educateur</h3>
-				<p>Mr {{classe.educateur}}</p>
-				<p>Contact: </p>
-				<h3>Prof principal</h3>
-				<p>Mr {{classe.pp}}</p>
-				<p>Contact: </p>
-				<h3>Délégué</h3>
-				<p>Mr {{classe.chefDeClasse}}</p>
-				<p>Contact: </p>
+				<h3>Effectif: {{classe.effectif}}</h3>
 			</div>
 			<div class="text-center">
 				<button mat-button (click)="onAjoutEleve()">Ajouter Elèves</button>
@@ -31,36 +22,43 @@
 			   <button mat-button (click)="onAjoutProf()">Ajouter Profs</button>
 		   </div>
 			<div class="text-center">
-			   <button mat-button routerLink="/classe/edit/{{classe.nom}}">Modifier infos</button>
+			   <button mat-button (click)="onUpdateDialog()">Modifier infos</button>
 			</div>
 		</div>
 	 </mat-drawer>
 	 <div id="container" *ngIf="classe" class="mb-5 p-3 d-flex">
 		<div id="infosClasse" class="ml-2 pl-3 pr-3 pt-1 pb-3 bg-white flex-grow-1">
 			<mat-tab-group>
-				<mat-tab label="Profs">
-					<div id="liste_profs">
-						<table class="table mt-5">
-							<tr>
-								<th>Matière</th>
-								<th>Nom et Prénoms</th>
-								<th>Email</th>
-								<th>Page personnelle</th>
-							</tr>
-							<tr *ngFor="let prof of lesProfs">
-								<td>{{prof.matiere}}</td>
-								<td>{{prof.prof.nom}} {{prof.prof.prenoms}}</td>
-								<td>{{prof.prof.email}}</td>
-								<td><button mat-stroked-button 
-											routerLink="/personnel/detail/{{prof.prof.matricule}}"
-											class="text-white">Consuler</button></td>
-							</tr>
-						</table>
-					</div>
-				</mat-tab>
 				<mat-tab label="Liste">
-					<table class="table table-bordered mt-5">
+					<div class="mt-3 mb-1">
+						<button 
+							mat-icon-button 
+							class="addButton"
+							(click)="onAjoutEleve()"
+							#tooltip="matTooltip" 
+							matTooltip="Ajouter des élèves"
+							[matTooltipPosition]="'above'"
+							matTooltipHideDelay="0">
+							<mat-icon>add</mat-icon>
+						</button>
+						<button 
+							mat-icon-button (click)="removeEleve()"
+							id="deleteButton"
+							[disabled] = "elevesSelectionnes.length == 0"
+							#tooltip="matTooltip" 
+							matTooltip="Retirer des élèves"
+							[matTooltipPosition]="'above'"
+							matTooltipHideDelay="0">
+							<mat-icon>delete</mat-icon>
+						</button>
+					</div>
+					<table class="table table-bordered">
 						<tr>
+							<th>
+								<input type="checkbox" 
+										[(ngModel)]="allChecked"
+										(change)="toggleCheckAll()">
+							</th>
 						   <th>N°</th>
 						   <th>Photo</th>
 						   <th>Matricule</th>
@@ -68,27 +66,39 @@
 						   <th>Prénoms</th>
 						   <th>Genre</th>
 						   <th>Redoublant(e)</th>
-						   <th>Actions</th>
 					   </tr>
 					   <tr *ngFor = "let eleve of eleves; let i=index">
-						   <td>{{i+1}}</td>
-						   <td><img src="" height="30" width="30" alt=""></td>
-						   <td>{{eleve.matricule}}</td>
-						   <td>{{eleve.nom}}</td>
-						   <td>{{eleve.prenoms}}</td>
-						   <td>{{eleve.genre}}</td>
-						   <td>{{eleve.redoublant}}</td>
-						   <td>
-							   <button mat-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}"><mat-icon>info</mat-icon>détail</button>
-							   
-							   <button mat-button color="warn" (click)="onDelete(i)">
-								   <mat-icon>delete</mat-icon>
-							   Retirer
-						   </button>
-						   </td>
+						<td>
+							<input type="checkbox" 
+									name=""
+									[(ngModel)]=checkList[eleve.matricule]
+									(change)="onCheckOnce(eleve.matricule, i)">
+					</td>
+						   <td [ngClass]="etatSelection[i]" >{{i+1}}</td>
+						   <td [ngClass]="etatSelection[i]"><img src='{{eleve.photoUrl ? "http://localhost:3000/"+ eleve.photoUrl : 
+											"http://localhost:3000/"+ "avatar.png"}}' 
+										 height="30" width="30" alt=""></td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.matricule}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.nom}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.prenoms}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.genre}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.redoublant}}</td>
+						   <td [ngClass]="etatSelection[i]">
+							   <button mat-icon-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}">
+									<mat-icon>info</mat-icon>
+								</button>
+							</td>
+							
 					   </tr>
 					</table>
 				</mat-tab>
+				<mat-tab label="Encadrement">
+					<div id="liste_profs">
+						<app-encadrement [classe]="classe"
+										 [eleves]="eleves"></app-encadrement>
+					</div>
+				</mat-tab>
+				
 				<mat-tab label="Emploi du temps">
 					<app-emploi-classe></app-emploi-classe>
 				</mat-tab>

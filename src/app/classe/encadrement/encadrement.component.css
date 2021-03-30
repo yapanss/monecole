@@ -1,0 +1,16 @@
+th{
+	background-color: #706441;
+	color: white;
+}
+td{
+	box-sizing: border-box;
+	height: 30px;
+	color: darkblue;
+}
+.choix{
+	background-color: #f5f0e1;
+}
+.cadre{
+	margin-top: 30px;
+}
+

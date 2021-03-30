@@ -1,0 +1,250 @@
+<!--Enseignements-->
+<section class="cadre" *ngIf="page == 'enseignement'">
+    <div class="d-flex">
+        <div>
+            <button mat-button (click)="page = 'delegue'">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+        </div>
+        <div class="flex-grow-1" pt-2>
+            <h1 class="mt-1 text-center">Enseignements</h1>
+        </div>
+        <div>
+            <button mat-button (click)="page = 'encadrement'">
+                <mat-icon>arrow_forward_ios</mat-icon>
+            </button>
+        </div>
+    </div>
+<div>
+<div class="choix form-group d-flex justify-content-around mt-3 pt-3">
+    <div id="matiere" class="form-group form-inline">
+        <label for="" class="mr-2">Matière: </label>
+        <select class="form-control" (change)="onSelectMatiere()" [(ngModel)]="matiere" ngDefaultControl>
+            <option *ngFor="let option of matieres" value="{{option}}">{{option}}</option>
+        </select>
+    </div>
+    <div id="periode" class="form-group form-inline">
+        <label for="" class="mr-2">Coefficient: </label>
+        <input type="number" [(ngModel)]="coef" ngDefaultControl>
+    </div>
+    
+    <div id="prof" class="form-group form-inline">
+        <label for="" class="mr-2">Code Prof: </label>
+        <select class="form-control" [(ngModel)]="codeProf" ngDefaultControl>
+            <option *ngFor="let option of codesParMatiere" value="{{option}}">{{option}}</option>
+        </select>
+            
+    </div>
+    <div *ngIf="addEnseignementMode">
+        <button mat-button color="primary" 
+                (click)="saveEnseignement('add')"
+                *ngIf="!ajoutEnseignementEnCours">Ajouter
+        </button>
+        <button mat-button color="primary" 
+                disabled
+                *ngIf="ajoutEnseignementEnCours">En cours ...
+        </button>
+    </div>
+    <div *ngIf="updateEnseignementMode">
+        <button mat-button color="primary" (click)="cancelUpdateEnseignement()">Annuler</button>
+        <button class="ml-1" mat-button color="primary" (click)="saveEnseignement('update')">Modifier</button>
+    </div>
+</div>
+<div>
+    <table class="table">
+        <tr>
+            <th>Matière</th>
+            <th>Coefficient</th>
+            <th>Code du Prof</th>
+            <th>Nom du Prof</th>
+            <th>Actions</th>
+        </tr>
+        <tr *ngFor="let enseignement of classe.enseignements; let i = index">
+            <td>{{enseignement.matiere}}</td>
+            <td>{{enseignement.coefficient}}</td>
+            <td>{{enseignement.codeProf}}</td>
+            <td>{{enseignement.nomProf}}</td>
+            <td>
+                <button mat-icon-button
+							class="text-success" 
+							routerLink="/personnel/detail/{{enseignement.matriculeProf}}"
+							#tooltip="matTooltip"
+							matTooltip="Page de {{enseignement.nomProf}}"
+							[matTooltipPosition]="'above'"
+							matTooltipHideDelay="0">
+						<fa-icon [icon]="faInfoCircle"></fa-icon>
+					</button>
+                <button mat-icon-button  
+                        (click)="selectCodeToModify(i)"
+                        #tooltip="matTooltip"
+                        matTooltip="Modifier"
+                        [matTooltipPosition]="'above'"
+                        matTooltipHideDelay="0">
+                    <fa-icon [icon]="faEdit"></fa-icon>
+                </button>
+                <button mat-icon-button color="warn" 
+                        (click)="deleteEnseignement(i)"
+                        #tooltip="matTooltip"
+                        matTooltip="Supprimer"
+                        [matTooltipPosition]="'above'"
+                        matTooltipHideDelay="0">
+                    <fa-icon [icon]="faTrashAlt"></fa-icon>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</section>
+
+<!--Encadrement-->
+<section class="cadre" *ngIf="page=='encadrement'">
+    <div class="d-flex">
+        <button mat-button (click)="page = 'enseignement'">
+            <mat-icon>arrow_back_ios</mat-icon>
+        </button>
+        <div class="flex-grow-1">
+            <h1 class="text-center">Encadrements</h1>
+        </div>
+        <button mat-button (click)="page = 'delegue'">
+            <mat-icon>arrow_forward_ios</mat-icon>
+        </button>
+    </div>
+    <div class="choix form-group d-flex justify-content-around mt-3 pt-3">
+        <div id="titre" class="form-group form-inline">
+            <label for="" class="mr-2">Titre Encadreur: </label>
+            <select class="form-control" (change)="onSelectMatiere()" [(ngModel)]="titreEncadreur" ngDefaultControl>
+                <option *ngFor="let option of titresEncadrement" value="{{option}}">{{option}}</option>
+            </select>
+        </div>
+        <div class="form-group form-inline">
+            <label for="" class="mr-2">Matricule Encadreur: </label>
+            <input type="text" class="form-control" [(ngModel)]="matriculeEncadreur" ngDefaultControl>
+        </div>
+        
+        <div *ngIf="addMode">
+            <button mat-button color="primary" (click)="addEncadrement()">Ajouter</button>
+        </div>
+        <div *ngIf="updateMode">
+            <button mat-button color="primary" (click)="cancelUpdate()">Annuler</button>
+            <button class="ml-1" mat-button color="primary" (click)="updateCode()">Modifier</button>
+        </div>
+    </div>
+    <div>
+        <table class="table">
+            <tr>
+                <th>Titre</th>
+                <th>Nom de l'encadreur</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let encadreur of classe.encadrements; let i = index">
+                <td>{{encadreur.titreEncadreur}}</td>
+                <td>{{encadreur.nomEncadreur}}</td>
+                <td>
+                    <button routerLink="/personnel/detail/{{encadreur.matriculeEncadreur}}"
+                            mat-icon-button  
+                            #tooltip="matTooltip"
+                            matTooltip="Infos de l'Encadreur"
+                            [matTooltipPosition]="'left'"
+                            matTooltipHideDelay="0">
+                <fa-icon [icon]="faInfoCircle"></fa-icon>
+                    </button>
+            <button mat-icon-button  
+                    (click)="selectCodeToModify(i)"
+                    #tooltip="matTooltip"
+                    matTooltip="Modifier"
+                    [matTooltipPosition]="'above'"
+                      matTooltipHideDelay="0">
+                <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button mat-icon-button color="warn" 
+                    (click)="deleteCode(i)"
+                    #tooltip="matTooltip"
+                    matTooltip="Supprimer"
+                    [matTooltipPosition]="'right'"
+                      matTooltipHideDelay="0">
+                <fa-icon [icon]="faTrashAlt"></fa-icon>
+            </button>
+                </td>
+</tr>
+        </table>
+    </div>
+    </section>
+    <section class="cadre" *ngIf="page == 'delegue'">
+        <div class="d-flex">
+            <button mat-button (click)="page = 'encadrement'">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <div class="flex-grow-1"><h1 class="text-center">Délégués</h1></div>
+            <div>
+                <button mat-button (click)="page = 'enseignement'">
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                </button>
+            </div>            
+        </div>
+        <div>
+            <div class="choix form-group d-flex justify-content-around mt-3 pt-3">
+                <div class="form-group form-inline">
+                    <label for="" class="mr-2">Titre du délégué: </label>
+                    <select class="form-control"[(ngModel)]="titreDelegue" ngDefaultControl>
+                        <option *ngFor="let option of titresDelegue" value="{{option}}">{{option}}</option>
+                    </select>
+                </div>
+                <div class="form-group form-inline">
+                    <label for="" class="mr-2">Matricule Délégué: </label>
+                    <select class="form-control"[(ngModel)]="matriculeDelegue" ngDefaultControl>
+                        <option *ngFor="let option of eleves" value="{{option.matricule}}">{{option.matricule}}</option>
+                    </select>
+                </div>
+                <div *ngIf="addModeDelegue">
+                    <button mat-button color="primary" (click)="addCodeDelegue()">Ajouter</button>
+                </div>
+                <div *ngIf="updateModeDelegue">
+                    <button mat-button color="primary" (click)="cancelUpdateDelegue()">Annuler</button>
+                    <button class="ml-1" mat-button color="primary" (click)="updateCodeDelegue()">Modifier</button>
+                </div>
+            </div>
+            <div>
+                <table class="table">
+                    <tr>
+                        <th>Titre</th>
+                        <th>Matricule</th>
+                        <th>Nom et prénoms</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr *ngFor="let delegue of delegues; let i = index">
+                        <td>{{delegue.titreDelegue}}</td>
+                        <td>{{delegue.matriculeDelegue}}</td>
+                        <td>{{delegue.NomDelegue}}</td>
+                        <td>
+                    <button mat-icon-button
+							class="text-success" 
+							routerLink="/personnel/detail/{{enseignement.matriculeProf}}"
+							#tooltip="matTooltip"
+							matTooltip="Page de {{enseignement.nomProf}}"
+							[matTooltipPosition]="'above'"
+							matTooltipHideDelay="0">
+						<fa-icon [icon]="faInfoCircle"></fa-icon>
+					</button>
+                    <button mat-icon-button  
+                            (click)="selectCodeToModify(i)"
+                            #tooltip="matTooltip"
+                            matTooltip="Modifier"
+                            [matTooltipPosition]="'above'"
+                              matTooltipHideDelay="0">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </button>
+                    <button mat-icon-button color="warn" 
+                            (click)="deleteCode(i)"
+                            #tooltip="matTooltip"
+                            matTooltip="Supprimer"
+                            [matTooltipPosition]="'above'"
+                              matTooltipHideDelay="0">
+                        <fa-icon [icon]="faTrashAlt"></fa-icon>
+                    </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
+    </section>
