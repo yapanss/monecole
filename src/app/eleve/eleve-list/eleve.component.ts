@@ -22,22 +22,24 @@ export class EleveComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
-  	this.api.getAllItems('eleve')
+  	//this.api.getAllItems('eleve')
+  	this.api.getAllItems('eleves')
   	.subscribe(eleves => {
-      if(eleves){
-        this.anneeScolaire = this.configService.config.anneeScolaire;
-        eleves.forEach(eleve =>{
-          eleve.cursus.forEach(item =>{
-            if(item.annee == this.anneeScolaire){
-              eleve.classe = item.classe
-              eleve.niveau = item.niveau
-              eleve.redoublant = item.redoublant
-            }
-          })
+      this.eleves = _.sortBy(eleves, 'nom');
+    //  if(eleves){
+    //    this.anneeScolaire = this.configService.config.anneeScolaire;
+    //    eleves.forEach(eleve =>{
+    //      eleve.cursus.forEach(item =>{
+    //        if(item.annee == this.anneeScolaire){
+    //          eleve.classe = item.classe
+    //          eleve.niveau = item.niveau
+    //          eleve.redoublant = item.redoublant
+    //        }
+    //      })
         })
-      }
-  		this.eleves = _.sortBy(eleves, 'nom');
-    })
+     // }
+  		//this.eleves = _.sortBy(eleves, 'nom');
+    //})
   }
   onCreateDialog(){
     let dialogRef = this.dialog.open(EleveDialogComponent, {
@@ -65,7 +67,7 @@ export class EleveComponent implements OnInit {
   onDelete(index){
     let eleve = this.eleves[index]
     if (confirm('Voulez-vous supprimer '+eleve.nom+" "+eleve.prenoms+"?")){
-      this.api.deleteOneItem('eleve', eleve.matricule)
+      this.api.deleteOneItem('eleves', eleve._id['$oid'])
       .subscribe(eleve  => {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';

@@ -29,7 +29,7 @@
 					<td>{{classe.pp}}</td>
 					<td>{{classe.chefDeClasse}}</td>
 					<td>
-						<button mat-button color="accent" routerLink="/classe/detail/{{classe.nom}}">détail</button>
+						<button mat-button color="accent" routerLink="/classe/detail/{{classe._id['$oid']}}">détail</button>
 						<button mat-button color="primary" (click)="onUpdateDialog(i)">modifier</button>
 						<button mat-button color="warn" (click)="onDelete(i)">supprimer</button>
 					</td>

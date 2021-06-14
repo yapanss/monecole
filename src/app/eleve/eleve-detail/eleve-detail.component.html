@@ -14,8 +14,10 @@
 			</div>
 			<div id="nomEtEmploi" class="text-center">
 				<h2 id="nom">{{eleve.nom}} {{eleve.prenoms}}</h2>
-				<h3 id="matricule">Mle: {{eleve.matricule}} {{eleve.classe}}</h3>
-				<h3 id="classe" class="p-2 changeButton" routerLink="/classe/detail/{{eleve.classe}}">{{eleve.classe}}</h3>
+				<h3 id="matricule">Mle: {{eleve.matricule}}</h3>
+				<h3>Classe actuelle : 
+					<span id="classe" class="p-2 infos changeButton" routerLink="/classe/detail/{{eleve.classe}}">{{eleve.classe}}</span>
+				</h3>
 				<p><mat-icon>phone </mat-icon>: {{eleve.contact}}</p>
 				<p><mat-icon>email </mat-icon>: {{eleve.contact}}</p>
 			</div>
@@ -47,15 +49,31 @@
 								</div>
 								<ul>
 									<li>
-										<p>Genre : {{eleve.genre}}</p>
-										<p>Date de naissance : {{eleve.dateNaissance | date: 'dd/MM/yyyy'}}</p>
-										<p>Lieu de naissance :	{{eleve.lieuNaissance}}</p>
-										<p>Domicile : {{eleve.domicile}}</p>
-										<p>Handicap : </p>
-										<p>Aptitude EPS : </p>
-										<p>Etablissement d'origine : </p>
-										<p>Date d'entrée dans l'établissement : </p>
-										<p>Redoublant : </p>
+										<p>Genre : <span class="infos">{{eleve.genre}}</span></p>
+										<p>Date de naissance : <span class="infos">
+											{{eleve.date_naissance | date: 'dd/MM/yyyy'}}</span>
+										</p>
+										<p>Lieu de naissance :	
+											<span class="infos">{{eleve.lieu_naissance}}</span>
+										</p>
+										<p>Domicile : 
+											<span class="infos">{{eleve.domicile}}</span> 
+										</p>
+										<p>Handicap : 
+											<span class="infos"></span>
+										</p>
+										<p>Aptitude EPS : 
+											<span class="infos"></span>
+										</p>
+										<p>Etablissement d'origine : 
+											<span class="infos"></span>
+										</p>
+										<p>Date d'entrée dans l'établissement : 
+											<span class="infos"></span>
+										</p>
+										<p>Redoublant : 
+											<span class="infos">{{eleve.redoublant}}</span>
+										</p>
 									</li>
 								</ul>
 							</div>
@@ -65,11 +83,21 @@
 								</div>
 								<ul>
 									<li>
-										<p>Nom et Prénoms: {{eleve.pere ? eleve.pere.nomEtPrenoms : null}}</p>
-										<p>Téléphone:  {{eleve.pere ? eleve.pere.contact : null}}</p>
-										<p>Email:  {{eleve.pere ? eleve.pere.email : null}}</p>
-										<p>Domicile:  {{eleve.pere ? eleve.pere.domicile : null}}</p>
-										<p>Profession: {{eleve.pere ? eleve.pere.profession : null}}</p>
+										<p>Nom et Prénoms: 
+											<span class="infos">{{eleve.pere ? eleve.pere.nomEtPrenoms : null}}</span>
+										</p>
+										<p>Téléphone:  
+											<span class="infos">{{eleve.pere ? eleve.pere.contact : null}}</span>
+										</p>
+										<p>Email:  
+											<span class="infos">{{eleve.pere ? eleve.pere.email : null}}</span>
+										</p>
+										<p>Domicile:  
+											<span class="infos">{{eleve.pere ? eleve.pere.domicile : null}}</span>
+										</p>
+										<p>Profession: 
+											<span class="infos">{{eleve.pere ? eleve.pere.profession : null}}</span>
+										</p>
 									</li>
 								</ul>
 							</div>
@@ -79,11 +107,21 @@
 								</div>
 								<ul>
 									<li>
-										<p>Nom et Prénoms: {{eleve.mere ? eleve.mere.nomEtPrenoms : null}}</p>
-										<p>Téléphone:  {{eleve.mere? eleve.mere.contact : null}}</p>
-										<p>Email:  {{eleve.mere? eleve.mere.email : null}}</p>
-										<p>Domicile:  {{eleve.mere ? eleve.mere.domicile : null}}</p>
-										<p>Profession: {{eleve.mere ? eleve.mere.profession : null}}</p>
+										<p>Nom et Prénoms: 
+											<span class="infos">{{eleve.mere ? eleve.mere.nomEtPrenoms : null}}</span>
+										</p>
+										<p>Téléphone:  
+											<span class="infos">{{eleve.mere ? eleve.mere.contact : null}}</span>
+										</p>
+										<p>Email:  
+											<span class="infos">{{eleve.mere ? eleve.mere.email : null}}</span>
+										</p>
+										<p>Domicile:  
+											<span class="infos">{{eleve.mere ? eleve.mere.domicile : null}}</span>
+										</p>
+										<p>Profession: 
+											<span class="infos">{{eleve.mere ? eleve.mere.profession : null}}</span>
+										</p>
 									</li>
 								</ul>
 							</div>
@@ -93,11 +131,21 @@
 								</div>
 								<ul>
 									<li>
-										<p>Nom et Prénoms: {{eleve.tuteur ? eleve.tuteur.nomEtPrenoms : null}}</p>
-										<p>Téléphone:  {{eleve.tuteur? eleve.tuteur.contact : null}}</p>
-										<p>Email:  {{eleve.tuteur? eleve.tuteur.email : null}}</p>
-										<p>Domicile:  {{eleve.tuteur ? eleve.tuteur.domicile : null}}</p>
-										<p>Profession: {{eleve.tuteur? eleve.tuteur.profession : null}}</p>
+										<p>Nom et Prénoms: 
+											<span class="infos">{{eleve.tuteur ? eleve.tuteur.nomEtPrenoms : null}}</span>
+										</p>
+										<p>Téléphone:  
+											<span class="infos">{{eleve.tuteur ? eleve.tuteur.contact : null}}</span>
+										</p>
+										<p>Email:  
+											<span class="infos">{{eleve.tuteur ? eleve.tuteur.email : null}}</span>
+										</p>
+										<p>Domicile:  
+											<span class="infos">{{eleve.tuteur ? eleve.tuteur.domicile : null}}</span>
+										</p>
+										<p>Profession: 
+											<span class="infos">{{eleve.tuteur ? eleve.tuteur.profession : null}}</span>
+										</p>
 									</li>
 								</ul>
 							</div>

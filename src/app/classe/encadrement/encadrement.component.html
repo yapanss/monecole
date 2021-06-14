@@ -29,11 +29,8 @@
     </div>
     
     <div id="prof" class="form-group form-inline">
-        <label for="" class="mr-2">Code Prof: </label>
-        <select class="form-control" [(ngModel)]="codeProf" ngDefaultControl>
-            <option *ngFor="let option of codesParMatiere" value="{{option}}">{{option}}</option>
-        </select>
-            
+        <label for="" class="mr-2">Matricule Prof: </label>
+        <input class="form-control" [(ngModel)]="matriculeProf" ngDefaultControl>
     </div>
     <div *ngIf="addEnseignementMode">
         <button mat-button color="primary" 

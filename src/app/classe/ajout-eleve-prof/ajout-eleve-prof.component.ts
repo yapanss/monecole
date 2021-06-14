@@ -13,7 +13,7 @@ import { forkJoin } from 'rxjs';
 })
 export class AjoutEleveProfComponent implements OnInit {
 
-  anneeScolaire: string = this.configService.config.anneeScolaire;
+  anneeScolaire: string;
   profForm: FormGroup;
   eleveForm: FormGroup;
 	eleveControls: FormGroup;
@@ -36,15 +36,15 @@ export class AjoutEleveProfComponent implements OnInit {
   }
 
    ngOnInit(): void {
-    this.api.getOneItem('emploiclasse', this.data.classe.nom)
-    .subscribe(emploiclasse =>{
-      this.emploiclasse = emploiclasse
-    })
+    // this.api.getOneItem('emploiclasse', this.data.classe.nom)
+    // .subscribe(emploiclasse =>{
+    //   this.emploiclasse = emploiclasse
+    // })
   }
 
   buildForm() {
     this.eleveForm = this.data.eleveForm;
-    this.profForm = this.data.profForm;
+    //this.profForm = this.data.profForm;
   }
   filterEleve(){
     this.data.eleves = this.eleves.filter(eleve => {
@@ -88,26 +88,37 @@ export class AjoutEleveProfComponent implements OnInit {
     }
   }
   onSubmitEleve(){
+    console.log('eleveForm', this.eleveForm.value)
     this.dialogRef.close();
-    const selectedMatriculeEleves = Object.entries(this.eleveForm.value)
+    const selectedMatricules = Object.entries(this.eleveForm.value)
                             .filter(keyValue => keyValue[1])
                             .map(keyValue => keyValue[0]);
-    const reqBodyEleves = {
-      anneeScolaire: this.anneeScolaire,
-      matriculeEleves: selectedMatriculeEleves,
-      classe: this.data.classe.nom,
-      updateQuery: 'classe'
-    }
-    const reqBodyClasse = {
-      effectif: this.data.classe.effectif + selectedMatriculeEleves.length
-    }
-    forkJoin([this.api.updateItems('eleve', reqBodyEleves),
-              this.api.updateOneItem('classe', this.data.classe._id, reqBodyClasse)]
-    )    
+    console.log('lesmatric', selectedMatricules)
+
+    
+      const requestBody = {
+        selectedMatricules
+      }
+    
+    
+    // const reqBodyEleves = {
+    //   anneeScolaire: this.anneeScolaire,
+    //   matriculeEleves: selectedMatricules,
+    //   classe: this.data.classe.nom,
+    //   updateQuery: 'classe'
+    // }
+    // const reqBodyClasse = {
+    //   effectif: this.data.classe.effectif + selectedMatricules.length
+    // }
+    // forkJoin([this.api.updateItems('eleve', reqBodyEleves),
+    //           this.api.updateOneItem('classe', this.data.classe._id, reqBodyClasse)]
+    //)    
+    const id = this.data.classe._id['$oid']
+    this.api.updateOneItem('classes', id, requestBody)
     .subscribe(response  => {
       this.route.routeReuseStrategy.shouldReuseRoute = () => false;
       this.route.onSameUrlNavigation = 'reload';
-      this.route.navigate(['/classe/detail/'+this.data.classe.nom])
+      this.route.navigate(['/classe/detail/'+id])
     });
   }
   requestServer(body){

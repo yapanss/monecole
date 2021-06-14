@@ -16,6 +16,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 })
 export class ConfigComponent implements OnInit {
 
+  ecoleForm;
   visible = true;
   selectable = true;
   removable = true;
@@ -46,7 +47,7 @@ export class ConfigComponent implements OnInit {
   matieres = [];
   dateFin: Date;
   proviseur;
-  configuration: any;
+  configuration: any = {};
   debut: Date;
   fin: Date;
   personnel = {nom: 'Mathieu', matricule: '23ZZER'}
@@ -58,25 +59,41 @@ export class ConfigComponent implements OnInit {
   toSubmitCode: boolean = false;
   codeProfErrorMessage: string;
 
+  ecole;
+  action:string;
+
   constructor(private formBuilder: FormBuilder,
   			  private api: ApiService,
-          private config: ConfigService) {
+          private configService: ConfigService) {
   	// this.buildForm()
   }
 
   ngOnInit(): void {
-    this.configuration = this.config.config
-    this.nomPeriodeArray = Object.keys(this.configuration.periodesEvaluation)
-    if(this.configuration.typePeriodes == 'trimestre'){
-        this.listeNomPeriode = ['Premier Trimestre,Deuxième Trimestre,Troisième Trimestre', 
-                                '1er Trimestre,2e Trimestre,3e Trimestre', 
-                                'Trimestre 1,Trimestre 2,Trimestre 3',
-                                'Trim 1,Trim 2,Trim 3']
-    }else{
-      this.listeNomPeriode = ['Premier Semestre,Deuxième Semestre','1er Semestre,2e Semestre','Semestre 1,Semestre 2',
-                              'Sem 1,Sem 2']
-      
+    console.log('config', this.configService.ecole)
+    this.ecole = this.configService.ecole
+    if (this.ecole.length == 0){
+           this.action = 'create'
     }
+    // this.api.getAllItems('ecoles')
+    // .subscribe(ecole =>{
+    //   this.ecole = ecole[0]
+    //   console.log('ecole = ', ecole, ecole.length)
+    //   if (ecole.length == 0){
+    //     this.action = 'create'
+    //   }
+    // })
+    // this.configuration = this.config.config
+    // this.nomPeriodeArray = Object.keys(this.configuration.periodesEvaluation)
+    // if(this.configuration.typePeriodes == 'trimestre'){
+    //     this.listeNomPeriode = ['Premier Trimestre,Deuxième Trimestre,Troisième Trimestre', 
+    //                             '1er Trimestre,2e Trimestre,3e Trimestre', 
+    //                             'Trimestre 1,Trimestre 2,Trimestre 3',
+    //                             'Trim 1,Trim 2,Trim 3']
+    // }else{
+    //   this.listeNomPeriode = ['Premier Semestre,Deuxième Semestre','1er Semestre,2e Semestre','Semestre 1,Semestre 2',
+    //                           'Sem 1,Sem 2']
+      
+    // }
   }
   onInputDebut(debut, periode){
     this.configuration.periodesEvaluation[periode].debut = debut
@@ -172,35 +189,44 @@ export class ConfigComponent implements OnInit {
     }
   }
   addCode(){
-    if((this.configuration.codesProfesseur.filter(item =>{
-      return item.codeProf == this.codeProf
-    })).length != 0){
-      this.codeProfErrorMessage = "Ce code est déjà attribué !"
-    }else {
-      this.codeProfErrorMessage = ""
-      return this.api.getOneItem('personnel', this.matriculeProf)
-    .pipe(
-      mergeMap(response => {
-        if(response){
-          let codeProf = {
-            codeProf: this.codeProf,
-            matiere: this.matiere,
-            matriculeProf: this.matriculeProf,
-            nomProf: response['personnel'].nom + ' ' + response['personnel'].prenoms
-          }
-          this.configuration.codesProfesseur =  this.configuration.codesProfesseur.concat(codeProf)
-          //this.toSubmitCode = true
-          return this.api.updateOneItem('config', this.configuration._id, this.configuration)
-        }
-      }),
-      catchError(err => {throw(err)})
-    )
-    .subscribe(personnel =>{
-      this.matiere = ""
-      this.codeProf = ""
-      this.matriculeProf = ""
+    let body = {
+              code: this.codeProf,
+              matiere: this.matiere,
+              
+           }
+    this.api.postForm('ecoles', body)
+    .subscribe(ecole =>{
+      this.ecole.push(ecole)
     })
-    }
+    // if((this.configuration.codesProfesseur.filter(item =>{
+    //   return item.codeProf == this.codeProf
+    // })).length != 0){
+    //   this.codeProfErrorMessage = "Ce code est déjà attribué !"
+    // }else {
+    //   this.codeProfErrorMessage = ""
+    //   return this.api.getOneItem('personnel', this.matriculeProf)
+    // .pipe(
+    //   mergeMap(response => {
+    //     if(response){
+    //       let codeProf = {
+    //         codeProf: this.codeProf,
+    //         matiere: this.matiere,
+    //         matriculeProf: this.matriculeProf,
+    //         nomProf: response['personnel'].nom + ' ' + response['personnel'].prenoms
+    //       }
+    //       this.configuration.codesProfesseur =  this.configuration.codesProfesseur.concat(codeProf)
+    //       //this.toSubmitCode = true
+    //       return this.api.updateOneItem('config', this.configuration._id, this.configuration)
+    //     }
+    //   }),
+    //   catchError(err => {throw(err)})
+    // )
+    // .subscribe(personnel =>{
+    //   this.matiere = ""
+    //   this.codeProf = ""
+    //   this.matriculeProf = ""
+    // })
+    // }
     
   }
   selectCodeToModify(index){
@@ -258,13 +284,19 @@ export class ConfigComponent implements OnInit {
     }
   }
   onSubmit(){
-    
         this.codeErrorMessage = ""
-        this.api.updateOneItem('config', this.configuration._id, this.configuration)
-        .subscribe(configuration =>{
-          console.log(configuration)
-          this.toSubmitCode = false;
-        })
+        if(this.action == 'create'){
+          this.api.postForm('ecoles', this.ecole)
+          .subscribe(ecole =>{
+            this.ecole = ecole
+          })
+        } else{
+          this.api.updateOneItem('ecoles', this.ecole._id['$oid'], this.ecole)
+          .subscribe(ecole =>{
+            this.ecole = ecole
+          })
+        }
+      
       
     
   }

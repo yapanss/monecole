@@ -15,26 +15,28 @@ export class AppComponent implements OnInit {
   			      private configService: ConfigService){}
 
   ngOnInit(): void {
-  	this.api.getAllItems('config')
+    
+  	this.api.getAllItems('ecoles')
     .pipe(
-      mergeMap(config =>{
-        this.configService.config = config[0];
-        if(Date.parse(this.configService.config.dateFin) <= Date.now()){
-          let [debut, fin] = this.configService.config.anneeScolaire.split('-')
-          debut = fin
-          fin = (parseInt(fin)+1).toString()
-          const anneeScolaire = debut+"-"+fin
-          return this.api.updateOneItem('config', config[0]._id, {
-            anneeScolaire,
-            dateFin: new Date('09-01-'+fin)
-          })
-        } else return of(config[0])
-      }),
-      catchError(err => {throw(err)})
-    )
-  	.subscribe(config => {
-      console.log(config)
-    })
+       mergeMap(ecole =>{
+         console.log('monecole', ecole)
+         this.configService.ecole = ecole[0];
+         if(Date.parse(this.configService.ecole.date_fin) <= Date.now()){
+           let [debut, fin] = this.configService.ecole.annee_scolaire.split('-')
+           debut = fin
+           fin = (parseInt(fin)+1).toString()
+           const annee_scolaire = debut+"-"+fin
+           return this.api.updateOneItem('ecoles', ecole[0]._id, {
+             annee_scolaire,
+             date_fin: new Date('09-01-'+fin)
+           })
+         } else return of(ecole[0])
+       }),
+       catchError(err => {throw(err)})
+     )
+  	 .subscribe(ecole => {
+       console.log('tonecole', ecole)
+     })
   }
   
 }

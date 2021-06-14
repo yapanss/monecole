@@ -1,0 +1,65 @@
+<section class="mt-3">
+	<h1 class="text-center">Liste de classe {{classe.nom}}</h1>
+<div class="mt-3 mb-1" id="ajoutSupprimeEleve">
+	<button 
+		mat-icon-button 
+		class="addButton"
+		(click)="onAjoutEleve()"
+		#tooltip="matTooltip" 
+		matTooltip="Ajouter des élèves"
+		[matTooltipPosition]="'above'"
+		matTooltipHideDelay="0">
+		<mat-icon>add</mat-icon>
+	</button>
+	<button 
+		mat-icon-button (click)="removeEleve()"
+		id="deleteButton"
+		[disabled] = "elevesSelectionnes.length == 0"
+		#tooltip="matTooltip" 
+		matTooltip="Retirer des élèves"
+		[matTooltipPosition]="'above'"
+		matTooltipHideDelay="0">
+		<mat-icon>delete</mat-icon>
+	</button>
+</div>
+<table class="table table-bordered">
+						<tr>
+							<th>
+								<input type="checkbox" 
+										[(ngModel)]="allChecked"
+										(change)="toggleCheckAll()">
+							</th>
+						   <th>N°</th>
+						   <th>Photo</th>
+						   <th>Matricule</th>
+						   <th>Nom</th>
+						   <th>Prénoms</th>
+						   <th>Genre</th>
+						   <th>Redoublant(e)</th>
+					   </tr>
+					   <tr *ngFor = "let eleve of eleves; let i=index">
+						<td>
+							<input type="checkbox" 
+									name=""
+									[(ngModel)]=checkList[eleve.matricule]
+									(change)="onCheckOnce(eleve.matricule, i)">
+					</td>
+						   <td [ngClass]="etatSelection[i]" >{{i+1}}</td>
+						   <td [ngClass]="etatSelection[i]"><img src='{{eleve.photoUrl ? "http://localhost:3000/"+ eleve.photoUrl : 
+											"http://localhost:3000/"+ "avatar.png"}}' 
+										 height="30" width="30" alt=""></td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.matricule}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.nom}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.prenoms}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.genre}}</td>
+						   <td [ngClass]="etatSelection[i]">{{eleve.redoublant}}</td>
+						   <td [ngClass]="etatSelection[i]">
+							   <button mat-icon-button color="accent" routerLink="/eleve/detail/{{eleve._id['$oid']}}">
+									<mat-icon>info</mat-icon>
+								</button>
+							</td>
+							
+					   </tr>
+					</table>
+</section>
+

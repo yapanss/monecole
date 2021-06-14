@@ -57,6 +57,10 @@ ul{
 	border-bottom: solid white 5px;
 	padding-top: 10px;
 }
+.infos{
+	font-weight: bolder;
+	color: indianred;
+}
 .card-header{
 	height: 35px;
 	background-color: #706441;

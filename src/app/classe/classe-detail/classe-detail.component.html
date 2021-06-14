@@ -11,10 +11,10 @@
 				<!-- <img
 				[src]=imgSrc alt="photo de profil" height="150" width="150"> -->
 			</div>
-			<div id="salleEffectifPersonnel" class="text-center">
+			<!-- <div id="salleEffectifPersonnel" class="text-center">
 				<h3>Salle: {{classe.salle}}</h3>
 				<h3>Effectif: {{classe.effectif}}</h3>
-			</div>
+			</div> -->
 			<div class="text-center">
 				<button mat-button (click)="onAjoutEleve()">Ajouter Elèves</button>
 			</div>
@@ -30,67 +30,7 @@
 		<div id="infosClasse" class="ml-2 pl-3 pr-3 pt-1 pb-3 bg-white flex-grow-1">
 			<mat-tab-group>
 				<mat-tab label="Liste">
-					<div class="mt-3 mb-1">
-						<button 
-							mat-icon-button 
-							class="addButton"
-							(click)="onAjoutEleve()"
-							#tooltip="matTooltip" 
-							matTooltip="Ajouter des élèves"
-							[matTooltipPosition]="'above'"
-							matTooltipHideDelay="0">
-							<mat-icon>add</mat-icon>
-						</button>
-						<button 
-							mat-icon-button (click)="removeEleve()"
-							id="deleteButton"
-							[disabled] = "elevesSelectionnes.length == 0"
-							#tooltip="matTooltip" 
-							matTooltip="Retirer des élèves"
-							[matTooltipPosition]="'above'"
-							matTooltipHideDelay="0">
-							<mat-icon>delete</mat-icon>
-						</button>
-					</div>
-					<table class="table table-bordered">
-						<tr>
-							<th>
-								<input type="checkbox" 
-										[(ngModel)]="allChecked"
-										(change)="toggleCheckAll()">
-							</th>
-						   <th>N°</th>
-						   <th>Photo</th>
-						   <th>Matricule</th>
-						   <th>Nom</th>
-						   <th>Prénoms</th>
-						   <th>Genre</th>
-						   <th>Redoublant(e)</th>
-					   </tr>
-					   <tr *ngFor = "let eleve of eleves; let i=index">
-						<td>
-							<input type="checkbox" 
-									name=""
-									[(ngModel)]=checkList[eleve.matricule]
-									(change)="onCheckOnce(eleve.matricule, i)">
-					</td>
-						   <td [ngClass]="etatSelection[i]" >{{i+1}}</td>
-						   <td [ngClass]="etatSelection[i]"><img src='{{eleve.photoUrl ? "http://localhost:3000/"+ eleve.photoUrl : 
-											"http://localhost:3000/"+ "avatar.png"}}' 
-										 height="30" width="30" alt=""></td>
-						   <td [ngClass]="etatSelection[i]">{{eleve.matricule}}</td>
-						   <td [ngClass]="etatSelection[i]">{{eleve.nom}}</td>
-						   <td [ngClass]="etatSelection[i]">{{eleve.prenoms}}</td>
-						   <td [ngClass]="etatSelection[i]">{{eleve.genre}}</td>
-						   <td [ngClass]="etatSelection[i]">{{eleve.redoublant}}</td>
-						   <td [ngClass]="etatSelection[i]">
-							   <button mat-icon-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}">
-									<mat-icon>info</mat-icon>
-								</button>
-							</td>
-							
-					   </tr>
-					</table>
+					<app-liste-classe [classe]="classe"></app-liste-classe>
 				</mat-tab>
 				<mat-tab label="Encadrement">
 					<div id="liste_profs">
@@ -100,10 +40,10 @@
 				</mat-tab>
 				
 				<mat-tab label="Emploi du temps">
-					<app-emploi-classe></app-emploi-classe>
+					<!-- <app-emploi-classe></app-emploi-classe> -->
 				</mat-tab>
 				<mat-tab label="Cahiers">
-					<app-cahiertexte [classe]="classe.nom"></app-cahiertexte>
+					<!-- <app-cahiertexte [classe]="classe.nom"></app-cahiertexte> -->
 				</mat-tab>
 				<mat-tab label="Bilan">
 					<div class="form-group form-inline p-2 bg-light">
@@ -121,7 +61,7 @@
 							   (click)="onSubmitDecision()">valider</button>
 					</div>
 					<div>
-						<table>
+						<!-- <table>
 							<tr>
 								<th>N°</th>
 								<th>Nom et Prénoms</th>
@@ -167,7 +107,7 @@
 									</select>
 							   </td>
 							</tr>
-						</table>
+						</table> -->
 						<div align="right" class="mt-2">
 						   <button mat-stroked-button color="primary">Imprimer</button>
 						</div>

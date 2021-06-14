@@ -1,0 +1,14 @@
+.selection{
+	background-color: #F5F0E1;
+}
+#deleteButton{
+	color:red;
+}
+.addButton:hover{
+	background-color: darkblue;
+	color: white;
+	border-radius: 50%;
+}
+#ajoutSupprimeEleve{
+	background-color: #F5F0E1;
+}

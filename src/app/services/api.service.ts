@@ -20,11 +20,12 @@ export class ApiService {
   }
 
   getOneItem(collection, itemId, anneeScolaire?){
+    console.log('itemid : ', itemId)
     let url: string = "";
     if(anneeScolaire){
       url = 'http://localhost:3000/api/'+collection+'/'+itemId+'/'+anneeScolaire
     }else{
-      url = 'http://localhost:3000/api/'+collection+'/'+itemId
+      url = 'http://localhost:3000/api/'+collection+ '/detail/' +itemId
     }
     return this.http.get(url);
   }

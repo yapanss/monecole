@@ -1,4 +1,4 @@
-<div id="overlay" [style.display]="eleves.length == 0 ? 'block' : 'none'">
+<div id="overla" [style.display]="eleves.length == 0 ? 'block' : 'none'">
 	<mat-progress-bar id="text" mode="indeterminate" color="primary"></mat-progress-bar>
 	<!-- <mat-progress-spinner id="text" mode="indeterminate"></mat-progress-spinner> -->
 </div>
@@ -23,7 +23,7 @@
 		<th>Matricule</th>
 		<th>Nom et Prénoms</th>
 		<th>Genre</th>
-		<th>Classe</th>
+		<th>Niveau</th>
 		<th>Actions</th>
 	</tr>
 	<tr *ngFor="let eleve of eleves; let i=index" class="text-center">
@@ -33,9 +33,10 @@
 		<td>{{eleve.matricule}}</td>
 		<td>{{eleve.nom}} {{eleve.prenoms}}</td>
 		<td>{{eleve.genre}}</td>
-		<td [routerLink]= "eleve.classe ? ['/classe/detail', eleve.classe] : null" id="classe">{{eleve.classe}}</td>
+		<td>{{eleve.niveau}}</td>
 		<td>
-			<button mat-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}">détail</button>
+			<!-- <button mat-button color="accent" routerLink="/eleve/detail/{{eleve.matricule}}">détail</button> !-->
+			<button mat-button color="accent" routerLink="/eleve/detail/{{eleve._id['$oid']}}">détail</button>
 			<button mat-button color="primary" (click)="onUpdateDialog(i)">modifier</button>
 			<button mat-button color="warn" (click)="onDelete(i)">supprimer</button>
 		</td>

@@ -25,6 +25,7 @@ export class EncadrementComponent implements OnInit {
   matriculeEncadreur: string;
   titresDelegue: string[] = TITRES_DELEGUES;
   titreDelegue: string;
+  matriculeProf;
   matriculeDelegue: string;
   codes: any;
   codesParMatiere: string[];
@@ -49,15 +50,15 @@ export class EncadrementComponent implements OnInit {
   ngOnInit(): void {
   }
   ngOnChanges(): void{
-    this.codes = this.configService.getCodes()
-    console.log('les codes : ', this.codes)
+    //this.codes = this.configService.getCodes()
+    //console.log('les codes : ', this.codes)
     //this.matieres = this.configService.getMatieres(this.classe.niveau)
   }
   onSelectMatiere(){ 
-    this.codesParMatiere = this.codes.filter(code =>{
-      return code.matiere == this.matiere 
-    })
-    .map(item => item.codeProf)
+    // this.codesParMatiere = this.codes.filter(code =>{
+    //   return code.matiere == this.matiere 
+    // })
+    // .map(item => item.codeProf)
   }
   
   addEncadrement(){
@@ -91,13 +92,7 @@ export class EncadrementComponent implements OnInit {
     let enseignement = {
       matiere: this.matiere,
       coefficient: this.coef,
-      codeProf: this.codeProf,
-      nomProf: this.codes.filter(code =>{
-        return code.codeProf == this.codeProf
-      })[0].nomProf,
-      matriculeProf: this.codes.filter(code =>{
-        return code.codeProf == this.codeProf
-      })[0].matriculeProf
+      matriculeProf: this.matriculeProf
     }
     if(addOrUpdate == 'add'){ 
       this.ajoutEnseignementEnCours = true;
@@ -113,10 +108,11 @@ export class EncadrementComponent implements OnInit {
     }
     this.api.updateOneItem('classe', this.classe._id, body)
     .subscribe(newClasse =>{
+      console.log('newclasse', newClasse)
       this.classe = newClasse
       this.matiere = null
       this.coef = null
-      this.codesParMatiere = []
+      //this.codesParMatiere = []
       this.ajoutEnseignementEnCours = false;
     })
   }

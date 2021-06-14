@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
-import { ConfigService } from '../services/config.service';
+import { ApiService } from '../../services/api.service';
+import { ConfigService } from '../../services/config.service';
 import { Params, ActivatedRoute, Router } from '@angular/router';
 import { mergeMap, catchError } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { mergeMap, catchError } from 'rxjs/operators';
 })
 export class ClasseEditComponent implements OnInit {
 	classe;
-  anneeScolaire: string = this.configService.config.anneeScolaire;
+  anneeScolaire: string = this.configService.ecole.annee_scolaire;
   niveaux
 	classes;
 	classeForm;
@@ -35,9 +35,9 @@ export class ClasseEditComponent implements OnInit {
 	catchError(err => {throw(err)})
 	)
 	.subscribe(classe => {
-	 this.salles = this.configService.config.salles;
+	 this.salles = this.configService.ecole.salles;
    this.classes = this.getClasses(classe["niveau"])
-   this.niveaux = this.configService.config.niveaux.map(niveau => {
+   this.niveaux = this.configService.ecole.niveaux.map(niveau => {
       return niveau.niveau;
    })
     this.classe = classe
@@ -61,7 +61,7 @@ export class ClasseEditComponent implements OnInit {
     this.classes = this.getClasses(this.classeForm.value.niveau)
   }
   getClasses(niveauClasse){
-    return this.configService.config.niveaux.filter(niveau => {
+    return this.configService.ecole.niveaux.filter(niveau => {
       return niveau.niveau == niveauClasse;
     })
     .map(niveau => niveau.classes)[0]

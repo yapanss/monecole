@@ -10,16 +10,16 @@
 				<img #imagePreview 
 				src="http://localhost:3000/{{personnel.photoUrl}}" alt="photo de profil" height="150" width="150">
 			</div>
-			<div class="text-center">
+			<!-- <div class="text-center"> -->
 				<h2 class="mb-0">{{personnel.nom}} {{personnel.prenoms}}</h2>
-				<h3 class="infos" 
+				<!--<h3 class="infos" 
 					*ngIf="personnel.fonction && 
 						   personnel.fonction.titre == 'Professeur'">Prof de {{personnel.fonction.specialite}}</h3>
 				<h3 *ngIf="personnel.fonction && 
 						   personnel.fonction.titre != 'Professeur'" class="infos">{{personnel.fonction && personnel.fonction.titre ? personnel.fonction.titre : null}}</h3>
 				<p><mat-icon>phone </mat-icon>: {{personnel.contact}}</p>
 				<p><mat-icon>email </mat-icon>: {{personnel.email}}</p>
-			</div>
+			</div> -->
 			<div>
 				<div *ngIf="!showPhotoForm" class="text-center">
 					<button class="changeButton" mat-button (click)="togglePhotoForm()">Changer photo</button>
@@ -51,13 +51,13 @@
 								</div>
 								<ul>
 									<li>
-										<p>Date de naissance: <span class="infos">{{personnel.dateNaissance | date: 'dd/MM/yyyy'}}</span></p>
+										<p>Date de naissance: <span class="infos">{{personnel.date_naissance | date: 'dd/MM/yyyy'}}</span></p>
 									</li>
 									<li>
-										<p>Lieu de naissance: <span class="infos">{{personnel.lieuNaissance}}</span></p>
+										<p>Lieu de naissance: <span class="infos">{{personnel.lieu_naissance}}</span></p>
 									</li>
 									<li>
-										<p> Situation matrimoniale: <span class="infos">{{personnel.situationMatrimoniale}}</span></p>
+										<p> Situation matrimoniale: <span class="infos">{{personnel.situation_matrimoniale}}</span></p>
 									</li>
 									<li>
 										<p>Nombre d'enfants: <span class="infos">{{personnel.nombreEnfants}}</span></p>
@@ -106,15 +106,15 @@
 
 					</mat-tab>
 				   <mat-tab label="Emploi du Temps" *ngIf="personnel.fonction && personnel.fonction.titre=='Professeur'">
-					   <app-emploiprof [personnel]="personnel"></app-emploiprof>
+					   <!-- <app-emploiprof [personnel]="personnel"></app-emploiprof> -->
 				   </mat-tab>
-				   <mat-tab label="Evaluer" 
+				   <!-- <mat-tab label="Evaluer" 
 						   *ngIf="personnel.fonction && personnel.fonction.titre && personnel.fonction.titre=='Professeur' || personnel.fonction.titre=='Educateur(trice)'">
 					   <app-evaluation [personnel]="personnel"></app-evaluation>	
 				   </mat-tab>
 				   <mat-tab label="Page perso">
 					<app-pageperso [matricule]="personnel.matricule"></app-pageperso>
-				   </mat-tab>
+				   </mat-tab> -->
 				</mat-tab-group>
 		</div>
 		<!-- </div> !-->

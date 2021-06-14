@@ -7,7 +7,7 @@ import { EleveDetailComponent } from './eleve-detail/eleve-detail.component';
 
 const routes: Routes = [
 	{path: 'eleves', component: EleveComponent},
-  {path: 'eleve/detail/:matricule', component: EleveDetailComponent},
+  {path: 'eleve/detail/:id', component: EleveDetailComponent},
 ]
 @NgModule({
   declarations: [],

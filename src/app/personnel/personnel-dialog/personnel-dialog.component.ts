@@ -103,16 +103,10 @@ export class PersonnelDialogComponent implements OnInit {
   }
   onCreate(){
     if(this.personnelForm.valid){
-      this.api.postForm('personnel', this.personnelForm.value)
-  		.subscribe(response => {
-			  if(response['statut'] == 'erreur'){
-				  console.log(response);
-				  this.messageErreur = response['message']
-			  } else {
-				this.addPersonnel.emit(response)
+      this.api.postForm('personnels', this.personnelForm.value)
+  		.subscribe(personnel => {
+				this.addPersonnel.emit(personnel)
         		this.dialogRef.close()
-			  }
-        
       }, err  => console.error(err));
     }else{ 
 		this.messageErreur = "Le formulaire est invalide ! Vérifiez que tous les champs sont correctement remplis."
@@ -120,17 +114,12 @@ export class PersonnelDialogComponent implements OnInit {
   }
   onUpdate(){
     if(this.personnelForm.valid){
-	const matricule = this.data.personnel.matricule;
-    this.api.updateOneItem('personnel', matricule, this.personnelForm.value)
-  		.subscribe(response => {
-			if(response['statut'] == 'erreur'){
-				console.log(response);
-				this.messageErreur = response['message']
-			} else { 
-				this.updatePersonnel.emit(response)
+	const id = this.data.personnel._id['$oid'];
+	console.log('idpersonnel : ', id)
+    this.api.updateOneItem('personnels', id, this.personnelForm.value)
+  		.subscribe(personnel => {
+				this.updatePersonnel.emit(personnel)
         		this.dialogRef.close()
-			}
-        
       }, err  => console.error(err));
   	} else{ 
 		this.messageErreur = "Le formulaire est invalide ! Vérifiez que tous les champs sont correctement remplis."

@@ -42,16 +42,16 @@ export class EvaluationComponent implements OnInit, OnChanges {
   }
   ngOnChanges(): void{
     this.periodes = this.configService.getPeriodes().concat(['Annuel']);
-    this.periodesEvaluation = this.configService.config.periodesEvaluation;
+    this.periodesEvaluation = this.configService.ecole.periodesEvaluation;
     Object.keys(this.periodesEvaluation).forEach(periode =>{
       this.periodesEvaluation[periode] = {
-        debut: this.configService.config.periodesEvaluation[periode].debut ? Date.parse((this.configService.config.periodesEvaluation[periode].debut).toString()) : null,
-        fin: this.configService.config.periodesEvaluation[periode].fin ? Date.parse((this.configService.config.periodesEvaluation[periode].fin).toString()) : null
+        debut: this.configService.ecole.periodesEvaluation[periode].debut ? Date.parse((this.configService.ecole.periodesEvaluation[periode].debut).toString()) : null,
+        fin: this.configService.ecole.periodesEvaluation[periode].fin ? Date.parse((this.configService.ecole.periodesEvaluation[periode].fin).toString()) : null
       }
     })
-    this.anneeScolaire = this.configService.config.anneeScolaire;
-    this.moyennePassage = this.configService.config.moyennePassage;
-    this.moyenneRedoublement = this.configService.config.moyenneRedoublement;
+    this.anneeScolaire = this.configService.ecole.anneeScolaire;
+    this.moyennePassage = this.configService.ecole.moyennePassage;
+    this.moyenneRedoublement = this.configService.ecole.moyenneRedoublement;
     if(this.personnel && this.personnel.fonction){
       if(this.personnel.fonction.titre == 'Professeur' || this.personnel.fonction.titre == 'Educateur(trice)'){
         this.api.getSome('classe', 'prof', this.personnel.matricule, this.anneeScolaire)

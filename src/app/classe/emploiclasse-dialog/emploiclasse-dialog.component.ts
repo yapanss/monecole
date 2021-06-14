@@ -14,7 +14,7 @@ export class EmploiclasseDialogComponent implements OnInit {
   emploiclasseForm: FormGroup;
   matieres; 
   codeProf;
-  salles = this.configService.config.salles.concat([null]);
+  salles = this.configService.ecole.salles.concat([null]);
   jours = ["lundi", "mardi", "mercredi", "jeudi", "vendredi"];
   horaires = ["m1", "m2", "m3", "m4", "m5", "s1", "s2", "s3", "s4", "s5"]
   leJour: string = "lundi";

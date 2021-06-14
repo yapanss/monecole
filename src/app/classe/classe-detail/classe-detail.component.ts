@@ -16,7 +16,7 @@ import { ClasseDialogComponent } from '../classe-dialog/classe-dialog.component'
   styleUrls: ['./classe-detail.component.css']
 })
 export class ClasseDetailComponent implements OnInit {
-  anneeScolaire: string = this.configService.config.anneeScolaire;
+  anneeScolaire: string
   niveaux: string[];
   niveauProchain: string[] = [];
   decisions: string[] = ['Admis (e)', 'Redouble', 'Exclu (e)'];
@@ -41,6 +41,7 @@ export class ClasseDetailComponent implements OnInit {
   baseUrl: string = "localhost:3000/";
   periodeSansAnnuel: any;
   configuration: any;
+  id: string;
 
   elevesSelectionnes: string[] = []
   checkList: boolean[] = []
@@ -55,7 +56,7 @@ export class ClasseDetailComponent implements OnInit {
               private dialog: MatDialog,
               private formBuilder: FormBuilder
   			  ) {
-    this.buildForm()
+    //this.buildForm()
   }
 
   ngOnInit(): void {
@@ -63,78 +64,83 @@ export class ClasseDetailComponent implements OnInit {
   	this.route.params
       .pipe(
         mergeMap(params => {
-          this.nom = params.nom;
-          return this.api.getOneItem('classe', this.nom, this.anneeScolaire)
+          this.id = params.id;
+          console.log('monid', this.id)
+          return this.api.getOneItem('classes', this.id)
        })
       )
-      .pipe(
-      	mergeMap(classe  => {
-          this.niveaux = this.configService.getNiveaux();
-      		this.classe = classe;
-          this.matieresDuNiveau = this.configService.getMatieres(this.classe.niveau)
-          let codes = classe["enseignements"].map(enseignement =>{
-            return enseignement.codeProf
-          })
-      		return forkJoin([this.api.getSome('eleve', 'classe', this.classe.nom, this.anneeScolaire),
-                          this.api.getSome('personnel', 'code', codes)])
-          }),
-      		catchError(err => {throw(err)})
-      )
-      .subscribe(response => {
-        this.configuration = this.configService.config;
-        this.periodeSansAnnuel = this.configService.getPeriodes();
-          this.periodes = this.configService.getPeriodes().concat(['Annuel']);
-          // let eleves = response[0];
-              this.eleves = _.orderBy(response[0], ['nom']);
-              this.eleves.forEach(eleve =>{
-                this.checkList[eleve.matricule] = false
-                this.etatSelection.push('')
-                eleve['cursus'].forEach(item =>{
-                  if(item.annee == this.anneeScolaire){
-                    this.infoEleves.push({
-                      resultats: item.resultats,
-                      decisionFinAnnee: item.decisionFinAnnee,
-                      niveau: item.niveau,
-                      redoublant: item.redoublant
-                    })
-                  }
-                })
-              })
-          this.infoEleves.forEach(info =>{
-            // console.log('resultats annuel : ', eleve.resultats['Annuel'])
-            if(info.decisionFinAnnee == 'Admis (e)'){
-              this.niveauProchain.push(this.classe.niveauSuivant)
-            }else{
-              this.niveauProchain.push(null)
-            }
-          })
-          this.professeurs = response[1]['personnels']
-          this.enseignements = this.classe["enseignements"];
-          this.enseignements.forEach(enseignement =>{
-            this.professeurs.forEach(prof =>{
-              if(enseignement.codeProf == prof.code){
-                this.lesProfs.push({
-                  matiere: enseignement.matiere,
-                  prof
-                })
-              }
-            })
-          })
-          this.lesProfs = _.orderBy(this.lesProfs, ['matiere'])
+      .subscribe(classe =>{
+        this.classe = classe;
+        console.log('maclasse', this.classe)
       })
+      // .pipe(
+      // 	mergeMap(classe  => {
+      //     this.niveaux = this.configService.getNiveaux();
+      // 		this.classe = classe;
+      //     this.matieresDuNiveau = this.configService.getMatieres(this.classe.niveau)
+      //     let codes = classe["enseignements"].map(enseignement =>{
+      //       return enseignement.codeProf
+      //     })
+      // 		return forkJoin([this.api.getSome('eleve', 'classe', this.classe.nom, this.anneeScolaire),
+      //                     this.api.getSome('personnel', 'code', codes)])
+      //     }),
+      // 		catchError(err => {throw(err)})
+      // )
+      // .subscribe(response => {
+      //   this.configuration = this.configService.config;
+      //   this.periodeSansAnnuel = this.configService.getPeriodes();
+      //     this.periodes = this.configService.getPeriodes().concat(['Annuel']);
+      //     // let eleves = response[0];
+      //         this.eleves = _.orderBy(response[0], ['nom']);
+      //         this.eleves.forEach(eleve =>{
+      //           this.checkList[eleve.matricule] = false
+      //           this.etatSelection.push('')
+      //           eleve['cursus'].forEach(item =>{
+      //             if(item.annee == this.anneeScolaire){
+      //               this.infoEleves.push({
+      //                 resultats: item.resultats,
+      //                 decisionFinAnnee: item.decisionFinAnnee,
+      //                 niveau: item.niveau,
+      //                 redoublant: item.redoublant
+      //               })
+      //             }
+      //           })
+      //         })
+      //     this.infoEleves.forEach(info =>{
+      //       // console.log('resultats annuel : ', eleve.resultats['Annuel'])
+      //       if(info.decisionFinAnnee == 'Admis (e)'){
+      //         this.niveauProchain.push(this.classe.niveauSuivant)
+      //       }else{
+      //         this.niveauProchain.push(null)
+      //       }
+      //     })
+      //     this.professeurs = response[1]['personnels']
+      //     this.enseignements = this.classe["enseignements"];
+      //     this.enseignements.forEach(enseignement =>{
+      //       this.professeurs.forEach(prof =>{
+      //         if(enseignement.codeProf == prof.code){
+      //           this.lesProfs.push({
+      //             matiere: enseignement.matiere,
+      //             prof
+      //           })
+      //         }
+      //       })
+      //     })
+      //     this.lesProfs = _.orderBy(this.lesProfs, ['matiere'])
+      // })
  }
- buildForm(){
-  let group = {};
-  if(this.eleves){
-    this.eleves.forEach(eleve =>{
-      group[eleve["matricule"]] = new FormControl(null); 
-    })
-    this.formEleve = this.formBuilder.group(group)
-  }else {
-    console.log('builder : ', 'désolé, ya pas eleve')
-  }
+//  buildForm(){
+//   let group = {};
+//   if(this.eleves){
+//     this.eleves.forEach(eleve =>{
+//       group[eleve['matricule']] = new FormControl(null); 
+//     })
+//     this.formEleve = this.formBuilder.group(group)
+//   }else {
+//     console.log('builder : ', 'désolé, ya pas eleve')
+//   }
   
- }
+//  }
 onCheckOnce(matricule, index){
   if(this.checkList[matricule]){
     this.etatSelection[index] = 'selection'
@@ -184,7 +190,7 @@ toggleCheckAll(){
      .subscribe(response =>{
       this.router.routeReuseStrategy.shouldReuseRoute = () => false;
       this.router.onSameUrlNavigation = 'reload';
-      this.router.navigate(['/classe/detail/'+this.classe.nom])
+      this.router.navigate(['/classe/detail/'+this.classe._id['$oid']])
      })
    }
  }
@@ -203,17 +209,19 @@ toggleCheckAll(){
  }
  onAjoutEleve() {
   let group = {};
-  this.api.getSome('eleve','niveau',  this.classe.niveau, this.anneeScolaire)
+  this.api.getSome('eleves','niveau',  this.classe.niveau)
   .subscribe(eleves => {
+    console.log('leseleves', eleves)
     Object.entries(eleves)
     .map(keyValue  => keyValue[1])
     .forEach((eleve: object) =>{
-          group[eleve["matricule"]] = new FormControl(null);  
+      console.log('matric', eleve['matricule'])
+          group[eleve['matricule']] = new FormControl(null);  
     })
           
   this.eleveForm = this.formBuilder.group(group)
-          
-    this.dialog.open(AjoutEleveProfComponent, {
+  this.dialog.open(AjoutEleveProfComponent, {
+   // this.dialog.open(ClasseDialogComponent, {
       disableClose: true,
       width: '80%',
       data: {
@@ -227,7 +235,7 @@ toggleCheckAll(){
  }
 
  onAjoutProf(){
-  this.codes = this.configService.config.codesPersonnel.concat([null]);
+  this.codes = this.configService.ecole.codesPersonnel.concat([null]);
   let group: any = {};
   this.classe.enseignements.forEach(enseignement =>{
     let matiere = Object.values(enseignement)[1].toString();

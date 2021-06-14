@@ -21,10 +21,12 @@ export class ClasseComponent implements OnInit {
               private route: Router) { }
 
   ngOnInit(): void {
-    this.anneeScolaire = this.configService.config.anneeScolaire;
-    console.log('annee scolaire', this.anneeScolaire)
-  	this.api.getAllItems('classe', this.anneeScolaire)
+    //this.anneeScolaire = this.configService.config.anneeScolaire;
+    //console.log('annee scolaire', this.anneeScolaire)
+    const annee_scolaire = this.configService.ecole.annee_scolaire
+  	this.api.getAllItems('classes', annee_scolaire)
   	.subscribe(classes => {
+      classes.forEach(classe => classe['effectif'] = classe['membre_ids'].length)
   		this.classes = classes;
       console.log('classes : ', classes);
   	});
@@ -56,9 +58,9 @@ export class ClasseComponent implements OnInit {
    if (confirm('Voulez-vous suprimer cette classe')){
     let reqBody = {query: this.classes[index].nom, value: null, anneeScolaire: this.anneeScolaire}
       forkJoin([
-        this.api.deleteOneItem('classe', this.classes[index]._id),
-        this.api.updateItems('eleve', reqBody),
-        this.api.deleteOneItem('emploiclasse', this.classes[index].nom)
+        this.api.deleteOneItem('classes', this.classes[index]._id['$oid']),
+        // this.api.updateItems('eleve', reqBody),
+        // this.api.deleteOneItem('emploiclasse', this.classes[index].nom)
       ])
       .subscribe(classe  => {
         this.route.routeReuseStrategy.shouldReuseRoute = () => false;

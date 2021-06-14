@@ -23,16 +23,9 @@ export class PersonnelComponent implements OnInit {
               private dialog: MatDialog,) { }
 
   ngOnInit(): void {
-  	this.api.getAllItems('personnel')
-  	.subscribe(response => {
-      if(response['success']){
-  		  this.personnelsAffiche = response['personnels'];
-        this.personnels = this.personnelsAffiche;
-      }else{
-        const {message} = response;
-        alert(message);
-        this.router.navigateByUrl('/');
-      }
+  	this.api.getAllItems('personnels')
+  	.subscribe(personnels => {
+        this.personnels = personnels;
     })
   }
   onCreateDialog(){
@@ -67,7 +60,7 @@ export class PersonnelComponent implements OnInit {
   onDelete(index){
     let personnel = this.personnels[index]
     if (confirm('Voulez-vous supprimer '+personnel.nom+" "+personnel.prenoms+"?")){
-      this.api.deleteOneItem('personnel', personnel.matricule)
+      this.api.deleteOneItem('personnels', personnel._id['$oid'])
       .subscribe(personnel =>{
         this.personnels.splice(index, 1)
       });

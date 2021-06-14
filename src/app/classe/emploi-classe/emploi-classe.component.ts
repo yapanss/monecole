@@ -30,7 +30,7 @@ export class EmploiClasseComponent implements OnInit {
   	this.route.params
       .pipe(
         mergeMap(params => {
-          this.anneeScolaire = this.configService.config.anneeScolaire;
+          this.anneeScolaire = this.configService.ecole.anneeScolaire;
           return forkJoin([this.api.getOneItem('emploiclasse', params.nom),
                           this.api.getOneItem('classe', params.nom, this.anneeScolaire)])
          

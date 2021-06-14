@@ -6,7 +6,7 @@ import { ClasseDetailComponent } from './classe-detail/classe-detail.component';
 
 const routes: Routes = [
 	{path: 'classes', component: ClasseComponent},
-  {path: 'classe/detail/:nom', component: ClasseDetailComponent},
+  {path: 'classe/detail/:id', component: ClasseDetailComponent},
 ]
 
 @NgModule({

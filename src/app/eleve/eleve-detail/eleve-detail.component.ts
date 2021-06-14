@@ -23,6 +23,7 @@ export class EleveDetailComponent implements OnInit {
   classe;
   periode: string;
 	matricule;
+  id: string;
   photo;
   showPhotoForm: boolean = false
   imgSrc: string;
@@ -37,32 +38,41 @@ export class EleveDetailComponent implements OnInit {
   	this.route.params
       .pipe(
         mergeMap(params => {
-          this.matricule = params.matricule;
-          return this.api.getOneItem('eleve', this.matricule)
-       })
+          console.log('params', params)
+          this.id = params.id;
+          return this.api.getOneItem('eleves', this.id)
+       }),
+       catchError(err => {throw(err)})
       )
-      .pipe(
-        flatMap(eleve =>{
-          this.anneeScolaire = this.configService.config.anneeScolaire;
-          eleve['cursus'].forEach(item =>{
-            if(item.annee == this.anneeScolaire){
-              eleve['classe'] = item.classe
-              eleve['resultats'] = item.resultats
-              eleve['decisionFinAnnee'] = item.decisionFinAnnee
-            }
-          })
-          this.eleve = eleve;
-          return this.api.getOneItem('classe', eleve['classe'], this.anneeScolaire)
-        }),
-         catchError(err => {throw(err)})
-      )
-      .subscribe(classe => {
-        this.periodes = this.configService.getPeriodes().concat(['Annuel']);
-        if(classe){
-          this.classe = classe;
-          this.enseignements = this.classe.enseignements;
-        }
-        this.imgSrc = !this.eleve.photoUrl ? this.baseUrl+"avatar.png" : this.baseUrl+this.eleve.photoUrl
+      // .pipe(
+      //   flatMap(eleve =>{
+      //     this.anneeScolaire = this.configService.config.anneeScolaire;
+      //     eleve['cursus'].forEach(item =>{
+      //       if(item.annee == this.anneeScolaire){
+      //         eleve['classe'] = item.classe
+      //         eleve['resultats'] = item.resultats
+      //         eleve['decisionFinAnnee'] = item.decisionFinAnnee
+      //       }
+      //     })
+      //     this.eleve = eleve;
+      //     return this.api.getOneItem('classe', eleve['classe'], this.anneeScolaire)
+      //   }),
+      //    catchError(err => {throw(err)})
+      // )
+      // .subscribe(classe => {
+      //   this.periodes = this.configService.getPeriodes().concat(['Annuel']);
+      //   if(classe){
+      //     this.classe = classe;
+      //     this.enseignements = this.classe.enseignements;
+      //   }
+      //   this.imgSrc = !this.eleve.photoUrl ? this.baseUrl+"avatar.png" : this.baseUrl+this.eleve.photoUrl
+      // })
+      .subscribe(eleve => {
+        console.log('uneleve', eleve)
+        eleve['classe'] = eleve['classes'].filter(classe => {
+                                             return classe.annee_scolaire == this.configService.ecole.annee_scolaire
+                                           })[0].nom
+        this.eleve = eleve
       })
   }
   handleFile(image: FileList, imagePreview){

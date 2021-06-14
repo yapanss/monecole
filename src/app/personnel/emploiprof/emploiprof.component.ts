@@ -39,8 +39,8 @@ export class EmploiprofComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
   ngOnChanges(): void {
-    if(this.configService.config){
-      this.anneeScolaire = this.configService.config.anneeScolaire;
+    if(this.configService.ecole){
+      this.anneeScolaire = this.configService.ecole.anneeScolaire;
     }
     this.codeProf = this.personnel["code"]
     this.api.getSome('classe', 'prof', this.personnel.matricule, this.anneeScolaire)

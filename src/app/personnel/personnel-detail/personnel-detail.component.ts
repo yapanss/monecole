@@ -15,6 +15,7 @@ import * as _ from 'lodash';
 export class PersonnelDetailComponent implements OnInit {
 	personnel = <any>{};
 	matricule;
+  id: string;
   photo: File = null;
   showPhotoForm: boolean = false;
   constructor(private api: ApiService,
@@ -26,19 +27,14 @@ export class PersonnelDetailComponent implements OnInit {
   	this.route.params
       .pipe(
         mergeMap(params => {
-          this.matricule = params.matricule;
-          return this.api.getOneItem('personnel', this.matricule)
+          this.id = params.id;
+          return this.api.getOneItem('personnels', this.id)
         }),
         catchError(err => {throw(err)})
       )  
-      .subscribe(response => {
-        if(response['success']){
-          this.personnel = response['personnel'];
-        }else{
-          const message = response['message'];
-          alert(message);
-          this.router.navigateByUrl('/');
-        }
+      .subscribe(personnel => {
+        console.log('lepersonnel', personnel)
+          this.personnel = personnel;
       })
   }
   handleFile(image: FileList, imagePreview){

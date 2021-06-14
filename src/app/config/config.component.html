@@ -2,54 +2,52 @@
 	<mat-tab-group>
 		<mat-tab label="Infos Ecole">
 			<mat-card>
-				<div class="form-group">
+				<div class="form-group" *ngIf="ecole.length !=0">
 					<label for="" class="form-control-label">Nom Etablissement: </label>
-					<input style="width: 70%;" class="form-control" type="text" [(ngModel)]="configuration.nomEcole">
+					<input style="width: 70%;" class="form-control" type="text" [(ngModel)]="ecole.nom_ecole">
 				</div>
 				<div class="form-group">
 					<label for="" class="form-control-label">Titre du Chef d'Etablissement:</label>
-					<select class="form-control" [(ngModel)]="configuration.titreChef" style="width: 70%;">
+					<select class="form-control" [(ngModel)]="ecole.titre_chef" style="width: 70%;">
 						<option *ngFor="let option of titresChef" value="{{option}}">{{option}}</option>
 					</select>
 				</div>
 				<div class="form-group">
 					<label for="" class="form-control-label">Nom Chef d'Etablissement: </label>
-					<input style="width: 70%;" class="form-control" type="text" [(ngModel)]="configuration.nomChef">
+					<input style="width: 70%;" class="form-control" type="text" [(ngModel)]="ecole.nom_chef">{{ecole.nom_chef}}
 				</div>
-				<div align="right">
-					<button mat-raised-button (click)="onSubmit()" color="accent">Submit</button>
-				</div>
+				
 			</mat-card>
 		</mat-tab>
 		<mat-tab label="Découpage Année">
 			<mat-card>
 				<div class="form-group">
 					<label for="" class="form-control-label">Annee Scolaire:</label>
-					<input type="text" [(ngModel)]="configuration.anneeScolaire" class="form-control">
+					<input type="text" [(ngModel)]="ecole.annee_scolaire" class="form-control">
 				</div>
 				<div class="form-group">
-					<label for="" class="form-control-label">Fin Année Scolaire: {{configuration.dateFin | date: 'dd/MM/yyyy'}}</label>
-					<input type="datetime-local" [(ngModel)]="configuration.dateFin" class="form-control">
+					<label for="" class="form-control-label">Fin Année Scolaire: {{ecole.date_fin | date: 'dd/MM/yyyy'}}</label>
+					<input type="datetime-local" [(ngModel)]="ecole.date_fin" class="form-control">
 				</div>
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label for="" class="form-control-label">Type des périodes:</label>
-					<select class="form-control" [(ngModel)]="configuration.typePeriodes" 
+					<select class="form-control" [(ngModel)]="ecole.typePeriodes" 
 							style="width: 70%;" (change)="onSelectPeriodeType()">
 						<option *ngFor="let option of listeTypePeriode" value="{{option}}">{{option}}</option>
 					</select>
-				</div>
-				<div class="form-group">
+				</div> -->
+				<!-- <div class="form-group">
 					<label for="">Noms des Périodes</label>
 					<select class="form-control" #nomper
 							style="width: 70%;" (change)="onSelectNomsPeriodes(nomper)">
 						<option *ngFor="let option of listeNomPeriode" value="{{option}}">{{option}}</option>
 					</select>
-				</div>
+				</div> -->
 				<div>
 					<h2 class="text-center">Autres Infos</h2>
 				</div>
-				<div>
-					<table class="table">
+				<!-- <div> -->
+					<!-- <table class="table">
 						<tr>
 							<th>Période</th>
 							<th>Date de début de saisie des moyennes</th>
@@ -60,33 +58,36 @@
 							<td>{{periode}}</td>
 							<td>
 								<input type="datetime-local" #debut
-										[(ngModel)]="configuration.periodesEvaluation[periode].debut">
+										[(ngModel)]="ecole.periodesEvaluation[periode].debut"> -->
 										<!-- (change)="onInputDebut(debut.value, periode)" -->
-							</td>
+							<!-- </td>
 							<td>
 								<input type="datetime-local" #fin
-									[(ngModel)]="configuration.periodesEvaluation[periode].fin">
+									[(ngModel)]="ecole.periodesEvaluation[periode].fin"> -->
 
 									<!-- (change)="onInputFin(fin.value, periode)"> -->
-								</td>
+								<!-- </td>
 							<td>
-								<input type="number" [(ngModel)]="configuration.periodes[i].coefficient">
+								<input type="number" [(ngModel)]="ecole.periodes[i].coefficient">
 							</td>
 						</tr>
 					</table>
 				</div>
 				<div align="right">
 					<button mat-raised-button (click)="onSubmit()" color="accent">Submit</button>
+				</div> -->
+				<div align="right">
+					<button mat-raised-button (click)="onSubmit()" color="accent">Submit</button>
 				</div>
 			</mat-card>
 		</mat-tab>
 		<mat-tab label="Niveaux Et Classes">
-			<div class="form-group form-inline mt-3">
+			<!-- <div class="form-group form-inline mt-3">
 				<label class="form-control-label" for="">Ajouter Niveau</label>
 				<input class="form-control" type="text" #niveau>
 				<button mat-raised-button color="primary" (click)="onAjoutNiveau(niveau.value)">Ajouter</button>
-			</div>
-			<div *ngFor="let niveau of configuration.niveaux; let i = index" class="d-flex justify-content-between">
+			</div> -->
+			<!-- <div *ngFor="let niveau of ecole.niveaux; let i = index" class="d-flex justify-content-between">
 				<div class="flex-grow-1">
 					<mat-accordion>
 						<mat-expansion-panel>
@@ -145,21 +146,21 @@
 						</mat-expansion-panel>
 					</mat-accordion>
 				</div>
-			<div class="ml-2 pt-2">
-				<button (click)="onDeleteNiveau(i)">
+			<div class="ml-2 pt-2"> -->
+				<!-- <button (click)="onDeleteNiveau(i)">
 					<mat-icon color="warn">delete</mat-icon>
 				</button>
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 			<div align="right">
 				<button mat-raised-button color="accent" (click)="onSubmit()">Submit</button>
 			</div>
 		</mat-tab>
 		<mat-tab label="Codes Professeurs">
-			<section *ngIf="codeProfErrorMessage">
+			<!-- <section *ngIf="codeProfErrorMessage">
 				<h2 class="errorMessage">{{codePersoErrorMessage}}</h2>
-			</section>
-			<section id="choix" class="form-group d-flex justify-content-around mt-3 pt-3">
+			</section> -->
+			<!-- <section id="choix" class="form-group d-flex justify-content-around mt-3 pt-3">
 				<div id="matiere" class="form-group form-inline">
 					<label for="" class="mr-2">Matière: </label>
 					<select class="form-control" [(ngModel)]="matiere" ngDefaultControl>
@@ -182,8 +183,8 @@
 					<button mat-button color="primary" (click)="cancelUpdate()">Annuler</button>
 					<button class="ml-1" mat-button color="primary" (click)="updateCode()">Modifier</button>
 				</div>
-			</section>
-			<section>
+			</section> -->
+			<!-- <section>
 				<table class="table">
 					<tr>
 						<th>Code</th>
@@ -192,11 +193,11 @@
 						<th>Nom et Prénoms Prof</th>
 						<th>Actions</th>
 					</tr>
-					<tr *ngFor="let item of configuration.codesProfesseur; let i = index">
-						<td>{{item.codeProf}}</td>
-						<td>{{item.matiere}}</td>
-						<td>{{item.matriculeProf}}</td>
-						<td>{{item.nomProf}}</td>
+					<tr *ngFor="let code of codes; let i = index">
+						<td>{{code.code}}</td>
+						<td>{{code.matiere}}</td>
+						<td></td>
+						<td></td>
 						<td>
 					<button mat-icon-button  
 							(click)="selectCodeToModify(i)"
@@ -217,7 +218,7 @@
 						</td>
 					</tr>
 				</table>
-			</section>
+			</section> -->
 		</mat-tab>
 	</mat-tab-group>
 </section>

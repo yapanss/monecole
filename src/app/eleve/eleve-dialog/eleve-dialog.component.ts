@@ -30,7 +30,7 @@ export class EleveDialogComponent implements OnInit {
   			}
 
   ngOnInit(): void {
-        this.anneeScolaire = this.configService.config.anneeScolaire;
+        this.anneeScolaire = this.configService.ecole.annee_scolaire;
   }
 
   buildForm(){
@@ -42,8 +42,8 @@ export class EleveDialogComponent implements OnInit {
       matricule: this.formBuilder.control(this.data.eleve && this.data.eleve.matricule ? this.data.eleve.matricule : null),
       nom: this.formBuilder.control(this.data.eleve && this.data.eleve.nom ? this.data.eleve.nom : null),
       prenoms: this.formBuilder.control(this.data.eleve && this.data.eleve.prenoms ? this.data.eleve.prenoms : null),
-      dateNaissance: this.formBuilder.control(this.data.eleve && this.data.eleve.dateNaissance ? this.data.eleve.dateNaissance : null),
-      lieuNaissance: this.formBuilder.control(this.data.eleve && this.data.eleve.lieuNaissance ? this.data.eleve.lieuNaissance : null),
+      date_naissance: this.formBuilder.control(this.data.eleve && this.data.eleve.date_naissance ? this.data.eleve.date_naissance : null),
+      lieu_naissance: this.formBuilder.control(this.data.eleve && this.data.eleve.lieu_naissance ? this.data.eleve.lieu_naissance : null),
       genre: this.formBuilder.control(this.data.eleve && this.data.eleve.genre ? this.data.eleve.genre : null),
       niveau: this.formBuilder.control({
       	value: this.data.eleve && this.data.eleve.niveau ? this.data.eleve.niveau : null, 
@@ -86,15 +86,16 @@ export class EleveDialogComponent implements OnInit {
 	  this.dialogRef.close();
   }
   onCreate(){
-      this.api.postForm('eleve', this.eleveForm.value)
+      //this.api.postForm('eleve', this.eleveForm.value)
+      this.api.postForm('eleves', this.eleveForm.value)
   		.subscribe(response => {
         this.addEleve.emit(response)
         this.dialogRef.close()
       }, err  => console.error(err));
   }
   onUpdate(){
-	const matricule = this.data.eleve.matricule;
-    this.api.updateOneItem('eleve', matricule, this.eleveForm.value)
+	const id = this.data.eleve._id['$oid'];
+    this.api.updateOneItem('eleves', id, this.eleveForm.value)
   		.subscribe(response => {
         this.updateEleve.emit(response)
         this.dialogRef.close()

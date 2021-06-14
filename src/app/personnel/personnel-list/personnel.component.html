@@ -22,9 +22,9 @@
 				<th>Photo</th>
 				<th>Matricule</th>
 				<th>Nom et Prénoms</th>
-				<th>Emploi</th>
+				<!-- <th>Emploi</th>
 				<th>Fonction actuelle</th>
-				<th>Code</th>
+				<th>Code</th> -->
 				<th>Domicile</th>
 				<th>Contact</th>
 				<th>Actions</th>
@@ -35,15 +35,15 @@
 								"http://localhost:3000/"+ "avatar.png"}}' height="30" width="30" alt=""></td>
 				<td>{{personnel.matricule}}</td>
 				<td>{{personnel.nom}} {{personnel.prenoms}}</td>
-				<td>{{personnel.emploi}}</td>
+				<!-- <td>{{personnel.emploi}}</td>
 				<td>{{personnel.fonction.titre}} {{personnel.fonction.specialite}}</td>
-				<td>{{personnel.code}}</td>
+				<td>{{personnel.code}}</td> -->
 				<td>{{personnel.domicile}}</td>
 				<td>{{personnel.contact}}</td>
 				<td>
 					<button mat-icon-button
 							class="text-success" 
-							routerLink="/personnel/detail/{{personnel.matricule}}"
+							routerLink="/personnel/detail/{{personnel._id['$oid']}}"
 							#tooltip="matTooltip"
 							matTooltip="Détails"
 							[matTooltipPosition]="'above'"
